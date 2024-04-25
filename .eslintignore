@@ -1,0 +1,5 @@
+/dist
+/node_modules
+.husky
+*.config.ts
+src/vite-env.d.ts
