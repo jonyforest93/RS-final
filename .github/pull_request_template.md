@@ -1,3 +1,3 @@
-Feature/page added  name:
-Short information about added features:
-Rationale for iadded features:
+1. Feature/page added  name:
+2. Short information about added features:
+3. Rationale for iadded features:
