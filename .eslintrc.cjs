@@ -272,13 +272,6 @@ module.exports = {
         format: ['PascalCase', 'camelCase'],
         leadingUnderscore: 'allow',
       },
-      // {
-      //   selector: 'variable',
-      //   format: ['strictCamelCase', 'UPPER_CASE'],
-      //   modifiers: ['const'],
-      //   leadingUnderscore: 'forbid',
-      //   trailingUnderscore: 'forbid',
-      // },
       {
         selector: 'variable',
         format: ['strictCamelCase', 'UPPER_CASE'],
