@@ -21,7 +21,7 @@ Done in eager to match latest Front-end technologies alongside with pursue of le
 The goal of the project is to create a full-fledged, functional, beautiful and modern application.
 
 
-Also, improving skills, learning new technologies, as well as developing soft skills and teamwork skills.
+Also, improving skills, learning new technologies, as well as impruve soft skills and teamwork skills.
 
 ## Project's Structure
 
