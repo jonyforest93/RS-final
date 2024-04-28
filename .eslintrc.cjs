@@ -425,6 +425,7 @@ module.exports = {
     'react/jsx-no-leaked-render': ['error', { validStrategies: ['ternary'] }],
     'react/jsx-max-depth': ['error', { max: 5 }],
     'react/function-component-definition': ['warn', { namedComponents: 'arrow-function' }],
+    'react/react-in-jsx-scope': 'off',
     'react/jsx-key': [
       'error',
       {
