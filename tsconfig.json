@@ -30,7 +30,16 @@
 
     "removeComments": true,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": "src/app",
+    "paths": {
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
+      "router/*": ["router/*"],
+      "services/*": ["services/*"],
+      "types/*": ["types/*"],
+      "utils/*": ["utils/*"]
+    }
   },
 
   "include": ["./src/**/*"],
