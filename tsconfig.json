@@ -30,18 +30,9 @@
 
     "removeComments": true,
     "skipLibCheck": true,
-    "sourceMap": true,
-    "baseUrl": "src/app",
-    "paths": {
-      "components/*": ["components/*"],
-      "pages/*": ["pages/*"],
-      "router/*": ["router/*"],
-      "services/*": ["services/*"],
-      "types/*": ["types/*"],
-      "utils/*": ["utils/*"]
-    }
+    "sourceMap": true
   },
 
-  "include": ["./src/**/*"],
+  "include": ["./src/app/**/*"],
   "exclude": ["node_modules", "dist"]
 }
