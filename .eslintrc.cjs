@@ -272,13 +272,6 @@ module.exports = {
         format: ['PascalCase', 'camelCase'],
         leadingUnderscore: 'allow',
       },
-      // {
-      //   selector: 'variable',
-      //   format: ['strictCamelCase', 'UPPER_CASE'],
-      //   modifiers: ['const'],
-      //   leadingUnderscore: 'forbid',
-      //   trailingUnderscore: 'forbid',
-      // },
       {
         selector: 'variable',
         format: ['strictCamelCase', 'UPPER_CASE'],
@@ -432,6 +425,7 @@ module.exports = {
     'react/jsx-no-leaked-render': ['error', { validStrategies: ['ternary'] }],
     'react/jsx-max-depth': ['error', { max: 5 }],
     'react/function-component-definition': ['warn', { namedComponents: 'arrow-function' }],
+    'react/react-in-jsx-scope': 'off',
     'react/jsx-key': [
       'error',
       {
