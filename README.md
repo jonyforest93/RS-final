@@ -40,6 +40,7 @@ Also, improving skills, learning new technologies, as well as impruve soft skill
 <details><summary>pages</summary></details>
 <details><summary>router</summary></details>
 <details><summary>services</summary></details>
+<details><summary>tests</summary></details>
 <details><summary>utils</summary></details>
 
 - App.css
