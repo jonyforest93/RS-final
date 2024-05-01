@@ -42,6 +42,6 @@
     }
   },
 
-  "include": ["./src/app/**/*"],
+  "include": ["./src/app/**/*", "src/app/tests/sum.test.ts", "src/app/tests/sum.ts"],
   "exclude": ["node_modules", "dist"]
 }
