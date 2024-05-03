@@ -8,7 +8,8 @@ module.exports = {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
-      vite: {},
+      typescript: {},
+      alias: { map: [['@', './src/app']] },
     },
   },
   overrides: [
