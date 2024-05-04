@@ -1,9 +1,10 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { setActive } from 'utils/setAcitve'
 
-export const Header: React.FC = () => {
+import type { FC } from 'react'
+
+export const Header: FC = () => {
   return (
     <header className="flex items-center justify-between px-[100px] py-[30px]  font-bold">
       <h1 className="text-xl">Kex Shop</h1>
