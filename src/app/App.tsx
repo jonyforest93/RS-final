@@ -9,7 +9,7 @@ import type { FC } from 'react'
 
 const App: FC = () => {
   return (
-    <>
+    <div className="m-auto max-w-[1440px]">
       <Routes>
         <Route path="/" element={<RouterOutler />}>
           <Route index element={<MainPage />} />
@@ -17,7 +17,7 @@ const App: FC = () => {
           <Route path="/registration" element={<RegistrationPage />} />
         </Route>
       </Routes>
-    </>
+    </div>
   )
 }
 
