@@ -6,7 +6,7 @@ import type { FC } from 'react'
 
 export const Header: FC = () => {
   return (
-    <header className="flex items-center justify-between px-[100px] py-[30px]  font-bold">
+    <header className="flex items-center justify-between px-[100px] font-bold">
       <h1 className="text-xl">Kex Shop</h1>
       <div className="flex  gap-[75px]">
         <NavLink to="/" className={setActive}>
