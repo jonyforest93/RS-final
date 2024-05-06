@@ -1,0 +1,3 @@
+.btn {
+  @apply transition duration-300 hover:bg-opacity-70 focus:outline-none;
+}

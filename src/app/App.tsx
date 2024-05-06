@@ -9,7 +9,7 @@ import type { FC } from 'react'
 
 const App: FC = () => {
   return (
-    <div className="m-auto flex h-[100vh] max-w-[1440px] flex-col justify-between py-[30px]">
+    <div className="m-auto flex h-[100vh] max-w-[1440px] flex-col justify-between py-[30px] font-poppins">
       <Routes>
         <Route path="/" element={<RouterOutler />}>
           <Route index element={<MainPage />} />
