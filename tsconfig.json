@@ -38,7 +38,8 @@
       "router/*": ["router/*"],
       "services/*": ["services/*"],
       "types/*": ["types/*"],
-      "utils/*": ["utils/*"]
+      "utils/*": ["utils/*"],
+      "api/*": ["api/*"]
     }
   },
 
