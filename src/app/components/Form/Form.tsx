@@ -2,6 +2,8 @@
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 
+import BaseButton from 'components/shared/BaseButton/BaseButton'
+
 import PasswordVisible from './PasswordVisible'
 
 import type { IFields, OnDataSend } from 'types/types'
@@ -47,9 +49,9 @@ const Form: FC<IProps> = ({ fields, onDataSend }: IProps) => {
           ) : null}
         </div>
       ))}
-      <button disabled={!isValid} className="mt-12 rounded " type="submit">
+      <BaseButton disabled={!isValid} type="submit">
         Submit
-      </button>
+      </BaseButton>
     </form>
   )
 }
