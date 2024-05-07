@@ -12,6 +12,10 @@ export default defineConfig({
       services: '/src/app/services',
       types: '/src/app/types',
       utils: '/src/app/utils',
+      'node-fetch': 'isomorphic-fetch',
     },
+  },
+  define: {
+    global: {},
   },
 })
