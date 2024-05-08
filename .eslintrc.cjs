@@ -32,7 +32,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['prettier', 'import', 'react-refresh', '@stylistic'],
+  plugins: ['prettier', 'import', 'react-refresh'],
   extends: [
     'eslint:recommended',
     'plugin:import/recommended',
@@ -392,31 +392,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/unified-signatures': 2,
-    '@stylistic/lines-between-class-members': [
-      'error',
-      {
-        enforce: [{ blankLine: 'always', prev: '*', next: 'method' }],
-      },
-    ],
-    '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],
-    '@stylistic/padding-line-between-statements': [
-      2,
-      {
-        blankLine: 'always',
-        prev: ['case', 'default', 'block', 'block-like', 'multiline-block-like', 'interface', 'type', 'export'],
-        next: '*',
-      },
-      {
-        blankLine: 'any',
-        prev: ['const', 'let'],
-        next: ['const', 'let'],
-      },
-      {
-        blankLine: 'always',
-        prev: '*',
-        next: ['switch', 'while', 'try', 'return', 'if', 'interface', 'type', 'function'],
-      },
-    ],
     'react/prefer-stateless-function': 'error',
     'react/button-has-type': 'error',
     'react/no-unstable-nested-components': ['error', { allowAsProps: true }],
