@@ -3,14 +3,16 @@ import React from 'react'
 import type { ButtonHTMLAttributes } from 'react'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'basket'
   icon?: React.ReactNode
 }
 
 const BaseButton: React.FC<ButtonProps> = ({ children, variant = 'primary', icon, ...props }) => {
   const buttonStyles: Record<string, string> = {
-    primary: 'text-semibold border-none bg-primary px-[36px] py-[12px] text-lg text-white',
-    showMore: 'text-semibold border border-primary px-[74px] py-[12px] text-lg text-primary',
+    primary:
+      'text-btnText hover:bg-secondary bg-primary px-[50px] py-[16px] text-xs font-bold uppercase tracking-wider hover:text-white',
+    basket:
+      'hover:bg-accent hover:text-btnText border bg-transparent px-[93px] py-[16px] text-xs font-bold uppercase tracking-wider text-white hover:border-none',
   }
 
   const combinedClassName = `${buttonStyles[variant]} btn`
