@@ -1,15 +1,19 @@
-/* eslint-disable prettier/prettier */
 import { apiRoot } from './apiRoot'
 
-import type { LoginFunction } from 'types/login-types'
+import type { Customer } from '@commercetools/platform-sdk'
+
+interface ILoginUser {
+  email: string
+  password: string
+}
+
+type LoginFunction = (user: ILoginUser) => Promise<Customer>
 
 export const loginUser: LoginFunction = async user => {
   try {
     const {
       body: { customer },
-    } = await apiRoot.me().login()
-.post({ body: user })
-.execute()
+    } = await apiRoot.me().login().post({ body: user }).execute()
 
     return customer
   } catch {
