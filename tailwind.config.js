@@ -4,12 +4,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
+        osvald: ['Oswald', 'sans-serif'],
+        cormorant: ['Cormorant', 'sans-serif'],
       },
       colors: {
-        primary: '#b88e2f',
-        textTitle: '#3a3a3a',
-        textSubtitle: '#666',
+        primary: '#43ffd2',
+        secondary: '#7d2253',
+        accent: '#d978ac',
+        btnText: '#040a0a',
       },
     },
   },
