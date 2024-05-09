@@ -5,15 +5,17 @@ import { LoginPage } from 'pages/Login-page/Login-page'
 import { MainPage } from 'pages/Main-page/Main-page'
 import { RegistrationPage } from 'pages/Registration-page/Registration-page'
 import { RouterOutler } from 'router/Router-outlet'
+import { NotFoundPage } from 'pages/NotFound-page/NotFound-page'
 
 const App: FC = () => {
   return (
-    <div className="m-auto flex h-[100vh] max-w-[1440px] flex-col justify-between py-[30px] font-poppins">
+    <div className="font-poppins m-auto flex h-[100vh] flex-col justify-between py-[30px]">
       <Routes>
         <Route path="/" element={<RouterOutler />}>
           <Route index element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </div>
