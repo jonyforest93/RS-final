@@ -1,11 +1,10 @@
 import { Route, Routes } from 'react-router-dom'
+import { type FC } from 'react'
 
 import { LoginPage } from 'pages/Login-page/Login-page'
 import { MainPage } from 'pages/Main-page/Main-page'
 import { RegistrationPage } from 'pages/Registration-page/Registration-page'
 import { RouterOutler } from 'router/Router-outlet'
-
-import type { FC } from 'react'
 
 const App: FC = () => {
   return (

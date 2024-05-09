@@ -32,7 +32,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['prettier', 'import', 'react-refresh'],
+  plugins: ['import', 'react-refresh', 'prettier'],
   extends: [
     'eslint:recommended',
     'plugin:import/recommended',
