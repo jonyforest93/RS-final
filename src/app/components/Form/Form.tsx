@@ -30,13 +30,13 @@ const Form: FC<IProps> = ({ fields, onDataSend }: IProps) => {
   }
 
   return (
-    <form className=" flex max-w-lg flex-col" onSubmit={handleSubmit(onSubmit)}>
+    <form className=" m-auto flex max-w-lg flex-col " onSubmit={handleSubmit(onSubmit)}>
       {fields.map(field => (
         <div className=" flex  flex-col" key={field.name}>
-          <label className="mb-6 mt-3 font-medium">{field.name}</label>
-          <div className="relative">
+          <label className="basic-text mb-1 mt-3">{field.name}</label>
+          <div className="relative z-20">
             <input
-              className="h-16 w-full rounded-xl border border-solid border-gray-600 pr-12 font-normal text-gray-600"
+              className={`h-16 w-full border border-solid pl-2 font-osvald ${errors[field.name] ? 'border-[#FF3A44]' : 'border-[#555555]'} bg-inherit pr-12 text-[#555555]`}
               type={field.type === 'password' && !showPassword ? 'password' : 'text'}
               {...register(field.name, field.validation)}
             ></input>
@@ -45,11 +45,11 @@ const Form: FC<IProps> = ({ fields, onDataSend }: IProps) => {
             ) : null}
           </div>
           {errors[field.name] ? (
-            <p className="mt-1 font-normal text-red-300">{(errors[field.name] as FieldError).message}</p>
+            <p className="mt-1 font-normal text-[#FF3A44]">{(errors[field.name] as FieldError).message}</p>
           ) : null}
         </div>
       ))}
-      <BaseButton disabled={!isValid} type="submit">
+      <BaseButton disabled={!isValid} type="submit" variant="login">
         Submit
       </BaseButton>
     </form>
