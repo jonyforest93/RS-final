@@ -13,10 +13,7 @@ export const NotFoundPage: React.FC = () => {
       <div className="z-10 ml-0 mt-[30px] flex flex-col items-center gap-[20px] text-white sm:ml-[17%] sm:items-start">
         <h2>404 Error</h2>
         <h2>Oops... this page doesn`t exist</h2>
-        <NavLink
-          to="/"
-          className={'relative z-[10] text-xs font-extrabold tracking-wider text-turquoiseEllipse hover:underline'}
-        >
+        <NavLink to="/" className="link text-turquoiseEllipse">
           MAIN PAGE
         </NavLink>
       </div>
