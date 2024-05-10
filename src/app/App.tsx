@@ -9,7 +9,7 @@ import { NotFoundPage } from 'pages/NotFound-page/NotFound-page'
 
 const App: FC = () => {
   return (
-    <div className="font-poppins m-auto flex h-[100vh] flex-col justify-between py-[30px]">
+    <div className="font-poppins m-auto flex min-h-[100vh]  flex-col justify-between">
       <Routes>
         <Route path="/" element={<RouterOutler />}>
           <Route index element={<MainPage />} />
