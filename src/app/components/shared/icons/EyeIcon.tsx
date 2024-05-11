@@ -4,10 +4,10 @@ const EyeIcon: React.FC = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill="#555555"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke="currentColor"
+      stroke="#ffffff"
       className="h-6 w-6"
     >
       <path
