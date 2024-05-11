@@ -9,7 +9,7 @@ import type { FC } from 'react'
 
 const App: FC = () => {
   return (
-    <div className="font-poppins container m-auto flex min-h-[100vh] max-w-[10000px] flex-col justify-between ">
+    <div className="font-poppins container m-auto flex min-h-[100vh] max-w-[10000px] flex-col justify-between bg-black">
       <Routes>
         <Route path="/" element={<RouterOutler />}>
           <Route index element={<MainPage />} />
