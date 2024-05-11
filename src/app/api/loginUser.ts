@@ -1,19 +1,20 @@
-import { apiRoot } from './apiRoot'
+import { passwordFlowClient } from './withPasswordFlow'
 
+import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import type { Customer } from '@commercetools/platform-sdk'
 
-interface ILoginUser {
-  email: string
-  password: string
-}
-
-type LoginFunction = (user: ILoginUser) => Promise<Customer>
+type LoginFunction = (user: UserAuthOptions) => Promise<Customer>
 
 export const loginUser: LoginFunction = async user => {
+  const client = passwordFlowClient(user)
   try {
     const {
       body: { customer },
-    } = await apiRoot.me().login().post({ body: user }).execute()
+    } = await client
+      .me()
+      .login()
+      .post({ body: { email: user.username, password: user.password } })
+      .execute()
 
     return customer
   } catch {

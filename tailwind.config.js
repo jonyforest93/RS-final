@@ -12,6 +12,7 @@ export default {
         secondary: '#7d2253',
         accent: '#d978ac',
         btnText: '#040a0a',
+        turquoiseEllipse: 'rgb(67, 255, 210)',
       },
     },
   },

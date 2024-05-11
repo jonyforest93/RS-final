@@ -56,7 +56,7 @@ module.exports = {
     'max-lines-per-function': [
       2,
       {
-        max: 40,
+        max: 80,
         skipBlankLines: true,
         skipComments: true,
       },
