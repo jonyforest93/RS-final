@@ -5,6 +5,7 @@ import { useState } from 'react'
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 
 import PasswordVisible from './PasswordVisible'
+import { AdditionalFields } from './AdditionalFields'
 
 import type { IFields, OnDataSend } from 'types/types'
 import type { FieldError } from 'react-hook-form'
@@ -13,9 +14,12 @@ import type { FC } from 'react'
 interface IProps {
   onDataSend: OnDataSend
   fields: IFields[]
+  isRegister?: boolean
+  shippingFields?: IFields[]
+  billingFields?: IFields[]
 }
 
-const Form: FC<IProps> = ({ fields, onDataSend }: IProps) => {
+const Form: FC<IProps> = ({ fields, onDataSend, isRegister, shippingFields, billingFields }: IProps) => {
   const [showPassword, setShowPassword] = useState(false)
   const {
     register,
@@ -37,7 +41,7 @@ const Form: FC<IProps> = ({ fields, onDataSend }: IProps) => {
           <div className="relative z-20">
             <input
               className={`h-16 w-full border border-solid pl-2 font-osvald ${errors[field.name] ? 'border-[#FF3A44]' : 'border-[#555555]'} bg-inherit pr-12 text-[#555555]`}
-              type={field.type === 'password' && !showPassword ? 'password' : 'text'}
+              type={field.type === 'password' && !showPassword ? 'password' : `${field.type}`}
               {...register(field.name, field.validation)}
             ></input>
             {field.type === 'password' ? (
@@ -49,6 +53,16 @@ const Form: FC<IProps> = ({ fields, onDataSend }: IProps) => {
           ) : null}
         </div>
       ))}
+      {isRegister ? (
+        <AdditionalFields
+          register={register}
+          errors={errors}
+          billingFields={billingFields}
+          shippingFields={shippingFields}
+        />
+      ) : (
+        ''
+      )}
       <BaseButton disabled={!isValid} type="submit" variant="login">
         Submit
       </BaseButton>
