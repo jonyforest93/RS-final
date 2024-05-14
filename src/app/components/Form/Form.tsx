@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 
@@ -66,6 +67,11 @@ const Form: FC<IProps> = ({ fields, onDataSend, isRegister, shippingFields, bill
       <BaseButton disabled={!isValid} type="submit" variant="login">
         Submit
       </BaseButton>
+      {isRegister ? (
+        <NavLink to={'/login'} className="link mt-6">
+          Already have an account?
+        </NavLink>
+      ) : null}
     </form>
   )
 }
