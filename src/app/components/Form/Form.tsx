@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 
 import PasswordVisible from './PasswordVisible'
-import { AdditionalFields } from './AdditionalFields'
+import { AdditionalFields } from './additionFields/AdditionalFields'
 
 import type { IFields, OnDataSend } from 'types/types'
 import type { FieldError } from 'react-hook-form'

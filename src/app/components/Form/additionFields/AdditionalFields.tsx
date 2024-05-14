@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 
+import { DefaultAdresses } from './DefaultAdress'
+
 import type { FieldError, FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import type { IFields } from 'types/types'
 
@@ -16,6 +18,7 @@ export const AdditionalFields: React.FC<IAdditionalProps> = ({ shippingFields, b
   const onChecked: () => void = () => {
     setChecked(!checked)
   }
+
   return (
     <div>
       <h2 className="mt-[20px] font-medium text-white">Shipping Adress</h2>
@@ -67,6 +70,7 @@ export const AdditionalFields: React.FC<IAdditionalProps> = ({ shippingFields, b
           </div>
         </>
       )}
+      <DefaultAdresses isShipping={!checked} />
     </div>
   )
 }
