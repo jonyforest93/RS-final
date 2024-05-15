@@ -1,20 +1,18 @@
 import { NavLink } from 'react-router-dom'
-import { type FC, useEffect, useState } from 'react'
+import { type FC } from 'react'
+import { useContext } from 'react'
 
 import { setActive } from 'utils/setAcitve'
+import { Context } from 'services/Context'
 
 import { HeaderLinks } from './HeaderLinks'
 import { HeaderBurger } from './HeaderBurger'
 
 export const Header: FC = () => {
-  const [logStatus, setLogStatus] = useState<boolean>(false)
-  useEffect(() => {
-    if (localStorage.getItem('reactReaction')) {
-      setLogStatus(true)
-    }
-  }, [])
+  const { isLoggedUser, setIsLoggedUser } = useContext(Context)
   const handleClick: () => void = () => {
-    setLogStatus(false)
+    localStorage.removeItem('refreshToken')
+    setIsLoggedUser(false)
   }
   return (
     <header className="h-[80px] text-white">
@@ -28,7 +26,7 @@ export const Header: FC = () => {
         </div>
         <HeaderLinks />
         <div className="flex  w-[100px] items-center gap-[20px] ">
-          {logStatus ? (
+          {isLoggedUser ? (
             <NavLink to="/" onClick={handleClick} className={setActive}>
               Logout
             </NavLink>

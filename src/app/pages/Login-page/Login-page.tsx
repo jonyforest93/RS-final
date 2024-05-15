@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Form from 'components/Form/Form'
 import { loginUser } from 'api/loginUser'
+import { tokenData } from 'api/withPasswordFlow'
+import { Context } from 'services/Context'
 
 import { ErrorModal } from './Error-message-server-modal'
 import Link from '../../components/Link'
@@ -25,7 +27,7 @@ const useErrorMessage = (): [string, (value: string) => void] => {
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useErrorMessage()
-
+  const { setIsLoggedUser } = useContext(Context)
   const onDataSend: OnDataSend = data => {
     const userData: UserData = JSON.parse(data) as UserData
     const loginData: UserAuthOptions = {
@@ -40,6 +42,12 @@ export const LoginPage: React.FC = () => {
     responseLoginData()
       .then(res => {
         navigate('/')
+        const { refreshToken } = tokenData.get()
+        if (typeof refreshToken === 'string') {
+          localStorage.setItem('refreshToken', refreshToken)
+          setIsLoggedUser(true)
+        }
+
         return res
       })
       .catch(err => {
@@ -51,7 +59,7 @@ export const LoginPage: React.FC = () => {
   }
 
   return (
-    <main className="relative flex-grow bg-[#282828]">
+    <main className="relative flex-grow ">
       <h2 className="title mt-24 text-center max-lg:text-7xl max-md:text-6xl max-sm:text-5xl">Welcome Back!</h2>
       <p className="basic-text text-center">Log In to access your account.</p>
       <div className="m-auto max-w-lg px-[10px]">
