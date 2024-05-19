@@ -28,14 +28,12 @@ const Form: FC<IProps> = ({ fields, onDataSend, isRegister, shippingFields, bill
     formState: { errors, isValid },
     handleSubmit,
     control,
-    reset,
   } = useForm({ mode: 'onChange' })
   const onSubmit = (data: Record<string, string>): void => {
     const trimData = Object.fromEntries(
       Object.entries(data).map(([key, value]) => (typeof value === 'string' ? [key, value.trim()] : [key, value])),
     )
     onDataSend(JSON.stringify(trimData))
-    reset()
   }
 
   return (

@@ -1,6 +1,10 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import Form from 'components/Form/Form'
-import { transormToRegisisterObject } from 'utils/transformToRegisterObject'
-import { apiRoot } from 'api/apiRoot'
+import { registration } from 'api/registration'
+import { ErrorModal } from 'pages/Login-page/Error-message-server-modal'
+import { tokenData } from 'api/withPasswordFlow'
 
 import { billingFields, registrationFields, shippingFields } from './Registration-fields'
 import { RegistrationImages } from './Registration-images'
@@ -9,17 +13,19 @@ import { RegistrationTitle } from './Registration-title'
 import type { OnDataSend } from 'types/types'
 
 export const RegistrationPage: React.FC = () => {
+  const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState<string>('')
   const onDataSend: OnDataSend = data => {
-    apiRoot
-      .me()
-      .signup()
-      .post({ body: transormToRegisisterObject(data) })
-      .execute()
-      .then(resp => {
-        console.log(resp)
+    registration(data)
+      .then(() => {
+        navigate('/')
+        const token = tokenData.get()
+        localStorage.setItem('LoweFloweToken', JSON.stringify(token))
       })
       .catch(err => {
-        console.error(err)
+        if (err instanceof Error) {
+          setErrorMessage(err.message)
+        }
       })
   }
   return (
@@ -34,6 +40,7 @@ export const RegistrationPage: React.FC = () => {
           shippingFields={shippingFields}
           billingFields={billingFields}
         ></Form>
+        {errorMessage ? <ErrorModal errorMessage={errorMessage}></ErrorModal> : null}
       </div>
     </div>
   )
