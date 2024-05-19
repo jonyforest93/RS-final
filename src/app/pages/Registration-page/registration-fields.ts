@@ -22,7 +22,7 @@ export const registrationFields: IFields[] = [
     },
   },
   {
-    name: 'firstname',
+    name: 'firstName',
     type: 'text',
     validation: {
       required: 'fill in the field',
@@ -34,7 +34,7 @@ export const registrationFields: IFields[] = [
     },
   },
   {
-    name: 'lastname',
+    name: 'lastName',
     type: 'text',
     validation: {
       required: 'fill in the field',
@@ -46,7 +46,7 @@ export const registrationFields: IFields[] = [
     },
   },
   {
-    name: 'Date of birdth',
+    name: 'Date of birth',
     type: 'date',
     validation: {
       required: 'fill in the field',
@@ -56,16 +56,16 @@ export const registrationFields: IFields[] = [
 
 export const shippingFields: IFields[] = [
   {
-    name: 'Shipping adress (country)',
+    name: 'country',
     type: 'text',
     isReadonly: true,
     validation: {
-      value: 'USA',
+      value: 'US',
       required: '',
     },
   },
   {
-    name: 'Shipping adress (city)',
+    name: 'city',
     type: 'text',
     validation: {
       required: 'fill in the field',
@@ -78,7 +78,7 @@ export const shippingFields: IFields[] = [
     },
   },
   {
-    name: 'Shipping adress (street)',
+    name: 'streetName',
     type: 'text',
     validation: {
       required: 'fill in the field',
@@ -86,7 +86,7 @@ export const shippingFields: IFields[] = [
     },
   },
   {
-    name: 'Shipping adress (postalcode)',
+    name: 'postalCode',
     type: 'text',
     validation: {
       required: 'fill in the field',
@@ -100,16 +100,16 @@ export const shippingFields: IFields[] = [
 
 export const billingFields: IFields[] = [
   {
-    name: 'Billing adress (country)',
+    name: 'country',
     type: 'text',
     isReadonly: true,
     validation: {
-      value: 'USA',
+      value: 'US',
       required: '',
     },
   },
   {
-    name: 'Billing adress (city)',
+    name: 'city',
     type: 'text',
     validation: {
       required: 'fill in the field',
@@ -122,7 +122,7 @@ export const billingFields: IFields[] = [
     },
   },
   {
-    name: 'Billing adress (street)',
+    name: 'streetName',
     type: 'text',
     validation: {
       required: 'fill in the field',
@@ -130,7 +130,7 @@ export const billingFields: IFields[] = [
     },
   },
   {
-    name: 'Billing adress (postalcode)',
+    name: 'postalCode',
     type: 'text',
     validation: {
       required: 'fill in the field',

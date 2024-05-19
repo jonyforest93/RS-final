@@ -1,9 +1,16 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
+import {
+  type Control,
+  Controller,
+  type FieldError,
+  type FieldErrors,
+  type FieldValues,
+  type UseFormRegister,
+} from 'react-hook-form'
 
 import { DefaultAdresses } from './DefaultAdress'
 
-import type { FieldError, FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import type { IFields } from 'types/types'
 
 interface IAdditionalProps {
@@ -11,9 +18,16 @@ interface IAdditionalProps {
   billingFields?: IFields[]
   register: UseFormRegister<FieldValues>
   errors: FieldErrors<FieldValues>
+  control: Control<FieldValues, boolean>
 }
 
-export const AdditionalFields: React.FC<IAdditionalProps> = ({ shippingFields, billingFields, register, errors }) => {
+export const AdditionalFields: React.FC<IAdditionalProps> = ({
+  shippingFields,
+  billingFields,
+  control,
+  register,
+  errors,
+}) => {
   const [checked, setChecked] = useState<boolean>(true)
   const onChecked: () => void = () => {
     setChecked(!checked)
@@ -42,8 +56,17 @@ export const AdditionalFields: React.FC<IAdditionalProps> = ({ shippingFields, b
         ))}
       </div>
       <div className="mt-5 flex gap-2 text-white">
-        <input type="checkbox" name="" id="" checked={checked} onChange={onChecked} />
-        <p>The shipping adress matches the billing adress</p>
+        <Controller
+          name="shippingMatchBilling"
+          control={control}
+          defaultValue={true}
+          render={({ field }) => (
+            <label>
+              <input type="checkbox" {...field} defaultChecked onChange={onChecked} className="mr-[10px]" />
+              The shipping address matches the billing address
+            </label>
+          )}
+        />
       </div>
 
       {checked ? (
@@ -59,7 +82,7 @@ export const AdditionalFields: React.FC<IAdditionalProps> = ({ shippingFields, b
                   <input
                     className={`h-16 w-full border border-solid pl-2 font-osvald ${errors[billingField.name] ? 'border-[#FF3A44]' : 'border-[#555555]'} bg-inherit pr-12 text-[#555555]`}
                     type={billingField.type}
-                    {...register(billingField.name, billingField.validation)}
+                    {...register(`billing${billingField.name}`, billingField.validation)}
                   ></input>
                 </div>
                 {errors[billingField.name] ? (
@@ -70,7 +93,7 @@ export const AdditionalFields: React.FC<IAdditionalProps> = ({ shippingFields, b
           </div>
         </>
       )}
-      <DefaultAdresses isShipping={!checked} />
+      <DefaultAdresses isShipping={!checked} control={control} />
     </div>
   )
 }

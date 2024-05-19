@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
+import { transfromName } from 'utils/transormName'
 
 import PasswordVisible from './PasswordVisible'
 import { AdditionalFields } from './additionFields/AdditionalFields'
@@ -26,10 +27,13 @@ const Form: FC<IProps> = ({ fields, onDataSend, isRegister, shippingFields, bill
     register,
     formState: { errors, isValid },
     handleSubmit,
+    control,
     reset,
   } = useForm({ mode: 'onChange' })
   const onSubmit = (data: Record<string, string>): void => {
-    const trimData = Object.fromEntries(Object.entries(data).map(([key, value]) => [key, value.trim()]))
+    const trimData = Object.fromEntries(
+      Object.entries(data).map(([key, value]) => (typeof value === 'string' ? [key, value.trim()] : [key, value])),
+    )
     onDataSend(JSON.stringify(trimData))
     reset()
   }
@@ -43,7 +47,7 @@ const Form: FC<IProps> = ({ fields, onDataSend, isRegister, shippingFields, bill
             <input
               className={`h-16 w-full border border-solid pl-2 font-osvald ${errors[field.name] ? 'border-[#FF3A44]' : 'border-[#555555]'} bg-inherit pr-12 text-[#555555]`}
               type={field.type === 'password' && !showPassword ? 'password' : `${field.type}`}
-              {...register(field.name, field.validation)}
+              {...register(transfromName(field.name), field.validation)}
             ></input>
             {field.type === 'password' ? (
               <PasswordVisible isPassword={showPassword} setShowPassword={setShowPassword}></PasswordVisible>
@@ -58,6 +62,7 @@ const Form: FC<IProps> = ({ fields, onDataSend, isRegister, shippingFields, bill
         <AdditionalFields
           register={register}
           errors={errors}
+          control={control}
           billingFields={billingFields}
           shippingFields={shippingFields}
         />
