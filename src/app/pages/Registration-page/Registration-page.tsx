@@ -20,7 +20,7 @@ export const RegistrationPage: React.FC = () => {
       .then(() => {
         navigate('/')
         const token = tokenData.get()
-        localStorage.setItem('LoweFloweToken', JSON.stringify(token))
+        localStorage.setItem('LoweFlowerToken', JSON.stringify(token))
       })
       .catch(err => {
         if (err instanceof Error) {
