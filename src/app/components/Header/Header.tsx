@@ -14,6 +14,10 @@ export const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
+    const token = localStorage.getItem('LowerFlowerToken')
+    if (token) {
+      setIsLoggedUser(true)
+    }
     function handleScroll(): void {
       const isScrolling = window.pageYOffset > 0
       setScrolling(isScrolling)
@@ -26,7 +30,7 @@ export const Header: FC = () => {
   }, [])
 
   const handleClick: () => void = () => {
-    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('LowerFlowerToken')
     setIsLoggedUser(false)
   }
 
@@ -76,15 +80,15 @@ export const Header: FC = () => {
         <HeaderLinks />
         <div className="flex  w-[100px] items-center gap-[20px] ">
           {isLoggedUser ? (
-            <NavLink to="/" onClick={handleClick} className={setActive}>
+            <NavLink to="/" onClick={handleClick} className="link">
               Logout
             </NavLink>
           ) : (
             <div className="flex flex-col ">
-              <NavLink className={setActive} to="/login">
+              <NavLink className="link" to="/login">
                 Sign Up
               </NavLink>
-              <NavLink className={setActive} to="/registration">
+              <NavLink className="link" to="/registration">
                 Sign In
               </NavLink>
             </div>

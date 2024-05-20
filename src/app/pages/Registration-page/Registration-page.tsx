@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Form from 'components/Form/Form'
@@ -14,13 +14,18 @@ import type { OnDataSend } from 'types/types'
 
 export const RegistrationPage: React.FC = () => {
   const navigate = useNavigate()
+  useEffect(() => {
+    if (localStorage.getItem('LowerFlowerToken')) {
+      navigate('/')
+    }
+  }, [])
   const [errorMessage, setErrorMessage] = useState<string>('')
   const onDataSend: OnDataSend = data => {
     registration(data)
       .then(() => {
         navigate('/')
         const token = tokenData.get().refreshToken
-        localStorage.setItem('LoweFlowerToken', JSON.stringify(token))
+        localStorage.setItem('LowerFlowerToken', JSON.stringify(token))
       })
       .catch(err => {
         if (err instanceof Error) {

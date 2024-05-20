@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Form from 'components/Form/Form'
@@ -26,6 +26,12 @@ const useErrorMessage = (): [string, (value: string) => void] => {
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate()
+  useEffect(() => {
+    if (localStorage.getItem('LowerFlowerToken')) {
+      navigate('/')
+    }
+  }, [])
+
   const [errorMessage, setErrorMessage] = useErrorMessage()
   const { setIsLoggedUser } = useContext(Context)
   const onDataSend: OnDataSend = data => {
@@ -44,7 +50,7 @@ export const LoginPage: React.FC = () => {
         navigate('/')
         const { refreshToken } = tokenData.get()
         if (typeof refreshToken === 'string') {
-          localStorage.setItem('LoweFlowerToken', refreshToken)
+          localStorage.setItem('LowerFlowerToken', refreshToken)
           setIsLoggedUser(true)
         }
 
