@@ -3,7 +3,8 @@ import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 
 import { tokenData } from 'services/token-storage'
 
-import { httpMiddlewareOptions } from './BuildClient'
+import { appConstants } from '../constants'
+import { httpMiddlewareOptions, projectKey } from './BuildClient'
 
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk'
 
@@ -20,15 +21,13 @@ interface RefreshAuthMiddlewareOptions {
   fetch?: unknown
 }
 
-const projectKey = 'rss-kex-shop'
-
 const refresh: (token: string) => RefreshAuthMiddlewareOptions = token => {
   return {
-    host: 'https://auth.eu-central-1.aws.commercetools.com/',
-    projectKey: 'test-project-key',
+    host: appConstants['AUTH_URL'],
+    projectKey,
     credentials: {
-      clientId: 'sUWZBcfpb57l2sQ-Z_6Jg_Nr',
-      clientSecret: 'vBUllYWxwo_ovAaqB0rpCkMEpJ0v4YPF',
+      clientId: appConstants['CLIENT_ID'],
+      clientSecret: appConstants['CLIENT_SECRET'],
     },
     refreshToken: token,
     tokenCache: tokenData,
@@ -43,5 +42,5 @@ export const refreshClientCreate: (token: string) => ByProjectKeyRequestBuilder 
     .withHttpMiddleware(httpMiddlewareOptions)
     .build()
 
-  return createApiBuilderFromCtpClient(client).withProjectKey({ projectKey: 'rss-kex-shop' })
+  return createApiBuilderFromCtpClient(client).withProjectKey({ projectKey })
 }

@@ -1,23 +1,24 @@
 import fetch from 'node-fetch'
 import { type AuthMiddlewareOptions, ClientBuilder, type HttpMiddlewareOptions } from '@commercetools/sdk-client-v2'
 
-const projectKey = 'rss-kex-shop'
-const scopes = ['manage_project:rss-kex-shop']
+import { appConstants } from '../constants'
 
-//TODO add ENV
+export const projectKey = appConstants['PROJECT_KEY']
+const scopes = [appConstants['SCOPES']]
+
 const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: 'https://auth.eu-central-1.aws.commercetools.com/',
+  host: appConstants['AUTH_URL'],
   projectKey,
   credentials: {
-    clientId: 'sUWZBcfpb57l2sQ-Z_6Jg_Nr',
-    clientSecret: 'vBUllYWxwo_ovAaqB0rpCkMEpJ0v4YPF',
+    clientId: appConstants['CLIENT_ID'],
+    clientSecret: appConstants['CLIENT_SECRET'],
   },
   scopes,
   fetch,
 }
 
 export const httpMiddlewareOptions: HttpMiddlewareOptions = {
-  host: 'https://api.eu-central-1.aws.commercetools.com/',
+  host: appConstants['API_URL'],
   fetch,
 }
 

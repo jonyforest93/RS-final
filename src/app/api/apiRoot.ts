@@ -1,5 +1,5 @@
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 
-import { ctpClient } from './BuildClient'
+import { ctpClient, projectKey } from './BuildClient'
 
-export const apiRoot = createApiBuilderFromCtpClient(ctpClient).withProjectKey({ projectKey: 'rss-kex-shop' })
+export const apiRoot = createApiBuilderFromCtpClient(ctpClient).withProjectKey({ projectKey })
