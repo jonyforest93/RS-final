@@ -12,7 +12,7 @@ const App: FC = () => {
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorage.getItem('refreshToken')))
   return (
     <Context.Provider value={{ isLoggedUser, setIsLoggedUser }}>
-      <div className="font-poppins container m-auto flex min-h-[100vh] max-w-[10000px] flex-col justify-between bg-black">
+      <div className="font-poppins container m-auto flex min-h-[100vh] max-w-[10000px] flex-col justify-between bg-[#040a0a]">
         <Routes>
           <Route path="/" element={<RouterOutler />}>
             <Route index element={<MainPage />} />

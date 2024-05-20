@@ -1,6 +1,6 @@
 .paralax {
   position: relative;
-  background: url('images/mainPageImg/promo.jpg');
+  background: url('../images/mainPageImg/promo.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
