@@ -375,15 +375,6 @@ module.exports = {
     '@typescript-eslint/return-await': [2, 'in-try-catch'],
     '@typescript-eslint/strict-boolean-expressions': 0,
     '@typescript-eslint/switch-exhaustiveness-check': 2,
-    '@typescript-eslint/triple-slash-reference': [
-      2,
-      {
-        lib: 'never',
-        path: 'never',
-        types: 'never',
-      },
-    ],
-
     '@typescript-eslint/unbound-method': [
       'error',
       {

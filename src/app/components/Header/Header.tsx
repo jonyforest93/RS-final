@@ -86,10 +86,10 @@ export const Header: FC = () => {
           ) : (
             <div className="flex flex-col ">
               <NavLink className="link" to="/login">
-                Sign Up
+                Sign In
               </NavLink>
               <NavLink className="link" to="/registration">
-                Sign In
+                Sign Up
               </NavLink>
             </div>
           )}

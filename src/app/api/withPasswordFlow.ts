@@ -3,7 +3,8 @@ import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 
 import { tokenData } from 'services/token-storage'
 
-import { httpMiddlewareOptions } from './BuildClient'
+import { appConstants } from '../constants'
+import { httpMiddlewareOptions, projectKey } from './BuildClient'
 
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk'
 
@@ -23,14 +24,13 @@ interface PasswordAuthMiddlewareOptions {
   oauthUri?: string
   fetch?: unknown
 }
-const projectKey = 'rss-kex-shop'
 
 const passwordMiddlewareOptions = (user: UserAuthOptions): PasswordAuthMiddlewareOptions => ({
-  host: 'https://auth.eu-central-1.aws.commercetools.com/',
+  host: appConstants['AUTH_URL'],
   projectKey,
   credentials: {
-    clientId: 'sUWZBcfpb57l2sQ-Z_6Jg_Nr',
-    clientSecret: 'vBUllYWxwo_ovAaqB0rpCkMEpJ0v4YPF',
+    clientId: appConstants['CLIENT_ID'],
+    clientSecret: appConstants['CLIENT_SECRET'],
     user,
   },
   tokenCache: tokenData,
@@ -44,5 +44,5 @@ export function passwordFlowClient(user: UserAuthOptions): ByProjectKeyRequestBu
     .withHttpMiddleware(httpMiddlewareOptions)
     .build()
 
-  return createApiBuilderFromCtpClient(client).withProjectKey({ projectKey: 'rss-kex-shop' })
+  return createApiBuilderFromCtpClient(client).withProjectKey({ projectKey })
 }

@@ -16,10 +16,10 @@ export const MainPage: React.FC = () => {
           <BaseButton variant="primary">view catalog</BaseButton>
           <div className="mt-[20px] flex gap-[15px]">
             <NavLink className="link" to="/login">
-              Sign Up
+              Sign In
             </NavLink>
             <NavLink className="link" to="/registration">
-              Sign In
+              Sign Up
             </NavLink>
           </div>
         </div>
@@ -39,7 +39,7 @@ export const MainPage: React.FC = () => {
       <div className="orders relative overflow-hidden pb-6">
         <div className="container relative z-10 mx-auto">
           <h2 className="title">catalog</h2>
-          <p className="text-lg font-light leading-[1.3] tracking-wider text-white lg:ml-16">
+          <p className="text-lg font-light leading-[1.3] tracking-wider text-white lg:ml-16 lg:mt-7">
             We have the largest selection of flowers, bouquets, cards and gifts. We will always help you choose a
             bouquet for your event, our manager will advise you and help you make your choice
           </p>
