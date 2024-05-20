@@ -17,7 +17,7 @@ export const loginUser: LoginFunction = async user => {
       .execute()
 
     return customer
-  } catch {
-    throw new Error('Incorrect username or password')
+  } catch (err) {
+    throw new Error(String(err))
   }
 }
