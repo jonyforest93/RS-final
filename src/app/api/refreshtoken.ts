@@ -1,7 +1,8 @@
 import { ClientBuilder, type TokenCache } from '@commercetools/sdk-client-v2'
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 
-import { tokenData } from './withPasswordFlow'
+import { tokenData } from 'services/token-storage'
+
 import { httpMiddlewareOptions } from './BuildClient'
 
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk'
@@ -18,7 +19,9 @@ interface RefreshAuthMiddlewareOptions {
   oauthUri?: string
   fetch?: unknown
 }
+
 const projectKey = 'rss-kex-shop'
+
 const refresh: (token: string) => RefreshAuthMiddlewareOptions = token => {
   return {
     host: 'https://auth.eu-central-1.aws.commercetools.com/',
