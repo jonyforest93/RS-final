@@ -1,4 +1,7 @@
+import { NavLink } from 'react-router-dom'
+
 import BaseButton from 'components/shared/BaseButton/BaseButton'
+import { setActive } from 'utils/setAcitve'
 
 import Orders from './Orders'
 
@@ -12,6 +15,14 @@ export const MainPage: React.FC = () => {
             We create for those who appreciate the freshness and grace of flowers
           </p>
           <BaseButton variant="primary">view catalog</BaseButton>
+          <div className="mt-[20px] flex gap-[15px]">
+            <NavLink className={setActive} to="/login">
+              Sign Up
+            </NavLink>
+            <NavLink className={setActive} to="/registration">
+              Sign In
+            </NavLink>
+          </div>
         </div>
         <div className="mask"></div>
         <div className="signature"></div>
