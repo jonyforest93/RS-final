@@ -28,6 +28,8 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.0.3",
     "@tailwindcss/typography": "^0.5.13",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
@@ -51,6 +53,7 @@
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
+    "react-test-renderer": "^18.3.1",
     "tailwindcss": "^3.4.3",
     "ts-jest": "^29.1.2",
     "typescript": "^5.2.2",

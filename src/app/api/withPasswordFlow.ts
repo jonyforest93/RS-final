@@ -1,5 +1,7 @@
-import { ClientBuilder, type TokenCache, type TokenStore, type UserAuthOptions } from '@commercetools/sdk-client-v2'
+import { ClientBuilder, type TokenCache, type UserAuthOptions } from '@commercetools/sdk-client-v2'
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
+
+import { tokenData } from 'services/token-storage'
 
 import { httpMiddlewareOptions } from './BuildClient'
 
@@ -22,26 +24,6 @@ interface PasswordAuthMiddlewareOptions {
   fetch?: unknown
 }
 const projectKey = 'rss-kex-shop'
-
-export const initialTokenInfo: TokenStore = {
-  token: '',
-  expirationTime: 0,
-  refreshToken: '',
-}
-
-class TokenInfo {
-  private store: TokenStore = initialTokenInfo
-
-  public get(): TokenStore {
-    return this.store
-  }
-
-  public set(data: TokenStore): void {
-    this.store = data
-  }
-}
-
-export const tokenData = new TokenInfo()
 
 const passwordMiddlewareOptions = (user: UserAuthOptions): PasswordAuthMiddlewareOptions => ({
   host: 'https://auth.eu-central-1.aws.commercetools.com/',

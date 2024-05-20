@@ -11,7 +11,6 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
   credentials: {
     clientId: 'sUWZBcfpb57l2sQ-Z_6Jg_Nr',
     clientSecret: 'vBUllYWxwo_ovAaqB0rpCkMEpJ0v4YPF',
-    anonymousId: '7',
   },
   scopes,
   fetch,

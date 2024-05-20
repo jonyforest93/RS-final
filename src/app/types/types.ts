@@ -4,15 +4,18 @@ interface IFieldValidation {
     value: number
     message: string
   }
-  pattern: {
+  value?: string
+  pattern?: {
     value: RegExp
     message: string
   }
+  validate?: (value: string) => boolean | string
 }
 
 interface IFields {
   name: string
   type: string
+  isReadonly?: boolean
   validation: IFieldValidation
 }
 

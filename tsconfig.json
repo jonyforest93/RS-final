@@ -4,6 +4,7 @@
     "module": "ES6",
     "moduleResolution": "node",
     "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost"],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "outDir": "./dist/",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

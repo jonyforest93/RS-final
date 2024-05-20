@@ -4,7 +4,7 @@ import BaseButton from 'components/shared/BaseButton/BaseButton'
 
 interface ErrorModalProps {
   errorMessage: string
-  onErrorMessageChange: (value: string) => void
+  onErrorMessageChange?: (value: string) => void
 }
 
 export const ErrorModal: React.FC<ErrorModalProps> = ({ errorMessage, onErrorMessageChange }) => {
@@ -12,7 +12,9 @@ export const ErrorModal: React.FC<ErrorModalProps> = ({ errorMessage, onErrorMes
 
   const handleButtonClick = (): void => {
     setIsButtonClicked(true)
-    onErrorMessageChange('')
+    if (onErrorMessageChange) {
+      onErrorMessageChange('')
+    }
   }
   return (
     <div
