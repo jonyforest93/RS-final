@@ -37,7 +37,7 @@ export const MainPage: React.FC = () => {
           className="absolute bottom-[400px] right-[-50px] object-cover opacity-60"
         />
       </div>
-      <div className="orders relative">
+      <div className="orders relative overflow-hidden pb-6">
         <div className="container relative z-10 mx-auto">
           <h2 className="title">catalog</h2>
           <p className="text-lg font-light leading-[1.3] tracking-wider text-white lg:ml-16">
