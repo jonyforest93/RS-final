@@ -4,6 +4,9 @@
   "transform": {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
+  "collectCoverage": true,
+  "coverageReporters": ["json", "html"],
+  "collectCoverageFrom": ["./src/**"],
   "moduleNameMapper": {
     "~src/(.*)": "<rootDir>/src/$1",
     "^pages(.)$": "<rootDir>/src/app/pages/$1",
@@ -13,5 +16,6 @@
     "^types(.)$": "<rootDir>/src/app/types/$1",
     "^utils(.)$": "<rootDir>/src/app/utils/$1",
     "^api(.*)$": "<rootDir>/src/app/api/$1"
-  }
+  },
+  "testEnvironment": "jsdom"
 }

@@ -66,7 +66,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <main className="relative flex-grow">
-      <h2 className="title mt-32 text-center max-lg:text-7xl max-md:text-6xl max-sm:text-5xl">Welcome Back!</h2>
+      <h2 className="title mt-48 text-center max-lg:text-7xl max-md:text-6xl max-sm:text-5xl">Welcome Back!</h2>
       <p className="basic-text text-center">Log In to access your account.</p>
       <div className="m-auto max-w-lg px-[10px]">
         <Form fields={fields} onDataSend={onDataSend}></Form>
@@ -74,7 +74,6 @@ export const LoginPage: React.FC = () => {
         <Link href="/registration">Create Account</Link>
       </div>
       <LoginImages />
-      <div className="h-[1000px]"></div>
     </main>
   )
 }
