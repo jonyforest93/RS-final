@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
-import { transfromName } from 'utils/transormName'
 
 import PasswordVisible from './PasswordVisible'
 import { AdditionalFields } from './additionFields/AdditionalFields'
@@ -44,8 +43,8 @@ const Form: FC<IProps> = ({ fields, onDataSend, isRegister, shippingFields, bill
           <div className="relative z-20">
             <input
               className={`h-16 w-full border border-solid pl-2 font-osvald ${errors[field.name] ? 'border-[#FF3A44]' : 'border-[#555555]'} bg-inherit pr-12 text-[#555555]`}
-              type={field.type === 'password' && !showPassword ? 'password' : `${field.type}`}
-              {...register(transfromName(field.name), field.validation)}
+              type={field.type === 'password' && !showPassword ? 'password' : field.type === 'date' ? 'date' : 'text'}
+              {...register(field.name === 'birthday' ? 'dateOfBirth' : field.name, field.validation)}
             ></input>
             {field.type === 'password' ? (
               <PasswordVisible isPassword={showPassword} setShowPassword={setShowPassword}></PasswordVisible>

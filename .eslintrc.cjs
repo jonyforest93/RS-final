@@ -87,7 +87,6 @@ module.exports = {
     'no-multi-assign': 2,
     'no-new-wrappers': 2,
     'no-negated-condition': 2,
-    'no-nested-ternary': 2,
     'no-new-object': 2,
     'no-octal-escape': 2,
     'no-param-reassign': 2,

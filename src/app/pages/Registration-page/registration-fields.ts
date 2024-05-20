@@ -46,10 +46,21 @@ export const registrationFields: IFields[] = [
     },
   },
   {
-    name: 'Date of birth',
+    name: 'Birthday',
     type: 'date',
     validation: {
       required: 'fill in the field',
+      pattern: {
+        value: /\d{4}-\d{2}-\d{2}/,
+        message: 'Enter correct data',
+      },
+      validate: (value: string): string | boolean => {
+        const inputDate = new Date(value)
+        const maxDate = new Date('2011-12-31')
+        const minDate = new Date('1910-12-31')
+
+        return (inputDate <= maxDate && inputDate > minDate) || 'Date must be after 31.12.1910 and before 31.12.2011'
+      },
     },
   },
 ]

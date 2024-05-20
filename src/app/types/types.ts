@@ -9,6 +9,7 @@ interface IFieldValidation {
     value: RegExp
     message: string
   }
+  validate?: (value: string) => boolean | string
 }
 
 interface IFields {

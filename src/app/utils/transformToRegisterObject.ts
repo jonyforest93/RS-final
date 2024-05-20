@@ -21,11 +21,17 @@ export interface IRegistrationData {
   addresses: BaseAddress[]
   defaultShippingAddress?: number
   defaultBillingAddress?: number
+  Birthday: string
 }
 export function transormToRegisisterObject(data: string): MyCustomerDraft {
   const parsedData = JSON.parse(data) as IRegistrationData
   parsedData.addresses = []
-  if (parsedData.shippingDefault) {
+  parsedData.dateOfBirth = parsedData.Birthday
+  if (parsedData.shippingDefault && parsedData.shippingMatchBilling) {
+    parsedData.defaultShippingAddress = 0
+    parsedData.defaultBillingAddress = 0
+  }
+  if (parsedData.shippingDefault && !parsedData.shippingMatchBilling) {
     parsedData.defaultShippingAddress = 0
   }
   if (parsedData.billingDefault) {
@@ -49,6 +55,5 @@ export function transormToRegisisterObject(data: string): MyCustomerDraft {
     }
     finalObj.addresses?.push(billingAdress)
   }
-
   return finalObj
 }

@@ -19,7 +19,7 @@ export const RegistrationPage: React.FC = () => {
     registration(data)
       .then(() => {
         navigate('/')
-        const token = tokenData.get()
+        const token = tokenData.get().refreshToken
         localStorage.setItem('LoweFlowerToken', JSON.stringify(token))
       })
       .catch(err => {
