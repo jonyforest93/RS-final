@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Form from 'components/Form/Form'
 import { loginUser } from 'api/loginUser'
-import { tokenData } from 'api/withPasswordFlow'
+import { tokenData } from 'services/token-storage'
 import { Context } from 'services/Context'
 
 import { ErrorModal } from './Error-message-server-modal'
