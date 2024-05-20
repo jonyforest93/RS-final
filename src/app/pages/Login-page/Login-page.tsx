@@ -44,7 +44,7 @@ export const LoginPage: React.FC = () => {
         navigate('/')
         const { refreshToken } = tokenData.get()
         if (typeof refreshToken === 'string') {
-          localStorage.setItem('refreshToken', refreshToken)
+          localStorage.setItem('LoweFlowerToken', refreshToken)
           setIsLoggedUser(true)
         }
 
