@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Form from 'components/Form/Form'
 import { registration } from 'api/registration'
 import { ErrorModal } from 'pages/Login-page/Error-message-server-modal'
 import { tokenData } from 'services/token-storage'
+import { Context } from 'services/Context'
 
 import { billingFields, registrationFields, shippingFields } from './registration-fields'
 import { RegistrationImages } from './Registration-images'
@@ -14,6 +15,8 @@ import type { OnDataSend } from 'types/types'
 
 export const RegistrationPage: React.FC = () => {
   const navigate = useNavigate()
+  const { setIsLoggedUser } = useContext(Context)
+
   useEffect(() => {
     if (localStorage.getItem('LowerFlowerToken')) {
       navigate('/')
@@ -26,6 +29,7 @@ export const RegistrationPage: React.FC = () => {
         navigate('/')
         const token = tokenData.get().refreshToken
         localStorage.setItem('LowerFlowerToken', JSON.stringify(token))
+        setIsLoggedUser(true)
       })
       .catch(err => {
         if (err instanceof Error) {
