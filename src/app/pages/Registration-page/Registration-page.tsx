@@ -6,7 +6,7 @@ import { registration } from 'api/registration'
 import { ErrorModal } from 'pages/Login-page/Error-message-server-modal'
 import { tokenData } from 'services/token-storage'
 
-import { billingFields, registrationFields, shippingFields } from './Registration-fields'
+import { billingFields, registrationFields, shippingFields } from './registration-fields'
 import { RegistrationImages } from './Registration-images'
 import { RegistrationTitle } from './Registration-title'
 

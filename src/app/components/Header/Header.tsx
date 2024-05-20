@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { type FC } from 'react'
+import { type FC, useEffect, useState } from 'react'
 import { useContext } from 'react'
 
 import { setActive } from 'utils/setAcitve'
@@ -9,9 +9,7 @@ import { HeaderLinks } from './HeaderLinks'
 import { HeaderBurger } from './HeaderBurger'
 
 export const Header: FC = () => {
-
   const { isLoggedUser, setIsLoggedUser } = useContext(Context)
-  const [logStatus, setLogStatus] = useState<boolean>(false)
   const [scrolling, setScrolling] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -24,12 +22,6 @@ export const Header: FC = () => {
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (localStorage.getItem('reactReaction')) {
-      setLogStatus(true)
     }
   }, [])
 
