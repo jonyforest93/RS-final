@@ -26,7 +26,7 @@ export const Header: FC = () => {
   }, [])
 
   const handleClick: () => void = () => {
-    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('LoweFlowerToken')
     setIsLoggedUser(false)
   }
 
