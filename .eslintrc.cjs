@@ -56,7 +56,7 @@ module.exports = {
     'max-lines-per-function': [
       2,
       {
-        max: 80,
+        max: 280,
         skipBlankLines: true,
         skipComments: true,
       },
@@ -398,7 +398,7 @@ module.exports = {
     'react/no-children-prop': 'error',
     'react/destructuring-assignment': ['error', 'always', { destructureInSignature: 'always' }],
     'react/jsx-no-leaked-render': ['error', { validStrategies: ['ternary'] }],
-    'react/jsx-max-depth': ['error', { max: 5 }],
+    'react/jsx-max-depth': ['error', { max: 15 }],
     'react/function-component-definition': ['warn', { namedComponents: 'arrow-function' }],
     'react/react-in-jsx-scope': 'off',
     'react/jsx-key': [

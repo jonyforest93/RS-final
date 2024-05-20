@@ -1,11 +1,12 @@
 @import url('components/shared/BaseButton/BaseButton.css');
+@import url('pages/Main-page/main-page.css');
 
 .main-title {
-  @apply font-cormorant text-[200px] font-normal uppercase tracking-wider text-black;
+  @apply font-cormorant text-[68px] font-normal uppercase tracking-wider text-white md:text-[200px] md:leading-[200px];
 }
 
 .title {
-  @apply font-cormorant text-8xl font-normal uppercase tracking-tighter text-white;
+  @apply font-cormorant text-[48px] font-normal uppercase tracking-tighter text-white md:text-8xl;
 }
 
 .link {
