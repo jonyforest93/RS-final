@@ -62,16 +62,20 @@ export const AdditionalFields: React.FC<IAdditionalProps> = ({
           defaultValue={true}
           render={({ field }) => (
             <label>
-              <input type="checkbox" {...field} defaultChecked onChange={onChecked} className="mr-[10px]" />
+              <input
+                type="checkbox"
+                {...field}
+                onClick={onChecked}
+                defaultChecked={typeof field.value === 'boolean' ? field.value : undefined}
+                className="mr-[10px]"
+              />
               The shipping address matches the billing address
             </label>
           )}
         />
       </div>
 
-      {checked ? (
-        ''
-      ) : (
+      {checked ? null : (
         <>
           <h2 className="mt-[20px] font-medium text-white">Billing Adress</h2>
           <div className="my-6">
@@ -85,8 +89,10 @@ export const AdditionalFields: React.FC<IAdditionalProps> = ({
                     {...register(`billing${billingField.name}`, billingField.validation)}
                   ></input>
                 </div>
-                {errors[billingField.name] ? (
-                  <p className="mt-1 font-normal text-[#FF3A44]">{(errors[billingField.name] as FieldError).message}</p>
+                {errors[`billing${billingField.name}`] ? (
+                  <p className="mt-1 font-normal text-[#FF3A44]">
+                    {(errors[`billing${billingField.name}`] as FieldError).message}
+                  </p>
                 ) : null}
               </div>
             ))}

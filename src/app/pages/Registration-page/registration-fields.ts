@@ -6,7 +6,7 @@ export const registrationFields: IFields[] = [
     type: 'email',
     validation: {
       required: 'fill in the field',
-      pattern: { value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: 'Invalid email address' },
+      pattern: { value: /^^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: 'Invalid email address' },
     },
   },
   {
