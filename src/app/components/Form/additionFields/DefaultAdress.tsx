@@ -9,17 +9,6 @@ interface IDefaultProps {
 }
 
 export const DefaultAdresses: React.FC<IDefaultProps> = ({ isShipping, control }) => {
-  // const [shippingDefault, setShippingDefault] = useState<boolean>(true)
-  // const [billingDefault, setBillingDefault] = useState<boolean>(false)
-
-  // const handleShipping = (): void => {
-  //   setShippingDefault(prev => !prev)
-  //   setBillingDefault(false)
-  // }
-  // const handleBilling = (): void => {
-  //   setBillingDefault(prev => !prev)
-  //   setShippingDefault(false)
-  // }
   return (
     <div>
       <div className="mt-5 flex gap-2 text-white">
