@@ -1,7 +1,7 @@
 import { transormToRegisisterObject } from 'utils/transformToRegisterObject'
 
-import { apiRoot } from './apiRoot'
 import { passwordFlowClient } from './withPasswordFlow'
+import { anonymousClient } from './BuildClient'
 
 import type { ClientResponse, CustomerSignInResult } from '@commercetools/platform-sdk'
 
@@ -9,8 +9,9 @@ type RegistrationFunction = (user: string) => Promise<ClientResponse<CustomerSig
 
 export const registration: RegistrationFunction = async user => {
   const userData = transormToRegisisterObject(user)
+  const client = anonymousClient()
   try {
-    await apiRoot.me().signup().post({ body: userData }).execute()
+    await client.me().signup().post({ body: userData }).execute()
     const { email, password } = userData
     const userObj = { username: email, password }
 
