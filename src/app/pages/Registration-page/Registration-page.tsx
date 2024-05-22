@@ -53,7 +53,7 @@ export const RegistrationPage: React.FC = () => {
     <div className=" relative m-auto  flex w-[100%] flex-grow flex-col items-center justify-between overflow-x-hidden">
       <RegistrationImages />
       <RegistrationTitle />
-      <div className="z-10 m-auto w-[100%] px-[10px]">
+      <div className="z-10 m-auto w-[100%] px-[10px] pb-[25px]">
         <Form
           fields={registrationFields}
           onDataSend={onDataSend}
