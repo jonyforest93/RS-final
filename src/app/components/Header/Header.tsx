@@ -73,8 +73,8 @@ export const Header: FC = () => {
           </div>
         </div>
         <img src="/logo.png" alt="logo" className="hidden lg:flex" />
-        <div className="title flex flex-grow  flex-col items-center text-[30px] lg:hidden">
-          <h2>Lower</h2>
+        <div className="title flex flex-grow  flex-col items-center text-[30px] leading-tight lg:hidden">
+          <h2>Lover</h2>
           <h2>Flower</h2>
         </div>
         <HeaderLinks />
