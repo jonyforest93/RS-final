@@ -6,6 +6,7 @@ import { registration } from 'api/registration'
 import { ErrorModal } from 'pages/Login-page/Error-message-server-modal'
 import { tokenData } from 'services/token-storage'
 import { Context } from 'services/Context'
+import { Modal } from 'components/modal/Modal'
 
 import { billingFields, registrationFields, shippingFields } from './registration-fields'
 import { RegistrationImages } from './Registration-images'
@@ -22,11 +23,21 @@ export const RegistrationPage: React.FC = () => {
       navigate('/')
     }
   }, [])
+
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const [modalMessage, setModalMessage] = useState<string>('')
+  const [display, setDisplay] = useState<boolean>(false)
+  const [displayModal, setDisplayModal] = useState<boolean>(false)
+
   const onDataSend: OnDataSend = data => {
     registration(data)
       .then(() => {
-        navigate('/')
+        setModalMessage('Congratulations! You have successfully registered!')
+        setDisplayModal(true)
+        setTimeout(() => {
+          setDisplayModal(false)
+          navigate('/')
+        }, 2000)
         const token = tokenData.get().refreshToken
         localStorage.setItem('LowerFlowerToken', JSON.stringify(token))
         setIsLoggedUser(true)
@@ -37,6 +48,7 @@ export const RegistrationPage: React.FC = () => {
         }
       })
   }
+
   return (
     <div className=" relative m-auto  flex w-[100%] flex-grow flex-col items-center justify-between overflow-x-hidden">
       <RegistrationImages />
@@ -48,8 +60,12 @@ export const RegistrationPage: React.FC = () => {
           isRegister={true}
           shippingFields={shippingFields}
           billingFields={billingFields}
+          data-testid="registrationForm"
         ></Form>
-        {errorMessage ? <ErrorModal errorMessage={errorMessage}></ErrorModal> : null}
+        {display ? (
+          <ErrorModal errorMessage={errorMessage} isDisplayed={display} setDisplay={setDisplay}></ErrorModal>
+        ) : null}
+        {displayModal ? <Modal modalText={modalMessage} isDisplay={displayModal} /> : null}
       </div>
     </div>
   )

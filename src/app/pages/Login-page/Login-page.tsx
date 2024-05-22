@@ -32,6 +32,7 @@ export const LoginPage: React.FC = () => {
     }
   }, [])
 
+  const [display, setDisplay] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useErrorMessage()
   const { setIsLoggedUser } = useContext(Context)
   const onDataSend: OnDataSend = data => {
@@ -60,6 +61,7 @@ export const LoginPage: React.FC = () => {
         if (err instanceof Error) {
           const { message } = err
           setErrorMessage(message)
+          setDisplay(true)
         }
       })
   }
@@ -70,7 +72,7 @@ export const LoginPage: React.FC = () => {
       <p className="basic-text text-center">Log In to access your account.</p>
       <div className="m-auto max-w-lg px-[10px]">
         <Form fields={fields} onDataSend={onDataSend}></Form>
-        {errorMessage ? <ErrorModal errorMessage={errorMessage} onErrorMessageChange={setErrorMessage} /> : null}
+        {display ? <ErrorModal errorMessage={errorMessage} isDisplayed={display} setDisplay={setDisplay} /> : null}
         <Link href="/registration">Create Account</Link>
       </div>
       <LoginImages />

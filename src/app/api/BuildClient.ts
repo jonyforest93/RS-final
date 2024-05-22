@@ -1,12 +1,13 @@
 import fetch from 'node-fetch'
 import { type AuthMiddlewareOptions, ClientBuilder, type HttpMiddlewareOptions } from '@commercetools/sdk-client-v2'
+import { type ByProjectKeyRequestBuilder, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 
 import { appConstants } from '../constants'
 
 export const projectKey = appConstants['PROJECT_KEY']
 const scopes = [appConstants['SCOPES']]
 
-const authMiddlewareOptions: AuthMiddlewareOptions = {
+const authMiddlewareOptions = (): AuthMiddlewareOptions => ({
   host: appConstants['AUTH_URL'],
   projectKey,
   credentials: {
@@ -15,15 +16,18 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
   },
   scopes,
   fetch,
-}
-
-export const httpMiddlewareOptions: HttpMiddlewareOptions = {
+})
+export const httpMiddlewareOptions = (): HttpMiddlewareOptions => ({
   host: appConstants['API_URL'],
   fetch,
-}
+})
 
-export const ctpClient = new ClientBuilder()
-  .withProjectKey(projectKey)
-  .withAnonymousSessionFlow(authMiddlewareOptions)
-  .withHttpMiddleware(httpMiddlewareOptions)
-  .build()
+export function anonymousClient(): ByProjectKeyRequestBuilder {
+  const client = new ClientBuilder()
+    .withProjectKey(projectKey)
+    .withAnonymousSessionFlow(authMiddlewareOptions())
+    .withHttpMiddleware(httpMiddlewareOptions())
+    .build()
+
+  return createApiBuilderFromCtpClient(client).withProjectKey({ projectKey })
+}
