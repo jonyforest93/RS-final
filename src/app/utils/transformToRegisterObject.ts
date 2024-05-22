@@ -30,12 +30,13 @@ export function transormToRegisisterObject(data: string): MyCustomerDraft {
   if (parsedData.shippingDefault && parsedData.shippingMatchBilling) {
     parsedData.defaultShippingAddress = 0
     parsedData.defaultBillingAddress = 0
-  }
-  if (parsedData.shippingDefault && !parsedData.shippingMatchBilling) {
+  } else if (parsedData.shippingDefault && !parsedData.shippingMatchBilling) {
     parsedData.defaultShippingAddress = 0
-  }
-  if (parsedData.billingDefault) {
+  } else if (parsedData.billingDefault) {
     parsedData.defaultBillingAddress = 1
+  }
+  if (!parsedData.billingcity) {
+    parsedData.defaultBillingAddress = 0
   }
   const finalObj: MyCustomerDraft = { ...parsedData }
   const address: BaseAddress = {
@@ -46,7 +47,7 @@ export function transormToRegisisterObject(data: string): MyCustomerDraft {
   }
   finalObj.addresses?.push(address)
 
-  if (parsedData.billingcountry) {
+  if (parsedData.billingstreetName) {
     const billingAdress: BaseAddress = {
       country: parsedData.billingcountry,
       city: parsedData.billingcity,

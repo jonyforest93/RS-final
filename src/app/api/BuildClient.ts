@@ -27,6 +27,7 @@ export function anonymousClient(): ByProjectKeyRequestBuilder {
     .withProjectKey(projectKey)
     .withAnonymousSessionFlow(authMiddlewareOptions())
     .withHttpMiddleware(httpMiddlewareOptions())
+    .withLoggerMiddleware()
     .build()
 
   return createApiBuilderFromCtpClient(client).withProjectKey({ projectKey })
