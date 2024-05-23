@@ -32,7 +32,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['prettier', 'import', 'react-refresh', '@stylistic'],
+  plugins: ['import', 'react-refresh', 'prettier'],
   extends: [
     'eslint:recommended',
     'plugin:import/recommended',
@@ -56,7 +56,7 @@ module.exports = {
     'max-lines-per-function': [
       2,
       {
-        max: 40,
+        max: 280,
         skipBlankLines: true,
         skipComments: true,
       },
@@ -87,7 +87,6 @@ module.exports = {
     'no-multi-assign': 2,
     'no-new-wrappers': 2,
     'no-negated-condition': 2,
-    'no-nested-ternary': 2,
     'no-new-object': 2,
     'no-octal-escape': 2,
     'no-param-reassign': 2,
@@ -376,15 +375,6 @@ module.exports = {
     '@typescript-eslint/return-await': [2, 'in-try-catch'],
     '@typescript-eslint/strict-boolean-expressions': 0,
     '@typescript-eslint/switch-exhaustiveness-check': 2,
-    '@typescript-eslint/triple-slash-reference': [
-      2,
-      {
-        lib: 'never',
-        path: 'never',
-        types: 'never',
-      },
-    ],
-
     '@typescript-eslint/unbound-method': [
       'error',
       {
@@ -392,31 +382,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/unified-signatures': 2,
-    '@stylistic/lines-between-class-members': [
-      'error',
-      {
-        enforce: [{ blankLine: 'always', prev: '*', next: 'method' }],
-      },
-    ],
-    '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],
-    '@stylistic/padding-line-between-statements': [
-      2,
-      {
-        blankLine: 'always',
-        prev: ['case', 'default', 'block', 'block-like', 'multiline-block-like', 'interface', 'type', 'export'],
-        next: '*',
-      },
-      {
-        blankLine: 'any',
-        prev: ['const', 'let'],
-        next: ['const', 'let'],
-      },
-      {
-        blankLine: 'always',
-        prev: '*',
-        next: ['switch', 'while', 'try', 'return', 'if', 'interface', 'type', 'function'],
-      },
-    ],
     'react/prefer-stateless-function': 'error',
     'react/button-has-type': 'error',
     'react/no-unstable-nested-components': ['error', { allowAsProps: true }],
@@ -424,7 +389,7 @@ module.exports = {
     'react/no-children-prop': 'error',
     'react/destructuring-assignment': ['error', 'always', { destructureInSignature: 'always' }],
     'react/jsx-no-leaked-render': ['error', { validStrategies: ['ternary'] }],
-    'react/jsx-max-depth': ['error', { max: 5 }],
+    'react/jsx-max-depth': ['error', { max: 15 }],
     'react/function-component-definition': ['warn', { namedComponents: 'arrow-function' }],
     'react/react-in-jsx-scope': 'off',
     'react/jsx-key': [

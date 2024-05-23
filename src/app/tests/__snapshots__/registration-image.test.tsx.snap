@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Registration-images should match snapshoot 1`] = `
+<div>
+  <div
+    class=" absolute z-0 flex w-[100%]"
+  >
+    <img
+      alt=""
+      class="absolute left-0 top-[-30px]
+      z-[5]
+     w-[220px] md:block md:w-[562px]"
+      data-testid="flowerLeft"
+      src="/registrationPage/flowerLeft.png"
+    />
+    <img
+      alt=""
+      class="absolute right-0  top-[-50px]  z-[5] w-[500px] md:w-[903px]"
+      data-testid="flowerRight"
+      src="/registrationPage/flowerRight.png"
+    />
+    <img
+      alt=""
+      class="md:bloc absolute left-[-150px] top-[-80px] z-0 rotate-180 md:left-[-50px] md:top-[0]"
+      data-testid="flowerEllipseLeftTop"
+      src="/registrationPage/ellipseLeftTop.png"
+    />
+    <img
+      alt=""
+      class="absolute right-[-100px] z-0"
+      data-testid="flowerEllipseRightTop"
+      src="/registrationPage/ellipseRightTop.png"
+    />
+  </div>
+</div>
+`;

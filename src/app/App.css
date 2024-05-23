@@ -1,0 +1,34 @@
+@import url('components/shared/BaseButton/BaseButton.css');
+@import url('pages/Main-page/main-page.css');
+
+.main-title {
+  @apply font-cormorant text-[68px] font-normal uppercase tracking-wider text-white md:text-[200px] md:leading-[200px];
+}
+
+.title {
+  @apply font-cormorant text-[48px] font-normal uppercase tracking-tighter text-white md:text-8xl;
+}
+
+.link {
+  @apply cursor-pointer font-osvald text-sm font-normal uppercase tracking-wider text-white transition duration-300 hover:text-primary hover:underline;
+}
+
+.list-title {
+  @apply font-osvald text-lg font-bold uppercase tracking-wider text-primary;
+}
+
+.list-item {
+  @apply font-osvald text-base font-normal uppercase tracking-wider text-white;
+}
+
+.basic-text {
+  @apply font-osvald text-sm font-normal uppercase tracking-wider text-white;
+}
+
+.card-title {
+  @apply font-osvald text-xl font-normal uppercase tracking-wider text-white;
+}
+
+.card-price {
+  @apply font-osvald text-sm font-bold uppercase tracking-wider text-white;
+}
