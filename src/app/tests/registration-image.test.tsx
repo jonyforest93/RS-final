@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 
 import '@testing-library/jest-dom'
-import { RegistrationImages } from '../../pages/Registration-page/Registration-images'
+import { RegistrationImages } from 'pages/Registration-page/Registration-images'
 
 /**
  * @jest-environment jsdom

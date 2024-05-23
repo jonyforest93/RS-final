@@ -6,7 +6,7 @@ export const initialTokenInfo: TokenStore = {
   refreshToken: '',
 }
 
-class TokenInfo {
+export class TokenInfo {
   private store: TokenStore = initialTokenInfo
 
   public get(): TokenStore {
