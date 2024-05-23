@@ -4,18 +4,24 @@
   "transform": {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
+  "globals": {
+    "ts-jest": {
+      "tsconfig": "./tsconfig.json",
+      "useESM": true
+    }
+  },
   "collectCoverage": true,
   "coverageReporters": ["json", "html"],
   "collectCoverageFrom": ["./src/**"],
+  "alias/(.*)": "<rootDir>/src/$1",
   "moduleNameMapper": {
-    "~src/(.*)": "<rootDir>/src/$1",
-    "^pages(.)$": "<rootDir>/src/app/pages/$1",
-    "^Components(.)$": "<rootDir>/src/app/components/Form$1",
-    "^router(.)$": "<rootDir>/src/app/router/$1",
-    "^services(.)$": "<rootDir>/src/app/services/$1",
-    "^types(.)$": "<rootDir>/src/app/types/$1",
-    "^utils(.)$": "<rootDir>/src/app/utils/$1",
-    "^api(.*)$": "<rootDir>/src/app/api/$1"
+    "^components/(.*)$": "<rootDir>/src/app/components/$1",
+    "^pages/(.*)$": "<rootDir>/src/app/pages/$1",
+    "^router/(.*)$": "<rootDir>/src/app/router/$1",
+    "^services/(.*)$": "<rootDir>/src/app/services/$1",
+    "^types/(.*)$": "<rootDir>/src/app/types/$1",
+    "^utils/(.*)$": "<rootDir>/src/app/utils/$1",
+    "^api/(.*)$": "<rootDir>/src/app/api/$1"
   },
   "testEnvironment": "jsdom"
 }
