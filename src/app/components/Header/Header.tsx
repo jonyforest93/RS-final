@@ -78,11 +78,16 @@ export const Header: FC = () => {
           <h2>Flower</h2>
         </div>
         <HeaderLinks />
-        <div className="flex  w-[100px] items-center gap-[20px] ">
+        <div className="flex  w-[100px] items-center justify-center gap-[20px] ">
           {isLoggedUser ? (
-            <NavLink to="/" onClick={handleClick} className="link">
-              Logout
-            </NavLink>
+            <div className="flex flex-col">
+              <NavLink to="/profile" className="link">
+                Profile
+              </NavLink>
+              <NavLink to="/" onClick={handleClick} className="link">
+                Logout
+              </NavLink>
+            </div>
           ) : (
             <div className="flex flex-col ">
               <NavLink className="link" to="/login">
