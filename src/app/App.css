@@ -32,3 +32,9 @@
 .card-price {
   @apply font-osvald text-sm font-bold uppercase tracking-wider text-white;
 }
+.input {
+  @apply h-16 w-full border border-solid  bg-inherit pl-2 pr-12 font-osvald text-[#43FFD2];
+}
+.label {
+  @apply basic-text mb-1 mt-3;
+}

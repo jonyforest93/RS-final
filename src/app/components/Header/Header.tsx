@@ -81,7 +81,7 @@ export const Header: FC = () => {
         <div className="flex  w-[100px] items-center justify-center gap-[20px] ">
           {isLoggedUser ? (
             <div className="flex flex-col">
-              <NavLink to="/profile" className="link">
+              <NavLink to="/profile" className={setActive}>
                 Profile
               </NavLink>
               <NavLink to="/" onClick={handleClick} className="link">

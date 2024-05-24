@@ -52,6 +52,7 @@ module.exports = {
     'max-depth': [2, 4],
     'max-statements': [2, 20],
     'max-params': [2, 5],
+    'react/prop-types': 0,
     'max-nested-callbacks': [2, 4],
     'max-lines-per-function': [
       2,
