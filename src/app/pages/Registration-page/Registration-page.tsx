@@ -36,11 +36,14 @@ export const RegistrationPage: React.FC = () => {
         setDisplayModal(true)
         setTimeout(() => {
           setDisplayModal(false)
+          const token = tokenData.get().refreshToken
+          if (token) {
+            localStorage.setItem('LowerFlowerToken', token)
+          }
+
+          setIsLoggedUser(true)
           navigate('/')
         }, 2000)
-        const token = tokenData.get().refreshToken
-        localStorage.setItem('LowerFlowerToken', JSON.stringify(token))
-        setIsLoggedUser(true)
       })
       .catch(err => {
         if (err instanceof Error) {

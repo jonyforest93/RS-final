@@ -35,9 +35,7 @@ export function transormToRegisisterObject(data: string): MyCustomerDraft {
   } else if (parsedData.billingDefault) {
     parsedData.defaultBillingAddress = 1
   }
-  if (!parsedData.billingcity) {
-    parsedData.defaultBillingAddress = 0
-  }
+
   const finalObj: MyCustomerDraft = { ...parsedData }
   const address: BaseAddress = {
     country: parsedData.country,

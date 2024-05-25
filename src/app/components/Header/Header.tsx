@@ -4,6 +4,7 @@ import { useContext } from 'react'
 
 import { setActive } from 'utils/setAcitve'
 import { Context } from 'services/Context'
+import { tokenData } from 'services/token-storage'
 
 import { HeaderLinks } from './HeaderLinks'
 import { HeaderBurger } from './HeaderBurger'
@@ -31,6 +32,7 @@ export const Header: FC = () => {
 
   const handleClick: () => void = () => {
     localStorage.removeItem('LowerFlowerToken')
+    tokenData.reset()
     setIsLoggedUser(false)
   }
 

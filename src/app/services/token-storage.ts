@@ -16,6 +16,9 @@ export class TokenInfo {
   public set(data: TokenStore): void {
     this.store = data
   }
+  public reset(): void {
+    this.store = { token: '', refreshToken: '', expirationTime: 0 }
+  }
 }
 
 export const tokenData = new TokenInfo()
