@@ -15,7 +15,12 @@ export const Profile: React.FC<IProfileProps> = ({ user }) => {
     <main className="relative flex flex-grow flex-col items-center justify-between overflow-hidden pb-10 text-white">
       <h1 className="title mt-28">User Profile</h1>
       <h2 className="title text-2xl">Main information</h2>
-      <ProfileMainInformation firstName={user.firstName} lastName={user.lastName} dateOfBirth={user.dateOfBirth} />
+      <ProfileMainInformation
+        firstName={user.firstName}
+        lastName={user.lastName}
+        dateOfBirth={user.dateOfBirth}
+        email={user.email}
+      />
       <h2 className="title mt-4 text-2xl">Adresses</h2>
       <div className="flex flex-wrap items-center justify-center gap-5">
         {user.addresses.length
