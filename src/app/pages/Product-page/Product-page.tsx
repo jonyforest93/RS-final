@@ -1,11 +1,13 @@
 import { ProductImages } from './Product-background-images'
-import { Product } from './Product'
+import { ProductComponent } from './Product-сomponent'
 
-export const ProductPage: React.FC = () => {
+import type { IproductData } from 'types/types'
+
+export const ProductPage: React.FC<IproductData> = productData => {
   return (
-    <main className="relative flex-grow ">
+    <main className="relative flex-grow">
       <ProductImages />
-      <Product />
+      <ProductComponent {...productData} />
     </main>
   )
 }

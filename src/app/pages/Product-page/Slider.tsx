@@ -1,28 +1,28 @@
 interface SliderProps {
   slides: string[]
-  current: number
-  setCurrent: React.Dispatch<React.SetStateAction<number>>
+  currentImg: number
+  setCurrentImg: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Slider: React.FC<SliderProps> = ({ slides, current, setCurrent }: SliderProps) => {
+const Slider: React.FC<SliderProps> = ({ slides, currentImg, setCurrentImg }: SliderProps) => {
   const previousSlide = (): void => {
-    if (current === slides.length - 1) {
-      setCurrent(current - 1)
+    if (currentImg === slides.length - 1) {
+      setCurrentImg(currentImg - 1)
     }
   }
   const nextSlide = (): void => {
-    if (current === 0) {
-      setCurrent(current + 1)
+    if (currentImg === 0) {
+      setCurrentImg(currentImg + 1)
     }
   }
   return (
     <div className="relative overflow-hidden ">
       <div
         className={` duration-40 flex h-[450px] transition ease-out `}
-        style={{ transform: `translate(-${current * 100}%)` }}
+        style={{ transform: `translate(-${currentImg * 100}%)` }}
       >
         {slides.map((slide, i) => (
-          <img className="object-fill" src={slide} key={i} />
+          <img className="object-cover" src={slide} key={i} />
         ))}
       </div>
       <div className="absolute top-0 z-10 flex h-full w-full items-center justify-between">
@@ -55,7 +55,7 @@ const Slider: React.FC<SliderProps> = ({ slides, current, setCurrent }: SliderPr
         {slides.map((_, i) => (
           <div
             key={`circle${i}`}
-            className={`h-3 w-3 rounded-full  ${i === current ? 'bg-white' : 'bg-gray-500'}`}
+            className={`h-3 w-3 rounded-full  ${i === currentImg ? 'bg-white' : 'bg-gray-500'}`}
           ></div>
         ))}
       </div>

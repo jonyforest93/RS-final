@@ -7,7 +7,7 @@ import { appConstants } from '../constants'
 export const projectKey = appConstants['PROJECT_KEY']
 const scopes = [appConstants['SCOPES']]
 
-const authMiddlewareOptions = (): AuthMiddlewareOptions => ({
+export const authMiddlewareOptions = (): AuthMiddlewareOptions => ({
   host: appConstants['AUTH_URL'],
   projectKey,
   credentials: {
