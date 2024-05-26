@@ -10,7 +10,7 @@ export const ProductWrapper: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    getProductByKey('summer-colors')
+    getProductByKey('peonies-with-gypsophila')
       .then(res => {
         const dataProduct = res.masterData.current
         const priceProduct = dataProduct.masterVariant.prices?.[0]
