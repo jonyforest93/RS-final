@@ -1,27 +1,13 @@
+import { generateAdressTitle } from 'utils/generateAdressTitle'
+
 import { ProfileAdress } from './Profile-components/Profile-adress'
 import { ProfileMainInformation } from './Profile-components/Profile-main-info'
 import { ProfileImages } from './Profile-images'
 
-import type { Address, Customer } from '@commercetools/platform-sdk'
+import type { Customer } from '@commercetools/platform-sdk'
 
 interface IProfileProps {
   user: Customer
-}
-
-const generateAdressTitle = (user: Customer, adress: Address): string => {
-  const isDefaultBillingAddressId = user.defaultBillingAddressId === adress.id
-  const isDefaultShippingAddressId = user.defaultShippingAddressId === adress.id
-
-  if (isDefaultBillingAddressId && isDefaultShippingAddressId) {
-    return 'Default Shipping Adress / Default Billing Adress'
-  }
-  if (isDefaultBillingAddressId) {
-    return 'Default Billing adress'
-  }
-  if (isDefaultShippingAddressId) {
-    return 'Default Shipping Adress'
-  }
-  return 'Adress'
 }
 
 export const Profile: React.FC<IProfileProps> = ({ user }) => {

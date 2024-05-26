@@ -40,7 +40,6 @@ export const RegistrationPage: React.FC = () => {
           if (token) {
             localStorage.setItem('LowerFlowerToken', token)
           }
-
           setIsLoggedUser(true)
           navigate('/')
         }, 2000)
