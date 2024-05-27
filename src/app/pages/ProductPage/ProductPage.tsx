@@ -1,5 +1,5 @@
-import { ProductImages } from './Product-background-images'
-import { ProductComponent } from './Product-сomponent'
+import { ProductImages } from './ProductBackgroundImages'
+import { ProductComponent } from './ProductComponent'
 
 import type { IproductData } from 'types/types'
 

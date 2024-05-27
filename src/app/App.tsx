@@ -8,7 +8,7 @@ import { RegistrationPage } from 'pages/Registration-page/Registration-page'
 import { RouterOutler } from 'router/Router-outlet'
 import { NotFoundPage } from 'pages/NotFound-page/NotFound-page'
 import { Context } from 'services/Context'
-import { ProductWrapper } from 'pages/Product-page/Product-page-wrapper'
+import { ProductWrapper } from 'pages/ProductPage/ProductPageWrapper'
 const App: FC = () => {
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorage.getItem('refreshToken')))
   return (

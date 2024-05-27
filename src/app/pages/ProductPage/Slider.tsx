@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import ArrowIcon from 'components/shared/icons/ArrowIcon'
 
-import { ModalProduct } from './Product-modal'
+import { ModalProduct } from './ProductModal'
 interface SliderProps {
   slides: string[]
   currentImg: number
@@ -27,6 +27,7 @@ const Slider: React.FC<SliderProps> = ({ slides, currentImg, setCurrentImg }: Sl
     setSelectedImage(url)
     setIsDisplayModal(true)
   }
+
   return (
     <div className="relative overflow-hidden ">
       <div

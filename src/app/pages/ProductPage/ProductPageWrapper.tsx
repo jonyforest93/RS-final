@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Loading } from 'components/Loading'
 import { getProductByKey } from 'api/getProductByKey'
 
-import { ProductPage } from './Product-page'
+import { ProductPage } from './ProductPage'
 
 import type { IproductData } from 'types/types'
 export const ProductWrapper: React.FC = () => {
