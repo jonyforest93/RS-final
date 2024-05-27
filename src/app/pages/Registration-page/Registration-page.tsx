@@ -7,6 +7,7 @@ import { ErrorModal } from 'pages/Login-page/Error-message-server-modal'
 import { tokenData } from 'services/token-storage'
 import { Context } from 'services/Context'
 import { Modal } from 'components/modal/Modal'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { billingFields, registrationFields, shippingFields } from './registration-fields'
 import { RegistrationImages } from './Registration-images'
@@ -38,7 +39,7 @@ export const RegistrationPage: React.FC = () => {
           setDisplayModal(false)
           const token = tokenData.get().refreshToken
           if (token) {
-            localStorage.setItem('LowerFlowerToken', token)
+            localStorageService.setItem(TOKEN_KEY, token)
           }
           setIsLoggedUser(true)
           navigate('/')

@@ -6,6 +6,7 @@ import { Modal } from 'components/modal/Modal'
 import Form from 'components/Form/Form'
 import { changePassword } from 'api/changePassword'
 import { toChangePasswordData } from 'utils/toChangePasswordData'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { ProfileAdress } from './Profile-components/Profile-adress'
 import { ProfileMainInformation } from './Profile-components/Profile-main-info'
@@ -40,7 +41,7 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   function onDataSend(data: string): void {
     showForm(false)
     const transofmedData = toChangePasswordData(data)
-    const token = localStorage.getItem('LowerFlowerToken')
+    const token = localStorageService.getItem(TOKEN_KEY)
     if (token) {
       changePassword(token, transofmedData.currentPassword, transofmedData.newPassword)
         .then(() => {
@@ -89,7 +90,7 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
             <BaseButton className="link">Add new Adress</BaseButton>
           </div>
           <div className="z-10 mt-10">
-            <BaseButton onClick={handleSave}>Save</BaseButton>
+            <BaseButton onClick={handleSave}>Exit</BaseButton>
           </div>
         </>
       ) : (

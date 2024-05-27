@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { getUser } from 'api/getUser'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { Profile } from './Profile-page'
 
@@ -20,7 +21,7 @@ export const ProfileWrapper: React.FC = () => {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('LowerFlowerToken')
+    const token = localStorageService.getItem(TOKEN_KEY)
 
     if (!token) {
       navigate('/')

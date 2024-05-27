@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { setActive } from 'utils/setAcitve'
 import { Context } from 'services/Context'
 import { tokenData } from 'services/token-storage'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { HeaderLinks } from './HeaderLinks'
 import { HeaderBurger } from './HeaderBurger'
@@ -15,7 +16,7 @@ export const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
-    const token = localStorage.getItem('LowerFlowerToken')
+    const token = localStorageService.getItem(TOKEN_KEY)
     if (token) {
       setIsLoggedUser(true)
     }
@@ -31,7 +32,7 @@ export const Header: FC = () => {
   }, [])
 
   const handleClick: () => void = () => {
-    localStorage.removeItem('LowerFlowerToken')
+    localStorageService.removeItem(TOKEN_KEY)
     tokenData.reset()
     setIsLoggedUser(false)
   }

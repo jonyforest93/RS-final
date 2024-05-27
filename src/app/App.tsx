@@ -9,9 +9,10 @@ import { RouterOutler } from 'router/Router-outlet'
 import { NotFoundPage } from 'pages/NotFound-page/NotFound-page'
 import { Context } from 'services/Context'
 import { ProfileWrapper } from 'pages/Profile-page/Profile-wrapper'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 const App: FC = () => {
-  const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorage.getItem('refreshToken')))
+  const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorageService.getItem(TOKEN_KEY)))
   return (
     <Context.Provider value={{ isLoggedUser, setIsLoggedUser }}>
       <div className="font-poppins container m-auto flex min-h-[100vh] max-w-[10000px] flex-col justify-between bg-[#040a0a]">
