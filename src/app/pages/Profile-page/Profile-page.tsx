@@ -20,13 +20,21 @@ interface IProfileProps {
   onEdit: () => void
   isEdit: boolean
 }
-
+interface IProfileModalMessage {
+  isShowMessage: boolean
+  text: string
+}
 const MESSAGE_SHOW_TIME = 2000
+
 export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   const [isFormShow, showForm] = useState<boolean>(false)
-  const [isShowMessage, showMessage] = useState<boolean>(false)
-  const [message, setMessage] = useState<string>('')
+  const [modalMessage, setModalMessage] = useState<IProfileModalMessage>({ isShowMessage: false, text: '' })
 
+  function hideMessage(): void {
+    setTimeout(() => {
+      setModalMessage({ isShowMessage: false, text: '' })
+    }, MESSAGE_SHOW_TIME)
+  }
   function handleEdit(): void {
     onEdit()
   }
@@ -45,18 +53,12 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
     if (token) {
       changePassword(token, transofmedData.currentPassword, transofmedData.newPassword)
         .then(() => {
-          showMessage(true)
-          setMessage('Your password have been changed')
-          setTimeout(() => {
-            showMessage(false)
-          }, MESSAGE_SHOW_TIME)
+          setModalMessage({ isShowMessage: true, text: 'Your password have been changed' })
+          hideMessage()
         })
         .catch(err => {
-          showMessage(true)
-          setMessage(String(err))
-          setTimeout(() => {
-            showMessage(false)
-          }, MESSAGE_SHOW_TIME)
+          setModalMessage({ isShowMessage: true, text: String(err) })
+          hideMessage()
         })
     }
   }
@@ -103,8 +105,8 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
           <Form fields={passwordChangeFields} onDataSend={onDataSend}></Form>
         </Modal>
       ) : null}
-      <Modal isDisplay={isShowMessage} bg="black">
-        {message}
+      <Modal isDisplay={modalMessage.isShowMessage} bg="black">
+        {modalMessage.text}
       </Modal>
     </main>
   )
