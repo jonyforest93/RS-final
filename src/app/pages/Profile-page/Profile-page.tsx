@@ -1,9 +1,16 @@
+import { useState } from 'react'
+
 import { generateAdressTitle } from 'utils/generateAdressTitle'
 import BaseButton from 'components/shared/BaseButton/BaseButton'
+import { Modal } from 'components/modal/Modal'
+import Form from 'components/Form/Form'
+import { changePassword } from 'api/changePassword'
+import { toChangePasswordData } from 'utils/toChangePasswordData'
 
 import { ProfileAdress } from './Profile-components/Profile-adress'
 import { ProfileMainInformation } from './Profile-components/Profile-main-info'
 import { ProfileImages } from './Profile-images'
+import { passwordChangeFields } from './Profile-components/passwordChangeFields'
 
 import type { Customer } from '@commercetools/platform-sdk'
 
@@ -13,7 +20,12 @@ interface IProfileProps {
   isEdit: boolean
 }
 
+const MESSAGE_SHOW_TIME = 2000
 export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
+  const [isFormShow, showForm] = useState<boolean>(false)
+  const [isShowMessage, showMessage] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>('')
+
   function handleEdit(): void {
     onEdit()
   }
@@ -21,7 +33,32 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   function handleSave(): void {
     onEdit()
   }
+  function onsPasswordChange(): void {
+    showForm(true)
+  }
 
+  function onDataSend(data: string): void {
+    showForm(false)
+    const transofmedData = toChangePasswordData(data)
+    const token = localStorage.getItem('LowerFlowerToken')
+    if (token) {
+      changePassword(token, transofmedData.currentPassword, transofmedData.newPassword)
+        .then(() => {
+          showMessage(true)
+          setMessage('Your password have been changed')
+          setTimeout(() => {
+            showMessage(false)
+          }, MESSAGE_SHOW_TIME)
+        })
+        .catch(err => {
+          showMessage(true)
+          setMessage(String(err))
+          setTimeout(() => {
+            showMessage(false)
+          }, MESSAGE_SHOW_TIME)
+        })
+    }
+  }
   return (
     <main className="relative flex flex-grow flex-col items-center justify-between overflow-hidden px-3 pb-10 text-white">
       <h1 className="title mt-28">User Profile</h1>
@@ -46,7 +83,9 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
       {isEdit ? (
         <>
           <div className="z-10 mt-10 flex gap-5">
-            <BaseButton className="link">Change Password</BaseButton>
+            <BaseButton className="link" onClick={onsPasswordChange}>
+              Change Password
+            </BaseButton>
             <BaseButton className="link">Add new Adress</BaseButton>
           </div>
           <div className="z-10 mt-10">
@@ -58,6 +97,14 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
           <BaseButton onClick={handleEdit}>Edit mode</BaseButton>
         </div>
       )}
+      {isFormShow ? (
+        <Modal isDisplay={isFormShow} bg="black">
+          <Form fields={passwordChangeFields} onDataSend={onDataSend}></Form>
+        </Modal>
+      ) : null}
+      <Modal isDisplay={isShowMessage} bg="black">
+        {message}
+      </Modal>
     </main>
   )
 }
