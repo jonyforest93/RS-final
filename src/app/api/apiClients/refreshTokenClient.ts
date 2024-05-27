@@ -3,8 +3,8 @@ import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 
 import { tokenData } from 'services/token-storage'
 
-import { appConstants } from '../constants'
-import { httpMiddlewareOptions, projectKey } from './BuildClient'
+import { appConstants } from '../../constants'
+import { httpMiddlewareOptions, projectKey } from './anonymousClient'
 
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk'
 

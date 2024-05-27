@@ -10,8 +10,14 @@ import type { Customer } from '@commercetools/platform-sdk'
 export const ProfileWrapper: React.FC = () => {
   const [user, setUser] = useState<Customer | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isEdit, setEdit] = useState<boolean>(false)
 
   const navigate = useNavigate()
+
+  function onEdit(): void {
+    setEdit(prev => !prev)
+    isEdit ? console.log('You changes have been saved') : console.log('ENTERED TO EDIT MODE')
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('LowerFlowerToken')
@@ -37,5 +43,5 @@ export const ProfileWrapper: React.FC = () => {
   if (!user) {
     return <h2 className="title mt-36 text-center text-white">Sorry, User data was not found</h2>
   }
-  return <Profile user={user} />
+  return <Profile user={user} onEdit={onEdit} isEdit={isEdit} />
 }

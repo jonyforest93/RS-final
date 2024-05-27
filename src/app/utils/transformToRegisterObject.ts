@@ -1,4 +1,4 @@
-import type { BaseAddress, MyCustomerDraft } from '@commercetools/platform-sdk'
+import type { BaseAddress } from '@commercetools/platform-sdk'
 
 /* eslint-disable @typescript-eslint/naming-convention */
 export interface IRegistrationData {
@@ -23,36 +23,69 @@ export interface IRegistrationData {
   defaultBillingAddress?: number
   Birthday: string
 }
-export function transormToRegisisterObject(data: string): MyCustomerDraft {
+
+export interface ICustomCustomerDraft {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  dateOfBirth: string
+  addresses: BaseAddress[]
+  billingAddresses: number[]
+  shippingAddresses: number[]
+  defaultShippingAddress?: number
+  defaultBillingAddress?: number
+}
+const createAdress: (city: string, streetName: string, postalCode: string) => BaseAddress = (
+  city,
+  streetName,
+  postalCode,
+) => {
+  return {
+    country: 'US',
+    city,
+    streetName,
+    postalCode,
+  }
+}
+export function transormToRegisisterObject(data: string): ICustomCustomerDraft {
   const parsedData = JSON.parse(data) as IRegistrationData
-  parsedData.addresses = []
-  parsedData.dateOfBirth = parsedData.Birthday
-  if (parsedData.shippingDefault && parsedData.shippingMatchBilling) {
-    parsedData.defaultShippingAddress = 0
-    parsedData.defaultBillingAddress = 0
-  } else if (parsedData.shippingDefault && !parsedData.shippingMatchBilling) {
-    parsedData.defaultShippingAddress = 0
-  } else if (parsedData.billingDefault) {
-    parsedData.defaultBillingAddress = 1
+  const finalObj: ICustomCustomerDraft = {
+    email: parsedData.email,
+    password: parsedData.password,
+    firstName: parsedData.firstName,
+    lastName: parsedData.lastName,
+    dateOfBirth: parsedData.Birthday,
+    addresses: [],
+    billingAddresses: [],
+    shippingAddresses: [],
+  }
+  const shippingAdress: BaseAddress = createAdress(parsedData.city, parsedData.streetName, parsedData.postalCode)
+
+  finalObj.addresses.push(shippingAdress)
+  finalObj.shippingAddresses.push(0)
+
+  if (parsedData.shippingDefault) {
+    finalObj.defaultShippingAddress = 0
   }
 
-  const finalObj: MyCustomerDraft = { ...parsedData }
-  const address: BaseAddress = {
-    country: parsedData.country,
-    city: parsedData.city,
-    streetName: parsedData.streetName,
-    postalCode: parsedData.postalCode,
-  }
-  finalObj.addresses?.push(address)
+  if (parsedData.billingcity) {
+    const billingAdress = createAdress(
+      parsedData.billingcity,
+      parsedData.billingstreetName,
+      parsedData.billingpostalCode,
+    )
+    finalObj.addresses.push(billingAdress)
+    finalObj.billingAddresses.push(1)
 
-  if (parsedData.billingstreetName) {
-    const billingAdress: BaseAddress = {
-      country: parsedData.billingcountry,
-      city: parsedData.billingcity,
-      streetName: parsedData.billingstreetName,
-      postalCode: parsedData.billingpostalCode,
+    if (parsedData.billingDefault) {
+      finalObj.defaultBillingAddress = 1
     }
-    finalObj.addresses?.push(billingAdress)
   }
+
+  if (parsedData.shippingMatchBilling) {
+    finalObj.billingAddresses.push(0)
+  }
+
   return finalObj
 }

@@ -67,7 +67,7 @@ export const RegistrationPage: React.FC = () => {
         {display ? (
           <ErrorModal errorMessage={errorMessage} isDisplayed={display} setDisplay={setDisplay}></ErrorModal>
         ) : null}
-        {displayModal ? <Modal modalText={modalMessage} isDisplay={displayModal} /> : null}
+        {displayModal ? <Modal isDisplay={displayModal}>{modalMessage}</Modal> : null}
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { refreshClientCreate } from './refreshtoken'
+import { refreshClientCreate } from './apiClients/refreshTokenClient'
 
 import type { Customer } from '@commercetools/platform-sdk'
 

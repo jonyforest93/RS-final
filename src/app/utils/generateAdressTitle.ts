@@ -1,17 +1,19 @@
 import type { Address, Customer } from '@commercetools/platform-sdk'
 
 export const generateAdressTitle = (user: Customer, adress: Address): string => {
-  const isDefaultBillingAddressId = user.defaultBillingAddressId === adress.id
-  const isDefaultShippingAddressId = user.defaultShippingAddressId === adress.id
+  const isBilling = user.billingAddressIds?.includes(adress.id as string)
 
-  if (isDefaultBillingAddressId && isDefaultShippingAddressId) {
-    return 'Default Shipping Adress / Default Billing Adress'
+  if (user.shippingAddressIds?.includes(adress.id as string) && user.billingAddressIds?.includes(adress.id as string)) {
+    return 'Shipping Adress / Billing Adress'
   }
-  if (isDefaultBillingAddressId) {
+  if (user.defaultBillingAddressId === adress.id) {
     return 'Default Billing adress'
   }
-  if (isDefaultShippingAddressId) {
+  if (user.defaultShippingAddressId === adress.id) {
     return 'Default Shipping Adress'
   }
-  return 'Adress'
+  if (isBilling) {
+    return 'Billing Adress'
+  }
+  return 'Shipping Adress'
 }

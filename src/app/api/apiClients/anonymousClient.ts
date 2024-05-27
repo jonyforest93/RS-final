@@ -1,8 +1,7 @@
-import fetch from 'node-fetch'
 import { type AuthMiddlewareOptions, ClientBuilder, type HttpMiddlewareOptions } from '@commercetools/sdk-client-v2'
 import { type ByProjectKeyRequestBuilder, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 
-import { appConstants } from '../constants'
+import { appConstants } from '../../constants'
 
 export const projectKey = appConstants['PROJECT_KEY']
 const scopes = [appConstants['SCOPES']]
