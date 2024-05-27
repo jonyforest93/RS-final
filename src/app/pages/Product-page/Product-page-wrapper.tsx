@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { Loading } from 'components/Loading'
 import { getProductByKey } from 'api/getProductByKey'
 
 import { ProductPage } from './Product-page'
@@ -34,7 +35,7 @@ export const ProductWrapper: React.FC = () => {
   }, [])
 
   if (isLoading) {
-    return <h2 className="title mt-60 text-center text-white">Loading...</h2>
+    return <Loading />
   }
 
   if (!productData) {

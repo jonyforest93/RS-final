@@ -45,10 +45,18 @@ const Slider: React.FC<SliderProps> = ({ slides, currentImg, setCurrentImg }: Sl
         ))}
       </div>
 
-      <button className="absolute top-1/2" onClick={previousSlide} type="button">
+      <button
+        className="absolute top-1/2 transform transition-transform duration-100 hover:scale-150"
+        onClick={previousSlide}
+        type="button"
+      >
         <ArrowIcon rotate={0}></ArrowIcon>
       </button>
-      <button className="absolute right-[0px] top-1/2" onClick={nextSlide} type="button">
+      <button
+        className="absolute right-[0px] top-1/2 transform transition-transform duration-100 hover:scale-150"
+        onClick={nextSlide}
+        type="button"
+      >
         <ArrowIcon rotate={180}></ArrowIcon>
       </button>
 
