@@ -1,50 +1,59 @@
-import { useState } from 'react'
-
 import { ProfileField } from './Profile-field'
 
 import type { ChangeEventHandler } from 'react'
-import type { Customer } from '@commercetools/platform-sdk'
 
-type IProfileMainInfoProps = Pick<Customer, 'firstName' | 'lastName' | 'dateOfBirth' | 'email'> & { isEdit: boolean }
+export interface IMainInfoObject {
+  email?: string
+  firstName?: string
+  lastName?: string
+  dateOfBirth?: string
+}
 
-export const ProfileMainInformation: React.FC<IProfileMainInfoProps> = ({
-  email = '',
-  firstName = '',
-  lastName = '',
-  dateOfBirth = '',
-  isEdit,
-}) => {
-  const [emailValue, setEmailValue] = useState(email)
-  const [firstNameValue, setFirstNameValue] = useState(firstName)
-  const [lastNameValue, setLastNameValue] = useState(lastName)
-  const [dateOfBirthValue, setDateOfBirthValue] = useState(dateOfBirth)
+interface IProfileMainInfoProps {
+  isEdit: boolean
+  mainFields: IMainInfoObject
+  setMainFields: React.Dispatch<React.SetStateAction<IMainInfoObject>>
+}
 
+export const ProfileMainInformation: React.FC<IProfileMainInfoProps> = ({ isEdit, mainFields, setMainFields }) => {
   const handleEmailChange: ChangeEventHandler<HTMLInputElement> = e => {
     if (isEdit) {
-      setEmailValue(e.target.value)
+      setMainFields(prevFields => ({
+        ...prevFields,
+        email: e.target.value,
+      }))
     }
   }
   const handleFirstNameChange: ChangeEventHandler<HTMLInputElement> = e => {
     if (isEdit) {
-      setFirstNameValue(e.target.value)
+      setMainFields(prevFields => ({
+        ...prevFields,
+        firstName: e.target.value,
+      }))
     }
   }
   const handleLastNameChange: ChangeEventHandler<HTMLInputElement> = e => {
     if (isEdit) {
-      setLastNameValue(e.target.value)
+      setMainFields(prevFields => ({
+        ...prevFields,
+        lastName: e.target.value,
+      }))
     }
   }
   const handleDateOfBirthChange: ChangeEventHandler<HTMLInputElement> = e => {
     if (isEdit) {
-      setDateOfBirthValue(e.target.value)
+      setMainFields(prevFields => ({
+        ...prevFields,
+        dateOfBirthe: e.target.value,
+      }))
     }
   }
   return (
     <div className="relative z-20  min-w-[500px]">
-      <ProfileField name="Email" value={emailValue} onChange={handleEmailChange} />
-      <ProfileField name="First Name" value={firstNameValue} onChange={handleFirstNameChange} />
-      <ProfileField name="Last Name" value={lastNameValue} onChange={handleLastNameChange} />
-      <ProfileField name="Date of Birth" value={dateOfBirthValue} onChange={handleDateOfBirthChange} />
+      <ProfileField name="Email" value={mainFields.email || ''} onChange={handleEmailChange} />
+      <ProfileField name="First Name" value={mainFields.firstName || ''} onChange={handleFirstNameChange} />
+      <ProfileField name="Last Name" value={mainFields.lastName || ''} onChange={handleLastNameChange} />
+      <ProfileField name="Date of Birth" value={mainFields.dateOfBirth || ''} onChange={handleDateOfBirthChange} />
     </div>
   )
 }
