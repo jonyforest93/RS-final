@@ -16,7 +16,7 @@ export const ProductWrapper: React.FC = () => {
   const productKey: string | null = getKeyFromUrl()
   useEffect(() => {
     if (productKey) {
-      getProductByKey(productKey) //peonies-with-gypsophila
+      getProductByKey(productKey)
         .then(res => {
           const dataProduct = res.masterData.current
           const priceProduct = dataProduct.masterVariant.prices?.[0]
