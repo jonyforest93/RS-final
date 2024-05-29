@@ -9,7 +9,7 @@ export const ProductPage: React.FC<IproductData> = productData => {
     <main className="relative  flex flex-col ">
       <ProductImages />
       <ProductComponent {...productData} />
-      <div className=" relative flex overflow-hidden pb-28">
+      <div className=" relative flex overflow-hidden px-2 pb-28">
         <div className="  mx-auto">
           <h3 className="list-title mb-11 mt-20 text-center text-[#D978AC]">In addition to ordering:</h3>
           <div className="mx-auto flex gap-7 max-md:flex-col">

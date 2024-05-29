@@ -63,10 +63,7 @@ const Slider: React.FC<SliderProps> = ({ slides, currentImg, setCurrentImg }: Sl
 
       <div className="absolute bottom-0 flex w-full justify-center gap-2 py-4">
         {slides.map((_, i) => (
-          <div
-            key={`circle${i}`}
-            className={`h-3 w-3 rounded-full  ${i === currentImg ? 'bg-white' : 'bg-gray-500'}`}
-          ></div>
+          <div key={i} className={`h-3 w-3 rounded-full  ${i === currentImg ? 'bg-white' : 'bg-gray-500'}`}></div>
         ))}
       </div>
       <ModalProduct

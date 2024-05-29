@@ -12,7 +12,7 @@ export const ProductImages: React.FC = () => {
         alt=""
       />
       <img
-        className="absolute bottom-0 right-0  w-64 object-cover max-lg:w-32"
+        className="absolute bottom-0 right-0  w-64 object-cover max-lg:hidden"
         src="/images/productPageImg/flower product page.png"
         alt=""
       />

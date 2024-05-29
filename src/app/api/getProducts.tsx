@@ -11,7 +11,7 @@ export const getProducts: () => Promise<Product[]> = async () => {
   try {
     const products = await client.products().get().execute()
     return products.body.results
-  } catch (e) {
-    throw new Error()
+  } catch (err) {
+    throw new Error(String(err))
   }
 }
