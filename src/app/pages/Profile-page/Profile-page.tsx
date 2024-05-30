@@ -1,21 +1,20 @@
 import { useState } from 'react'
 
-import { generateAdressTitle } from 'utils/generateAdressTitle'
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { Modal } from 'components/modal/Modal'
 import Form from 'components/Form/Form'
 import { changePassword } from 'api/changePassword'
 import { toChangePasswordData } from 'utils/toChangePasswordData'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
+import { EditForm } from 'components/Form/EditForm'
 import { changeMainInfo } from 'api/changeMainInfo'
 
-import { ProfileAdress } from './Profile-components/Profile-adress'
-import { ProfileMainInformation } from './Profile-components/Profile-main-info'
 import { ProfileImages } from './Profile-images'
 import { passwordChangeFields } from './Profile-components/passwordChangeFields'
 import { addAdressFields } from './Profile-components/addAdressFields'
+import { createMainFields } from './Profile-components/mainInfoFields'
 
-import type { IMainInfoObject } from './Profile-components/Profile-main-info'
+import type { IFormData } from 'components/Form/EditForm'
 import type { Customer } from '@commercetools/platform-sdk'
 
 interface IProfileProps {
@@ -35,28 +34,15 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   const [isAdressFormShow, showAdressForm] = useState<boolean>(false)
   const [modalMessage, setModalMessage] = useState<IProfileModalMessage>({ isShowMessage: false, text: '' })
 
-  const [mainFields, setMainFields] = useState<IMainInfoObject>({
-    email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    dateOfBirth: user.dateOfBirth,
-  })
-
   function hideMessage(): void {
     setTimeout(() => {
       setModalMessage({ isShowMessage: false, text: '' })
     }, MESSAGE_SHOW_TIME)
   }
-  function handleEdit(): void {
-    onEdit()
-  }
-
-  function handleSave(): void {
-    onEdit()
-    changeMainInfo(mainFields as Required<IMainInfoObject>)
-      .then(() => {
-        setModalMessage({ isShowMessage: true, text: 'Your data have been changed' })
-        hideMessage()
+  function onFieldsSend({ firstName, lastName, dateOfBirth, email }: IFormData): void {
+    changeMainInfo({ firstName, lastName, dateOfBirth, email })
+      .then(res => {
+        console.log(res)
       })
       .catch(err => {
         console.error(err)
@@ -89,18 +75,22 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
     showAdressForm(false)
   }
   return (
-    <main className="relative flex flex-grow flex-col items-center justify-between overflow-hidden px-3 pb-10 text-white">
+    <main className="relative flex w-[100%] flex-grow flex-col items-center justify-between overflow-hidden px-3 pb-10 text-white">
       <h1 className="title mt-28">User Profile</h1>
       <h2 className="title text-2xl">Main information</h2>
-      <ProfileMainInformation isEdit={isEdit} mainFields={mainFields} setMainFields={setMainFields} />
-      <h2 className="title mt-4 text-2xl">Adresses</h2>
-      <div className="z-20 flex flex-wrap items-center justify-center gap-5">
-        {user.addresses.length
-          ? user.addresses.map((adress, index) => {
-              const adressTitle = generateAdressTitle(user, adress)
-              return <ProfileAdress adress={adress} key={index} title={adressTitle} isEdit={isEdit}></ProfileAdress>
-            })
-          : null}
+      <div className="relative z-20 m-auto w-[100%] px-[10px] pb-[25px]">
+        <EditForm
+          fields={createMainFields({
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            dateOfBirth: user.dateOfBirth,
+          })}
+          user={user}
+          isEdit={isEdit}
+          onDataSend={onFieldsSend}
+          onEdit={onEdit}
+        ></EditForm>
       </div>
       <ProfileImages />
       {isEdit ? (
@@ -113,15 +103,8 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
               Add new Adress
             </BaseButton>
           </div>
-          <div className="z-10 mt-10">
-            <BaseButton onClick={handleSave}>Exit</BaseButton>
-          </div>
         </>
-      ) : (
-        <div className="z-10 mt-10">
-          <BaseButton onClick={handleEdit}>Edit mode</BaseButton>
-        </div>
-      )}
+      ) : null}
       {isPasswordFormShow ? (
         <Modal isDisplay={isPasswordFormShow} bg="black">
           <Form fields={passwordChangeFields} onDataSend={onDataSend} />
