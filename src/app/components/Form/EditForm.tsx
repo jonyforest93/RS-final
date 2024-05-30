@@ -5,7 +5,8 @@ import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { generateAdressTitle } from 'utils/generateAdressTitle'
 import { createAdressFields } from 'pages/Profile-page/Profile-components/createAdressFields'
 
-import { FormInput } from './formInput'
+import { FormInput } from './FormInput'
+import { AdressCheckboxes } from './AdressCheckboxes'
 
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import type { Customer } from '@commercetools/platform-sdk'
@@ -35,12 +36,14 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
     register,
     formState: { errors, isValid },
     handleSubmit,
+    control,
   } = useForm({ mode: 'onChange' })
 
   const handleEdit = (): void => {
     onEdit()
   }
   const onSubmit: SubmitHandler<FieldValues> = data => {
+    console.log(data)
     Object.fromEntries(
       Object.entries(data).map(([key, value]) => (typeof value === 'string' ? [key, value.trim()] : [key, value])),
     )
@@ -65,11 +68,19 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
                     {createAdressFields(adress).map(field => (
                       <FormInput register={register} errors={errors} field={field} isEdit={isEdit} key={field.name} />
                     ))}
+                    <AdressCheckboxes
+                      adress={adress}
+                      user={user}
+                      control={control}
+                      index={index}
+                      isEdit={isEdit}
+                    ></AdressCheckboxes>
                   </div>
                 )
               })
             : null}
         </div>
+
         {isEdit ? (
           <BaseButton disabled={!isValid} type="submit" variant="primary">
             Save Changes

@@ -18,7 +18,7 @@ export const FormInput: React.FC<IFormInputProps> = ({ field, isEdit, errors, re
           } bg-inherit pr-12 text-[#555555]`}
           type={field.type}
           {...register(field.name === 'birthday' ? 'dateOfBirth' : field.name, field.validation)}
-          disabled={!isEdit}
+          disabled={field.name === 'country' || !isEdit}
         />
       </div>
       {errors[field.name] ? (
