@@ -1,6 +1,5 @@
 import type { BaseAddress } from '@commercetools/platform-sdk'
 
-/* eslint-disable @typescript-eslint/naming-convention */
 export interface IRegistrationData {
   email: string
   password: string

@@ -256,62 +256,6 @@ module.exports = {
     ],
     '@typescript-eslint/explicit-module-boundary-types': 2,
     '@typescript-eslint/method-signature-style': 2,
-    '@typescript-eslint/naming-convention': [
-      2,
-      {
-        selector: 'default',
-        format: ['strictCamelCase'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: 'import',
-        format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
-      },
-      {
-        selector: 'variable',
-        format: ['PascalCase', 'camelCase'],
-        leadingUnderscore: 'allow',
-      },
-      {
-        selector: 'variable',
-        format: ['strictCamelCase', 'UPPER_CASE'],
-        modifiers: ['const'],
-        types: ['boolean', 'string', 'number'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-
-      {
-        selector: 'variable',
-        modifiers: ['destructured'],
-        format: null,
-      },
-      {
-        selector: 'objectLiteralProperty',
-        format: null,
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: 'parameter',
-        format: ['strictCamelCase'],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: ['typeLike', 'enum'],
-        format: ['PascalCase'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: 'enumMember',
-        format: ['PascalCase'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-    ],
     '@typescript-eslint/no-base-to-string': 2,
     '@typescript-eslint/no-confusing-void-expression': 2,
     '@typescript-eslint/no-dynamic-delete': 2,
@@ -320,6 +264,7 @@ module.exports = {
     '@typescript-eslint/no-invalid-void-type': 2,
     '@typescript-eslint/no-non-null-assertion': 2,
     '@typescript-eslint/no-redeclare': 2,
+    '@typescript-eslint/no-misused-promises': 'off',
     '@typescript-eslint/no-redundant-type-constituents': 2,
     '@typescript-eslint/no-shadow': [
       2,

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from 'react-hook-form'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'

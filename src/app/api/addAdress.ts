@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { refreshClientCreate } from './apiClients/refreshTokenClient'

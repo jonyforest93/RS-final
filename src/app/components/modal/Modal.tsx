@@ -1,6 +1,5 @@
 import type { DetailedHTMLProps, HTMLAttributes } from 'react'
 
-/* eslint-disable react/prop-types */
 interface IModalProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   isDisplay: boolean
   bg?: string
