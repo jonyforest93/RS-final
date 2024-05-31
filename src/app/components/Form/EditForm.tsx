@@ -2,11 +2,9 @@
 import { useForm } from 'react-hook-form'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
-import { generateAdressTitle } from 'utils/generateAdressTitle'
-import { createAdressFields } from 'pages/Profile-page/Profile-components/createAdressFields'
 
 import { FormInput } from './FormInput'
-import { AdressCheckboxes } from './AdressCheckboxes'
+import { EditFormAdress } from './components/EditFormAdress'
 
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import type { Customer } from '@commercetools/platform-sdk'
@@ -61,20 +59,16 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
           {user.addresses.length
             ? user.addresses.map((address, index) => {
                 return (
-                  <div className="flex  flex-col" key={index}>
-                    <div className="flex w-[500px] flex-col gap-3"></div>
-                    <h3 className="label text-center">{generateAdressTitle(user, address)}</h3>
-                    {createAdressFields(address, index).map(field => (
-                      <FormInput register={register} errors={errors} field={field} isEdit={isEdit} key={field.name} />
-                    ))}
-                    <AdressCheckboxes
-                      adress={address}
-                      user={user}
-                      control={control}
-                      index={index}
-                      isEdit={isEdit}
-                    ></AdressCheckboxes>
-                  </div>
+                  <EditFormAdress
+                    register={register}
+                    errors={errors}
+                    user={user}
+                    address={address}
+                    index={index}
+                    key={address.city}
+                    control={control}
+                    isEdit={isEdit}
+                  ></EditFormAdress>
                 )
               })
             : null}
