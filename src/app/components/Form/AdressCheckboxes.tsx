@@ -11,7 +11,7 @@ interface IAdressInputsProps {
   isEdit: boolean
 }
 
-export const AdressInputs: React.FC<IAdressInputsProps> = ({ adress, user, control, index, isEdit }) => {
+export const AdressCheckboxes: React.FC<IAdressInputsProps> = ({ adress, user, control, index, isEdit }) => {
   if (isEdit) {
     return (
       <div className="flex flex-col gap-5">

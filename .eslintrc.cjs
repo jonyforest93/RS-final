@@ -281,14 +281,7 @@ module.exports = {
         leadingUnderscore: 'forbid',
         trailingUnderscore: 'forbid',
       },
-      {
-        selector: ['variable', 'property'],
-        types: ['boolean'],
-        format: ['PascalCase'],
-        prefix: ['is', 'has', 'should', 'can', 'will'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
+
       {
         selector: 'variable',
         modifiers: ['destructured'],

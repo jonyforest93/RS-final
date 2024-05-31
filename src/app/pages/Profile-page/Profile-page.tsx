@@ -8,12 +8,16 @@ import { toChangePasswordData } from 'utils/toChangePasswordData'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 import { EditForm } from 'components/Form/EditForm'
 import { changeMainInfo } from 'api/changeMainInfo'
+import { AdressForm } from 'components/Form/AddressForm'
+import { addAdress } from 'api/addAdress'
+import { useRefreshPage } from 'hooks/useRefreshPage.hook'
 
 import { ProfileImages } from './Profile-images'
 import { passwordChangeFields } from './Profile-components/passwordChangeFields'
 import { addAdressFields } from './Profile-components/addAdressFields'
 import { createMainFields } from './Profile-components/mainInfoFields'
 
+import type { IAdressFormData } from 'components/Form/AddressForm'
 import type { IFormData } from 'components/Form/EditForm'
 import type { Customer } from '@commercetools/platform-sdk'
 
@@ -30,6 +34,7 @@ interface IProfileModalMessage {
 const MESSAGE_SHOW_TIME = 2000
 
 export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
+  const refreshPage = useRefreshPage()
   const [isPasswordFormShow, showPasswordForm] = useState<boolean>(false)
   const [isAdressFormShow, showAdressForm] = useState<boolean>(false)
   const [modalMessage, setModalMessage] = useState<IProfileModalMessage>({ isShowMessage: false, text: '' })
@@ -39,10 +44,15 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
       setModalMessage({ isShowMessage: false, text: '' })
     }, MESSAGE_SHOW_TIME)
   }
-  function onFieldsSend({ firstName, lastName, dateOfBirth, email }: IFormData): void {
-    changeMainInfo({ firstName, lastName, dateOfBirth, email })
-      .then(res => {
-        console.log(res)
+  function onFieldsSend(data: IFormData): void {
+    changeMainInfo({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      dateOfBirth: data.dateOfBirth,
+      email: data.email,
+    })
+      .then(() => {
+        refreshPage()
       })
       .catch(err => {
         console.error(err)
@@ -70,8 +80,22 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
         })
     }
   }
-  function onAdressDataSend(data: string): void {
-    console.log(data)
+  function onAdressDataSend(data: IAdressFormData): void {
+    addAdress({
+      country: 'US',
+      city: data.city,
+      streetName: data.streetName,
+      postalCode: data.postalCode,
+      action: data.radioOption,
+    })
+      .then(() => {
+        setModalMessage({ isShowMessage: true, text: 'The address has been added !' })
+        hideMessage()
+      })
+      .catch(err => {
+        setModalMessage({ isShowMessage: true, text: String(err) })
+        hideMessage()
+      })
     showAdressForm(false)
   }
   return (
@@ -112,7 +136,7 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
       ) : null}
       {isAdressFormShow ? (
         <Modal isDisplay={isAdressFormShow} bg="black">
-          <Form fields={addAdressFields} onDataSend={onAdressDataSend} />
+          <AdressForm fields={addAdressFields} onDataSend={onAdressDataSend} />
         </Modal>
       ) : null}
       <Modal isDisplay={modalMessage.isShowMessage} bg="black">

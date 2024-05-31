@@ -43,7 +43,6 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
     onEdit()
   }
   const onSubmit: SubmitHandler<FieldValues> = data => {
-    console.log(data)
     Object.fromEntries(
       Object.entries(data).map(([key, value]) => (typeof value === 'string' ? [key, value.trim()] : [key, value])),
     )
@@ -60,16 +59,16 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
         <h2 className="title mt-4 text-center text-2xl">Adresses</h2>
         <div className="z-20 flex flex-wrap justify-center gap-5">
           {user.addresses.length
-            ? user.addresses.map((adress, index) => {
+            ? user.addresses.map((address, index) => {
                 return (
                   <div className="flex  flex-col" key={index}>
                     <div className="flex w-[500px] flex-col gap-3"></div>
-                    <h3 className="label text-center">{generateAdressTitle(user, adress)}</h3>
-                    {createAdressFields(adress).map(field => (
+                    <h3 className="label text-center">{generateAdressTitle(user, address)}</h3>
+                    {createAdressFields(address, index).map(field => (
                       <FormInput register={register} errors={errors} field={field} isEdit={isEdit} key={field.name} />
                     ))}
                     <AdressCheckboxes
-                      adress={adress}
+                      adress={address}
                       user={user}
                       control={control}
                       index={index}

@@ -1,9 +1,9 @@
 import type { Address } from '@commercetools/platform-sdk'
 import type { IFields } from 'types/types'
 
-export const createAdressFields = (adress: Address): IFields[] => [
+export const createAdressFields = (adress: Address, index: number): IFields[] => [
   {
-    name: 'country',
+    name: `country${String(index)}`,
     type: 'text',
     isReadonly: true,
     validation: {
@@ -12,7 +12,7 @@ export const createAdressFields = (adress: Address): IFields[] => [
     },
   },
   {
-    name: 'city',
+    name: `city${String(index)}`,
     type: 'text',
     validation: {
       value: adress.city,
@@ -26,7 +26,7 @@ export const createAdressFields = (adress: Address): IFields[] => [
     },
   },
   {
-    name: 'streetName',
+    name: `streetName${String(index)}`,
     type: 'text',
     validation: {
       value: adress.streetName,
@@ -35,7 +35,7 @@ export const createAdressFields = (adress: Address): IFields[] => [
     },
   },
   {
-    name: 'postalCode',
+    name: `postalCode${String(index)}`,
     type: 'text',
     validation: {
       value: adress.postalCode,
