@@ -54,7 +54,7 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
         {fields.map(field => (
           <FormInput register={register} errors={errors} field={field} isEdit={isEdit} key={field.name} />
         ))}
-        <h2 className="title mt-4 text-center text-2xl">Adresses</h2>
+        <h2 className="title mt-4 text-center text-2xl">Addresses</h2>
         <div className="z-20 flex flex-wrap justify-center gap-5">
           {user.addresses.length
             ? user.addresses.map((address, index) => {
@@ -65,7 +65,7 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
                     user={user}
                     address={address}
                     index={index}
-                    key={address.city}
+                    key={`${address.city}${index}`}
                     control={control}
                     isEdit={isEdit}
                   ></EditFormAdress>

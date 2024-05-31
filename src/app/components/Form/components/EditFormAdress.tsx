@@ -51,7 +51,7 @@ export const EditFormAdress: React.FC<IEditFormAdressProps> = ({
               <img
                 src="./profilePage/deleteIcon.svg"
                 alt="Delete Adress"
-                className="absolute right-0 top-3 w-6"
+                className=" absolute right-0 top-3 w-6 transition-all hover:w-[28px]"
                 title="Delete Adress"
               />
             </button>

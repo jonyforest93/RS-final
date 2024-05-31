@@ -100,8 +100,8 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   }
   return (
     <main className="relative flex w-[100%] flex-grow flex-col items-center justify-between overflow-hidden px-3 pb-10 text-white">
-      <h1 className="title mt-28">User Profile</h1>
-      <h2 className="title text-2xl">Main information</h2>
+      <h1 className="title z-20 mt-28">User Profile</h1>
+      <h2 className="title z-20 text-2xl">Main information</h2>
       <div className="relative z-20 m-auto w-[100%] px-[10px] pb-[25px]">
         <EditForm
           fields={createMainFields({
