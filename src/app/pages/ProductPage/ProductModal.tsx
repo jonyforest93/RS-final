@@ -59,7 +59,7 @@ export const ModalProduct = ({ isDisplayModal, selectedImg, setIsDisplayModal }:
             className=" duration-40 flex h-[640px] transition ease-out max-lg:h-[500px] max-md:h-[380px]"
           >
             {[selectedImg, ...productsImages].map((url, i) => (
-              <img key={i} className=" object-cover" src={url}></img>
+              <img key={i} className=" object-cover" src={url} alt={`product-${i}`}></img>
             ))}
           </div>
 

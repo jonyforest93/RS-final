@@ -3,13 +3,21 @@ import { useState } from 'react'
 import ArrowIcon from 'components/shared/icons/ArrowIcon'
 
 import { ModalProduct } from './ProductModal'
+
+interface IproductInfo {
+  name: string
+  description: string
+  price: number
+  discount: number | undefined
+}
 interface SliderProps {
   slides: string[]
   currentImg: number
   setCurrentImg: React.Dispatch<React.SetStateAction<number>>
+  props: IproductInfo
 }
 
-const Slider = ({ slides, currentImg, setCurrentImg }: SliderProps): JSX.Element => {
+const Slider = ({ slides, currentImg, setCurrentImg, ...props }: SliderProps): JSX.Element => {
   const [selectedImage, setSelectedImage] = useState('')
   const [isDisplayModal, setIsDisplayModal] = useState(false)
   const previousSlide = (): void => {
@@ -39,6 +47,7 @@ const Slider = ({ slides, currentImg, setCurrentImg }: SliderProps): JSX.Element
             className="cursor-pointer object-cover"
             src={slide}
             key={i}
+            alt={props.props.name}
             onClick={() => {
               handleImageClick(slide)
             }}

@@ -16,6 +16,7 @@ export const ProductComponent = ({ slides, ...props }: IproductData): JSX.Elemen
             className={`h-[185px] w-[160px] cursor-pointer ${currentImg === i ? '' : 'blur-[2px]'}`}
             src={slide}
             key={i}
+            alt={props.name}
             onClick={() => {
               setCurrentImg(i)
             }}
@@ -23,7 +24,7 @@ export const ProductComponent = ({ slides, ...props }: IproductData): JSX.Elemen
         ))}
       </div>
       <div className="relative flex w-[350px] ">
-        <Slider slides={slides} currentImg={currentImg} setCurrentImg={setCurrentImg} />
+        <Slider slides={slides} currentImg={currentImg} setCurrentImg={setCurrentImg} props={props} />
       </div>
       <ProductInformation {...props} />
     </div>
