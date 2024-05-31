@@ -9,11 +9,7 @@ interface IModalProduct {
   setIsDisplayModal: (value: boolean) => void
 }
 
-export const ModalProduct: React.FC<IModalProduct> = ({
-  isDisplayModal,
-  selectedImg,
-  setIsDisplayModal,
-}: IModalProduct) => {
+export const ModalProduct = ({ isDisplayModal, selectedImg, setIsDisplayModal }: IModalProduct): JSX.Element | null => {
   const [productsImages, setProductsImages] = useState<string[]>()
   const [currentImg, setCurrentImg] = useState(0)
 
@@ -71,7 +67,6 @@ export const ModalProduct: React.FC<IModalProduct> = ({
             onClick={handleClouseModal}
             type="button"
             className="absolute right-2 top-2 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
-            data-modal-hide="popup-modal"
           >
             <CrossIcon />
           </button>

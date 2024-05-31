@@ -9,9 +9,9 @@ interface SliderProps {
   setCurrentImg: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Slider: React.FC<SliderProps> = ({ slides, currentImg, setCurrentImg }: SliderProps) => {
-  const [selectedImage, setSelectedImage] = useState<string>('')
-  const [isDisplayModal, setIsDisplayModal] = useState<boolean>(false)
+const Slider = ({ slides, currentImg, setCurrentImg }: SliderProps): JSX.Element => {
+  const [selectedImage, setSelectedImage] = useState('')
+  const [isDisplayModal, setIsDisplayModal] = useState(false)
   const previousSlide = (): void => {
     if (currentImg === slides.length - 1) {
       setCurrentImg(currentImg - 1)
