@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import { createAdressFields } from 'pages/Profile-page/Profile-components/createAdressFields'
 import { generateAdressTitle } from 'utils/generateAdressTitle'
-import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { deleteAdress } from 'api/deleteAdress'
 
 import { FormInput } from '../FormInput'
@@ -43,9 +42,21 @@ export const EditFormAdress: React.FC<IEditFormAdressProps> = ({
   }
   if (!isDeleted) {
     return (
-      <div className="flex  flex-col">
+      <div className="flex  flex-col gap-5">
         <div className="flex w-[500px] flex-col gap-3"></div>
-        <h3 className="label text-center">{generateAdressTitle(user, address)}</h3>
+        <div className="relative flex items-center justify-center">
+          <h3 className="label text-center">{generateAdressTitle(user, address)}</h3>
+          {isEdit ? (
+            <button onClick={handleClick} type="button">
+              <img
+                src="./profilePage/deleteIcon.svg"
+                alt="Delete Adress"
+                className="absolute right-0 top-3 w-6"
+                title="Delete Adress"
+              />
+            </button>
+          ) : null}
+        </div>
         {createAdressFields(address, index).map(field => (
           <FormInput register={register} errors={errors} field={field} isEdit={isEdit} key={field.name} />
         ))}
@@ -56,7 +67,6 @@ export const EditFormAdress: React.FC<IEditFormAdressProps> = ({
           index={index}
           isEdit={isEdit}
         ></AdressCheckboxes>
-        {isEdit ? <BaseButton onClick={handleClick}>Delete</BaseButton> : null}
       </div>
     )
   }
