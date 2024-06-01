@@ -1,15 +1,17 @@
-import { refreshClientCreate } from './apiClients/refreshTokenClient'
+import { tokenData } from 'services/token-storage'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
-import type { ClientResponse, Customer, Project } from '@commercetools/platform-sdk'
+import { refreshClientCreate } from './apiClients/refreshTokenClient'
+import { loginUser } from './loginUser'
 
 export async function changePassword(
   refreshToken: string,
   currentPassword: string,
   newPassword: string,
-): Promise<ClientResponse<Customer> | ClientResponse<Project>> {
+): Promise<void> {
   const client = refreshClientCreate(refreshToken)
   try {
-    return await client
+    const passwordChangeResponse = await client
       .me()
       .get()
       .execute()
@@ -21,6 +23,15 @@ export async function changePassword(
           .post({ body: { version: customerVersion, currentPassword, newPassword } })
           .execute()
       })
+    tokenData.reset()
+    await loginUser({
+      username: passwordChangeResponse.body.email,
+      password: newPassword,
+    })
+    const newToken = tokenData.get().refreshToken
+    if (newToken) {
+      localStorageService.setItem(TOKEN_KEY, newToken)
+    }
   } catch (err) {
     throw new Error(String(err))
   }

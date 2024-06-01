@@ -12,6 +12,5 @@ export const toChangePasswordData = (data: string): IPasswordChangeData => {
     currentPassword: parsedData['current Password'],
     newPassword: parsedData['new Password'],
   }
-
   return transformedObject
 }

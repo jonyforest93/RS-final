@@ -64,7 +64,7 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   function onAdressAdd(): void {
     showAdressForm(true)
   }
-  function onDataSend(data: string): void {
+  function onPasswordDataSend(data: string): void {
     showPasswordForm(false)
     const transofmedData = toChangePasswordData(data)
     const token = localStorageService.getItem(TOKEN_KEY)
@@ -131,7 +131,7 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
       ) : null}
       {isPasswordFormShow ? (
         <Modal isDisplay={isPasswordFormShow} bg="black" setDisplay={showPasswordForm}>
-          <Form fields={passwordChangeFields} onDataSend={onDataSend} />
+          <Form fields={passwordChangeFields} onDataSend={onPasswordDataSend} />
         </Modal>
       ) : null}
       {isAdressFormShow ? (
