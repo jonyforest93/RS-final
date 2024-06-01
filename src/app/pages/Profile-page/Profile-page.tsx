@@ -26,7 +26,7 @@ interface IProfileProps {
   onEdit: () => void
   isEdit: boolean
 }
-interface IProfileModalMessage {
+export interface IProfileModalMessage {
   isShowMessage: boolean
   text: string
 }
@@ -130,12 +130,12 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
         </>
       ) : null}
       {isPasswordFormShow ? (
-        <Modal isDisplay={isPasswordFormShow} bg="black">
+        <Modal isDisplay={isPasswordFormShow} bg="black" setDisplay={showPasswordForm}>
           <Form fields={passwordChangeFields} onDataSend={onDataSend} />
         </Modal>
       ) : null}
       {isAdressFormShow ? (
-        <Modal isDisplay={isAdressFormShow} bg="black">
+        <Modal isDisplay={isAdressFormShow} bg="black" setDisplay={showAdressForm}>
           <AdressForm fields={addAdressFields} onDataSend={onAdressDataSend} />
         </Modal>
       ) : null}
