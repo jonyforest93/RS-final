@@ -18,13 +18,17 @@ interface IFields {
   isReadonly?: boolean
   validation: IFieldValidation
 }
-interface IproductData {
-  slides: string[]
+interface IproductInfo {
   name: string
   description: string
   price: number
   discount: number | undefined
 }
+
+interface IproductData extends IproductInfo {
+  slides: string[]
+}
+
 type OnDataSend = (data: string) => void
 
-export type { IFields, OnDataSend, IproductData }
+export type { IFields, OnDataSend, IproductData, IproductInfo }

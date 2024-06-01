@@ -1,11 +1,7 @@
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { addDotPrice } from 'utils/addDotPrice'
-interface IproductInfo {
-  name: string
-  description: string
-  price: number
-  discount: number | undefined
-}
+
+import type { IproductInfo } from 'types/types'
 
 export const ProductInformation = ({ name, description, price, discount }: IproductInfo): JSX.Element => {
   const formatPrice = addDotPrice(price)

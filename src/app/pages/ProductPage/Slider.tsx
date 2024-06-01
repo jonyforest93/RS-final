@@ -4,12 +4,8 @@ import ArrowIcon from 'components/shared/icons/ArrowIcon'
 
 import { ModalProduct } from './ProductModal'
 
-interface IproductInfo {
-  name: string
-  description: string
-  price: number
-  discount: number | undefined
-}
+import type { IproductInfo } from 'types/types'
+
 interface SliderProps {
   slides: string[]
   currentImg: number
