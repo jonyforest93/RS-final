@@ -21,7 +21,7 @@ export const ProductInformation = ({ name, description, price, discount }: Iprod
       <div className="flex pb-16 max-lg:pb-7">
         <p className="basic-text ">{description}</p>
       </div>
-      <div className="w-[70%] max-lg:w-[80%]">
+      <div className=" w-[70%] max-lg:m-auto max-lg:w-[80%]">
         <BaseButton variant="basket">Add to cart</BaseButton>
       </div>
     </div>
