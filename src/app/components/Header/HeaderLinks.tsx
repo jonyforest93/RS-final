@@ -8,7 +8,7 @@ export const HeaderLinks: React.FC = () => {
       <NavLink to="/" className={setActive}>
         Home
       </NavLink>
-      <NavLink to="/" className="link">
+      <NavLink to="/catalog" className="link">
         Catalog
       </NavLink>
       <NavLink to="/" className="link">
