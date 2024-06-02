@@ -48,14 +48,19 @@ export const LoginPage: React.FC = () => {
 
     responseLoginData()
       .then(res => {
-        navigate('/')
+        console.log(res)
         const { refreshToken } = tokenData.get()
-        if (typeof refreshToken === 'string') {
+        console.log(tokenData.get())
+
+        console.log(refreshToken, typeof refreshToken)
+
+        if (refreshToken) {
           localStorage.setItem('LowerFlowerToken', refreshToken)
           setIsLoggedUser(true)
         }
 
-        return res
+        // navigate('/')
+        // return res
       })
       .catch(err => {
         if (err instanceof Error) {
