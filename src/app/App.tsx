@@ -8,6 +8,7 @@ import { RegistrationPage } from 'pages/Registration-page/Registration-page'
 import { RouterOutler } from 'router/Router-outlet'
 import { NotFoundPage } from 'pages/NotFound-page/NotFound-page'
 import { Context } from 'services/Context'
+import { ProductWrapper } from 'pages/ProductPage/ProductPageWrapper'
 const App: FC = () => {
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorage.getItem('refreshToken')))
   return (
@@ -18,6 +19,7 @@ const App: FC = () => {
             <Route index element={<MainPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/product" element={<ProductWrapper />}></Route>
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

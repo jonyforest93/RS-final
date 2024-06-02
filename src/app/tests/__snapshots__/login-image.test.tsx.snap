@@ -16,31 +16,31 @@ exports[`Registration-images should match snapshoot 1`] = `
   />
   <img
     alt=""
-    class=" z-5 absolute right-0 top-0  w-1/4 object-cover"
+    class=" z-5 absolute right-0 top-0  w-1/4 object-cover opacity-60"
     data-testid="loginEllipseRt"
     src="/images/loginPageImg/Ellipse rt.png"
   />
   <img
     alt=""
-    class=" z-5 absolute bottom-0 left-0  w-1/4 object-cover"
+    class=" z-5 absolute bottom-0 left-0  w-1/4 object-cover opacity-60"
     data-testid="loginEllipseLb"
     src="/images/loginPageImg/Ellipse lb.png"
   />
   <img
     alt=""
-    class=" z-5 absolute left-0 top-0  w-2/12 object-cover"
+    class=" z-5 absolute left-0 top-0  w-2/12 object-cover opacity-60"
     data-testid="loginEllipseLt"
     src="/images/loginPageImg/Ellipse lt.png"
   />
   <img
     alt=""
-    class=" z-5 absolute bottom-0 right-0  w-2/12 object-cover"
+    class=" z-5 absolute bottom-0 right-0  w-2/12 object-cover opacity-60"
     data-testid="loginEllipseRb"
     src="/images/loginPageImg/Ellipse rb.png"
   />
   <img
     alt=""
-    class=" z-5 absolute left-1/2 top-1/2 w-[250px]  object-cover"
+    class=" z-5 absolute left-1/2 top-1/2 w-[250px]  object-cover "
     data-testid="loginSignature"
     src="/images/loginPageImg/signature.png"
   />
