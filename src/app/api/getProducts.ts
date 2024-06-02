@@ -1,6 +1,7 @@
 import { anonymousClient } from './BuildClient'
 import { refreshClientCreate } from './refreshtoken'
 
+
 export interface IProduct {
   key?: string
   title: string
@@ -10,13 +11,15 @@ export interface IProduct {
 }
 
 export const getProducts: () => Promise<IProduct[]> = async () => {
+
+import type { Product } from '@commercetools/platform-sdk'
+  
   const token = localStorage.getItem('LowerFlowerToken')
 
   const client = token ? refreshClientCreate(token) : anonymousClient()
 
   try {
     const products = await client.products().get().execute()
-
     const formattedProducts = products.body.results.map(item => {
       const { key } = item
       const title = item.masterData.current.name['en-US']
@@ -41,7 +44,7 @@ export const getProducts: () => Promise<IProduct[]> = async () => {
     })
 
     return formattedProducts
-  } catch (e) {
-    throw new Error()
+  } catch (err) {
+    throw new Error(String(err))
   }
 }
