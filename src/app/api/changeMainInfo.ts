@@ -4,7 +4,7 @@ import { refreshClientCreate } from './apiClients/refreshTokenClient'
 
 import type { ClientResponse, Customer } from '@commercetools/platform-sdk'
 
-interface IChangeMainInfoProps {
+export interface IChangeMainInfoProps {
   firstName: string
   lastName: string
   dateOfBirth: string

@@ -1,10 +1,12 @@
 import { useForm } from 'react-hook-form'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
+import { collectAddresses } from 'utils/collectAddress'
 
 import { FormInput } from './FormInput'
 import { EditFormAdress } from './components/EditFormAdress'
 
+import type { ICollectedAddressField } from 'utils/collectAddress'
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import type { Customer } from '@commercetools/platform-sdk'
 import type { IFields } from 'types/types'
@@ -23,17 +25,13 @@ export interface IFormData {
   firstName: string
   lastName: string
   dateOfBirth: string
-  country: string
-  city: string
-  streetName: string
-  postalCode: string
+  addressData: ICollectedAddressField[]
 }
 export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user, onEdit }: IEditFormProps) => {
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-    control,
   } = useForm({ mode: 'onChange' })
 
   const handleEdit = (): void => {
@@ -43,6 +41,8 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
     Object.fromEntries(
       Object.entries(data).map(([key, value]) => (typeof value === 'string' ? [key, value.trim()] : [key, value])),
     )
+    const collectedAddressData = collectAddresses(data)
+    data['addressData'] = collectedAddressData
     onDataSend(data as IFormData)
     onEdit()
   }
@@ -65,7 +65,6 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
                     address={address}
                     index={index}
                     key={`${address.city}${index}`}
-                    control={control}
                     isEdit={isEdit}
                   ></EditFormAdress>
                 )

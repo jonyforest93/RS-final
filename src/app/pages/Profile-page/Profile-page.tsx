@@ -7,10 +7,10 @@ import { changePassword } from 'api/changePassword'
 import { toChangePasswordData } from 'utils/toChangePasswordData'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 import { EditForm } from 'components/Form/EditForm'
-import { changeMainInfo } from 'api/changeMainInfo'
 import { AdressForm } from 'components/Form/AddressForm'
 import { addAdress } from 'api/addAdress'
 import { useRefreshPage } from 'hooks/useRefreshPage.hook'
+import { changeUserInfo } from 'api/changeUserInfo'
 
 import { ProfileImages } from './Profile-images'
 import { passwordChangeFields } from './Profile-components/passwordChangeFields'
@@ -45,11 +45,9 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
     }, MESSAGE_SHOW_TIME)
   }
   function onFieldsSend(data: IFormData): void {
-    changeMainInfo({
-      firstName: data.firstName,
-      lastName: data.lastName,
-      dateOfBirth: data.dateOfBirth,
-      email: data.email,
+    changeUserInfo({
+      user: { firstName: data.firstName, lastName: data.lastName, dateOfBirth: data.dateOfBirth, email: data.email },
+      addressData: data.addressData,
     })
       .then(() => {
         refreshPage()

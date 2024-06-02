@@ -12,6 +12,15 @@ export const createAdressFields = (adress: Address, index: number): IFields[] =>
     },
   },
   {
+    name: `id${String(index)}`,
+    type: 'text',
+    isReadonly: true,
+    validation: {
+      value: adress.id,
+      required: '',
+    },
+  },
+  {
     name: `city${String(index)}`,
     type: 'text',
     validation: {
