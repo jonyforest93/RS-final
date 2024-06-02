@@ -18,7 +18,7 @@ const BaseButton: React.FC<ButtonProps> = ({ children, variant = 'primary', icon
     edit: 'hover:bg-primary hover:text-btnText border bg-transparent px-[93px] py-[16px] text-xs font-bold uppercase tracking-wider text-white hover:border-none text-[#97bdf0]',
   }
 
-  const combinedClassName = `${buttonStyles[variant]} btn`
+  const combinedClassName = `${buttonStyles[variant]} btn flex justify-center`
 
   return (
     <button type="button" className={combinedClassName} {...props}>

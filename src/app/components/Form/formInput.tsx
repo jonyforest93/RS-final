@@ -10,7 +10,7 @@ interface IFormInputProps {
 export const FormInput: React.FC<IFormInputProps> = ({ field, isEdit, errors, register }) => {
   return (
     <div
-      className={`flex w-[95%] flex-col sm:max-w-[500px] ${field.name.replace(/\d+$/, '') === 'id' ? 'hidden' : 'block'}`}
+      className={`flex w-[95%] max-w-[475px] flex-col ${field.name.replace(/\d+$/, '') === 'id' ? 'hidden' : 'block'}`}
     >
       <label className="basic-text mb-1 mt-3">{field.name.replace(/\d+$/, '')}</label>
       <div className="relative z-20">

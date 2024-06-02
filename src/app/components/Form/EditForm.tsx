@@ -49,12 +49,12 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
 
   return (
     <div className="flex flex-col items-center">
-      <form className="m-auto flex flex-col items-center gap-5" onSubmit={handleSubmit(onSubmit)}>
+      <form className="m-auto flex w-[100%] flex-col items-center gap-5" onSubmit={handleSubmit(onSubmit)}>
         {fields.map(field => (
           <FormInput register={register} errors={errors} field={field} isEdit={isEdit} key={field.name} />
         ))}
         <h2 className="title mt-4 text-center text-2xl">Addresses</h2>
-        <div className="z-20 flex flex-wrap justify-center gap-5">
+        <div className="z-20 flex w-[100%] flex-wrap justify-center gap-5">
           {user.addresses.length
             ? user.addresses.map((address, index) => {
                 return (

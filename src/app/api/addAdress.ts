@@ -24,6 +24,7 @@ export async function setAdressAs(
 ): Promise<ClientResponse<Customer>> {
   const token = localStorageService.getItem(TOKEN_KEY) as string
   const client = refreshClientCreate(token)
+
   try {
     return await client
       .me()

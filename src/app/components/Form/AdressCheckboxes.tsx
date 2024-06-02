@@ -11,7 +11,7 @@ interface IAdressInputsProps {
 export const AdressCheckboxes: React.FC<IAdressInputsProps> = ({ index, isEdit, register }) => {
   if (isEdit) {
     return (
-      <div className="flex w-[500px]  ">
+      <div className="flex max-w-[500px]  ">
         <div className="mt-5 flex flex-wrap justify-center gap-10 text-white">
           <RadioInput
             register={register}

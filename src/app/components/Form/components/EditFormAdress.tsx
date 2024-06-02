@@ -33,16 +33,16 @@ export const EditFormAdress: React.FC<IEditFormAdressProps> = ({ register, error
   }
   if (!isDeleted) {
     return (
-      <div className="flex  flex-col items-center gap-5">
-        <div className="flex w-[500px] flex-col gap-3"></div>
-        <div className="relative flex w-[500px] flex-col">
+      <div className=" flex w-[95%] max-w-[500px] flex-col items-center gap-5">
+        <div className="flex flex-col gap-3"></div>
+        <div className="relative flex w-[100%] max-w-[500px] flex-col">
           <h3 className="label text-center">{generateAdressTitle(user, address)}</h3>
           {isEdit ? (
             <button onClick={handleClick} type="button">
               <img
                 src="./profilePage/deleteIcon.svg"
                 alt="Delete Adress"
-                className="absolute right-0 top-3 w-6 transition-all hover:w-[28px]"
+                className="absolute right-0 top-[9px] w-6 transition-all"
                 title="Delete Adress"
               />
             </button>

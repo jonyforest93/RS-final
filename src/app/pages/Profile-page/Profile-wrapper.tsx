@@ -17,7 +17,6 @@ export const ProfileWrapper: React.FC = () => {
 
   function onEdit(): void {
     setEdit(prev => !prev)
-    isEdit ? console.log('You changes have been saved') : console.log('ENTERED TO EDIT MODE')
   }
 
   useEffect(() => {
