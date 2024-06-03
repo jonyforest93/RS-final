@@ -1,5 +1,5 @@
-import { anonymousClient } from './BuildClient'
-import { refreshClientCreate } from './refreshtoken'
+import { refreshClientCreate } from './apiClients/refreshTokenClient'
+import { anonymousClient } from './apiClients/anonymousClient'
 
 import type { Product } from '@commercetools/platform-sdk'
 
