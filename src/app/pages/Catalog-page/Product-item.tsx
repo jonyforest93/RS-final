@@ -2,7 +2,7 @@ import React from 'react'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 
-import type { IProduct } from 'api/getProducts'
+import type { IProduct } from 'types/types'
 
 export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
   return (

@@ -31,4 +31,12 @@ interface IproductData extends IproductInfo {
 
 type OnDataSend = (data: string) => void
 
-export type { IFields, OnDataSend, IproductData, IproductInfo }
+interface IProduct {
+  keyName?: string
+  title: string
+  image?: string
+  price?: number
+  discountPrice?: number
+}
+
+export type { IFields, OnDataSend, IproductData, IproductInfo, IProduct }
