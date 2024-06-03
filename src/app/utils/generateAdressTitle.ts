@@ -17,7 +17,7 @@ export const generateAdressTitle = (user: Customer, adress: Address): string => 
   }
 
   if (user.shippingAddressIds?.includes(adress.id as string) && user.billingAddressIds?.includes(adress.id as string)) {
-    return 'Shipping Adress / Billing Adress'
+    return 'Shipping address / Billing address'
   }
 
   if (isBilling) {

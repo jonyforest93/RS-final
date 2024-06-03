@@ -45,15 +45,25 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
     }, MESSAGE_SHOW_TIME)
   }
 
-  async function onMainFieldDataSend(data: IFormData): Promise<void> {
+  async function onMainFieldDataSend({
+    firstName,
+    lastName,
+    dateOfBirth,
+    email,
+    addressData,
+  }: IFormData): Promise<void> {
+    setModalMessage({ isShowMessage: true, text: 'Сhanges have been saved' })
     try {
       await changeUserInfo({
-        user: { firstName: data.firstName, lastName: data.lastName, dateOfBirth: data.dateOfBirth, email: data.email },
-        addressData: data.addressData,
+        user: { firstName, lastName, dateOfBirth, email },
+        addressData,
       })
-      refreshPage()
+      setTimeout(() => {
+        refreshPage()
+      }, MESSAGE_SHOW_TIME)
     } catch (err) {
-      console.error(err)
+      setModalMessage({ isShowMessage: true, text: 'err' })
+      hideMessage()
     }
   }
 
@@ -61,15 +71,16 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
     showPasswordForm(false)
     const transofmedData = toChangePasswordData(data)
     const token = localStorageService.getItem(TOKEN_KEY)
-    if (token) {
-      try {
-        await changePassword(token, transofmedData.currentPassword, transofmedData.newPassword)
-        setModalMessage({ isShowMessage: true, text: 'Your password have been changed' })
-        hideMessage()
-      } catch (err) {
-        setModalMessage({ isShowMessage: true, text: String(err) })
-        hideMessage()
-      }
+    if (!token) {
+      return
+    }
+    try {
+      await changePassword(token, transofmedData.currentPassword, transofmedData.newPassword)
+      setModalMessage({ isShowMessage: true, text: 'Your password have been changed' })
+      hideMessage()
+    } catch (err) {
+      setModalMessage({ isShowMessage: true, text: String(err) })
+      hideMessage()
     }
   }
 
@@ -89,13 +100,6 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
       hideMessage()
     }
     showAdressForm(false)
-  }
-
-  function onPasswordChange(): void {
-    showPasswordForm(true)
-  }
-  function onAdressAdd(): void {
-    showAdressForm(true)
   }
 
   return (
@@ -119,10 +123,20 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
       <ProfileImages />
 
       <div className="z-10 mt-10 flex gap-5">
-        <BaseButton className="link" onClick={onPasswordChange}>
+        <BaseButton
+          className="link"
+          onClick={() => {
+            showPasswordForm(true)
+          }}
+        >
           Change Password
         </BaseButton>
-        <BaseButton className="link" onClick={onAdressAdd}>
+        <BaseButton
+          className="link"
+          onClick={() => {
+            showAdressForm(true)
+          }}
+        >
           Add new Adress
         </BaseButton>
       </div>
