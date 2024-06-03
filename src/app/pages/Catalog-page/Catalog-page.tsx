@@ -79,6 +79,17 @@ export const CatalogPage: React.FC = () => {
           </p>
         </div>
 
+
+        <div className="mt-[60px]">
+          <div></div>
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 justify-center gap-[30px] sm:grid-cols-2 md:grid-cols-3">
+              {products.map(product => (
+                <Link key={product.key} to={`/product/${product.key}`}>
+                  <ProductItem key={product.key} {...product} />
+                </Link>
+              ))}
+
         <div className="catalog-layout mt-[60px]">
           <div>
             <h1 className="title">filter</h1>
@@ -108,11 +119,8 @@ export const CatalogPage: React.FC = () => {
                   </Link>
                 ))
               )}
-              {/* // {products.map(product => (
-              //   <Link key={product.keyName} to={`/product?key=${product.keyName}`}>
-              //     <ProductItem {...product} key={product.keyName} />
-              //   </Link>
-              // ))} */}
+            
+
             </div>
           </div>
         </div>

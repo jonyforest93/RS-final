@@ -40,12 +40,12 @@ export const ProductPage: React.FC<IproductData> = productData => {
           </div>
         </div>
         <img
-          src="images/productPageImg/Ellipse2.png"
+          src="/images/productPageImg/Ellipse2.png"
           alt=""
           className="absolute left-0 top-[-100px] object-cover opacity-50 max-lg:top-[0px]"
         />
         <img
-          src="images/productPageImg/Ellipse1.png"
+          src="/images/productPageImg/Ellipse1.png"
           alt=""
           className="absolute right-[-300px] top-[-50px] object-cover opacity-60 max-lg:top-[0px]"
         />

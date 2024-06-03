@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import CrossIcon from 'components/shared/icons/CrossIcon'
 import ArrowIcon from 'components/shared/icons/ArrowIcon'
-import { getProducts } from 'api/getProducts'
+import { getProductsProductPage } from 'api/getProductsProductPage'
 interface IModalProduct {
   isDisplayModal: boolean
   selectedImg: string
@@ -32,7 +32,7 @@ export const ModalProduct = ({ isDisplayModal, selectedImg, setIsDisplayModal }:
     }
   }
   useEffect(() => {
-    getProducts()
+    getProductsProductPage()
       .then(res => {
         const productsImg = res.map(product => product.masterData.current.masterVariant.images?.[0].url ?? '')
         setProductsImages(productsImg)
