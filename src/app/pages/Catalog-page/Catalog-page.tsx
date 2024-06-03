@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom'
 import { getProducts } from 'api/getProducts'
 import { sortByName, sortByPrice } from 'api/sortProducts'
 import { searchProducts } from 'api/searchProducts'
+import { getProductByategory } from 'api/getProductByCategory'
+import { getProductsInPriceRange } from 'api/getProductsInPriceRange'
 
 import { ProductItem } from './Product-item'
 import { SearchBar } from './SearchBar'
 import { SortBar } from './SortBar'
+import { FilterBar } from './FilterBar'
 
 import type { IProduct } from 'types/types'
 
@@ -15,6 +18,7 @@ export const CatalogPage: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   const [searchedProducts, setSearchedProduct] = useState<IProduct[]>([])
   const [searchText, setSearchText] = useState<string>('')
+  const [currentCategory, setCurrentCategory] = useState<string>('All')
 
   useEffect(() => {
     getProducts()
@@ -62,6 +66,49 @@ export const CatalogPage: React.FC = () => {
     }
   }
 
+  const handleCategoryChange = (id: string, current?: string): void => {
+    if (current === currentCategory) {
+      return
+    }
+
+    if (id === 'All') {
+      setCurrentCategory('All')
+      getProducts()
+        .then((res: IProduct[]) => {
+          setProducts(res)
+        })
+        .catch(error => {
+          console.error('Error', error)
+        })
+
+      return
+    }
+
+    if (current) {
+      setCurrentCategory(current)
+      getProductByategory(id)
+        .then(res => {
+          setProducts(res)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
+  }
+
+  const handleSortToPriceRange = (min: string, max: string): void => {
+    const minPrice = String(Number(min) * 100)
+    const maxPrice = String(Number(max) * 100)
+
+    getProductsInPriceRange(minPrice, maxPrice)
+      .then(res => {
+        setProducts(res)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
+
   return (
     <div className="relative min-h-[100svh] overflow-hidden">
       <img src="images/catalogPageImg/flower-left.png" alt="flower" className="absolute z-[2]" />
@@ -81,7 +128,7 @@ export const CatalogPage: React.FC = () => {
 
         <div className="catalog-layout mt-[60px]">
           <div>
-            <h1 className="title">filter</h1>
+            <FilterBar changeCategory={handleCategoryChange} submitPriceRange={handleSortToPriceRange} />
           </div>
 
           <div>
@@ -101,6 +148,8 @@ export const CatalogPage: React.FC = () => {
                 ) : (
                   <h1 className="title">No found products</h1>
                 )
+              ) : products.length === 0 ? (
+                <h1 className="title">No found products</h1>
               ) : (
                 products.map(product => (
                   <Link key={product.keyName} to={`/product/${product.keyName}`}>

@@ -21,7 +21,7 @@ export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
           )}
         </div>
       </div>
-      <BaseButton variant="basket">Buy</BaseButton>
+      <BaseButton variant="product-cart">Add to cart</BaseButton>
     </div>
   )
 }
