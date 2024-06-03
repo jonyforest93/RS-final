@@ -42,7 +42,7 @@ export const CatalogPage: React.FC = () => {
           <div className="flex justify-center">
             <div className="grid grid-cols-1 justify-center gap-[30px] sm:grid-cols-2 md:grid-cols-3">
               {products.map(product => (
-                <Link key={product.key} to={`/product?key=${product.key}`}>
+                <Link key={product.key} to={`/product/${product.key}`}>
                   <ProductItem key={product.key} {...product} />
                 </Link>
               ))}

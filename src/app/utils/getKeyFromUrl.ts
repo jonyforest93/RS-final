@@ -1,4 +1,5 @@
 export function getKeyFromUrl(): string {
-  const urlParams = new URLSearchParams(window.location.search)
-  return urlParams.get('key') ?? 'heart-box'
+  const urlPath = window.location.pathname
+  const lastIndex = urlPath.lastIndexOf('/')
+  return urlPath.substr(lastIndex + 1)
 }
