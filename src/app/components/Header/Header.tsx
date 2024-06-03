@@ -29,7 +29,7 @@ export const Header: FC = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  })
 
   const handleClick: () => void = () => {
     localStorageService.removeItem(TOKEN_KEY)
@@ -58,7 +58,7 @@ export const Header: FC = () => {
             <NavLink to="/" className={setActive}>
               Home
             </NavLink>
-            <NavLink to="/" className="link">
+            <NavLink to="/catalog" className="link">
               Catalog
             </NavLink>
             <NavLink to="/" className="link">

@@ -1,5 +1,6 @@
 @import url('components/shared/BaseButton/BaseButton.css');
 @import url('pages/Main-page/main-page.css');
+@import url('pages/Catalog-page/Catalog.css');
 
 .main-title {
   @apply font-cormorant text-[68px] font-normal uppercase tracking-wider text-white md:text-[200px] md:leading-[200px];

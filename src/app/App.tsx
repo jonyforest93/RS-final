@@ -10,6 +10,8 @@ import { NotFoundPage } from 'pages/NotFound-page/NotFound-page'
 import { Context } from 'services/Context'
 import { ProfileWrapper } from 'pages/Profile-page/Profile-wrapper'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
+import { CatalogPage } from 'pages/Catalog-page/Catalog-page'
+import { ProductWrapper } from 'pages/ProductPage/ProductPageWrapper'
 
 const App: FC = () => {
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorageService.getItem(TOKEN_KEY)))
@@ -22,6 +24,11 @@ const App: FC = () => {
             <Route path="/profile" element={<ProfileWrapper />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
+
+            <Route path="/catalog" element={<CatalogPage />} />
+
+            <Route path="/product" element={<ProductWrapper />}></Route>
+
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

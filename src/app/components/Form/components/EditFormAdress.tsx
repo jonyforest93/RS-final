@@ -4,8 +4,8 @@ import { createAdressFields } from 'pages/Profile-page/Profile-components/create
 import { generateAdressTitle } from 'utils/generateAdressTitle'
 import { deleteAdress } from 'api/deleteAdress'
 
-import { FormInput } from '../FormInput'
 import { AdressCheckboxes } from '../AdressCheckboxes'
+import { FormInput } from '../FormInput'
 
 import type { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import type { Address, Customer } from '@commercetools/platform-sdk'

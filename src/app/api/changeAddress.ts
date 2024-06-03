@@ -19,7 +19,8 @@ import type {
   _BaseAddress,
 } from '@commercetools/platform-sdk/dist/declarations/src'
 import type { ICollectedAddressField } from 'utils/collectAddress'
-const actionMap = {
+
+const actionsMap = {
   addShippingAddressId: createShippingActions,
   addBillingAddressId: createBillingActions,
   setDefaultShippingAddress: createDefaultShippingActions,
@@ -36,7 +37,7 @@ async function setAdressAs(
   try {
     const response = await client.me().get().execute()
 
-    actionMap[action](response.body, addressId).forEach(element => actions.push(element))
+    actionsMap[action](response.body, addressId).forEach(element => actions.push(element))
 
     actions.push({ action, addressId })
 

@@ -49,13 +49,13 @@ export const LoginPage: React.FC = () => {
 
     responseLoginData()
       .then(res => {
-        navigate('/')
         const { refreshToken } = tokenData.get()
         if (typeof refreshToken === 'string') {
           localStorageService.setItem(TOKEN_KEY, refreshToken)
           setIsLoggedUser(true)
         }
 
+        navigate('/')
         return res
       })
       .catch(err => {
