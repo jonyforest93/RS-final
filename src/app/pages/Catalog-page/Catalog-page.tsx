@@ -5,6 +5,7 @@ import { getProducts } from 'api/getProducts'
 import { sortByName, sortByPrice } from 'api/sortProducts'
 import { searchProducts } from 'api/searchProducts'
 import { getProductByategory } from 'api/getProductByCategory'
+import { getProductsInPriceRange } from 'api/getProductsInPriceRange'
 
 import { ProductItem } from './Product-item'
 import { SearchBar } from './SearchBar'
@@ -95,6 +96,19 @@ export const CatalogPage: React.FC = () => {
     }
   }
 
+  const handleSortToPriceRange = (min: string, max: string): void => {
+    const minPrice = String(Number(min) * 100)
+    const maxPrice = String(Number(max) * 100)
+
+    getProductsInPriceRange(minPrice, maxPrice)
+      .then(res => {
+        setProducts(res)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
+
   return (
     <div className="relative min-h-[100svh] overflow-hidden">
       <img src="images/catalogPageImg/flower-left.png" alt="flower" className="absolute z-[2]" />
@@ -114,7 +128,7 @@ export const CatalogPage: React.FC = () => {
 
         <div className="catalog-layout mt-[60px]">
           <div>
-            <FilterBar changeCategory={handleCategoryChange} />
+            <FilterBar changeCategory={handleCategoryChange} submitPriceRange={handleSortToPriceRange} />
           </div>
 
           <div>
@@ -134,6 +148,8 @@ export const CatalogPage: React.FC = () => {
                 ) : (
                   <h1 className="title">No found products</h1>
                 )
+              ) : products.length === 0 ? (
+                <h1 className="title">No found products</h1>
               ) : (
                 products.map(product => (
                   <Link key={product.keyName} to={`/product/${product.keyName}`}>

@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 
 import { getCategory } from 'api/getCategories'
+import BaseButton from 'components/shared/BaseButton/BaseButton'
 
 import type { ICategory } from 'api/getCategories'
 
 interface FilterBarProps {
   changeCategory: (category: string, name?: string) => void
+  submitPriceRange: (min: string, max: string) => void
 }
 
-export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory }) => {
+export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submitPriceRange }) => {
   const [categories, setCategories] = useState<ICategory[]>([])
   const [activeCategory, setActiveCategory] = useState<string>('All')
+  const [minPrice, setMinPrice] = useState<string>('')
+  const [maxPrice, setMaxPrice] = useState<string>('')
 
   const handleClickCategory = (event: React.MouseEvent<HTMLLIElement>): void => {
     const node = event.target as HTMLElement
@@ -24,6 +28,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory }) => {
     }
 
     changeCategory(id, name)
+  }
+
+  const handleSubmitPriceRange = (): void => {
+    submitPriceRange(minPrice, maxPrice)
   }
 
   useEffect(() => {
@@ -58,21 +66,36 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory }) => {
         ))}
       </ul>
       <h3 className="list-title mt-[40px]">Price</h3>
-      <div className="flex w-full justify-between">
-        <div className="flex justify-between gap-2">
+      <div className="my-[20px] flex w-full justify-center gap-4">
+        <div className="flex items-center justify-between gap-2">
           <label htmlFor="minValue" className="basic-text">
             from
           </label>
-          <input type="number" className=" w-[60px]" />
+          <input
+            type="number"
+            className="search-input basic-text w-[60px] px-2"
+            onChange={event => {
+              setMinPrice(event.target.value)
+            }}
+          />
         </div>
 
-        <div className="flex justify-between gap-2">
+        <div className="flex items-center justify-between gap-2">
           <label htmlFor="maxValue" className="basic-text ">
             to
           </label>
-          <input type="number" className="w-[60px]" />
+          <input
+            type="number"
+            className="search-input basic-text w-[60px] px-2"
+            onChange={event => {
+              setMaxPrice(event.target.value)
+            }}
+          />
         </div>
       </div>
+      <BaseButton variant="product-cart" onClick={handleSubmitPriceRange}>
+        filter
+      </BaseButton>
     </div>
   )
 }
