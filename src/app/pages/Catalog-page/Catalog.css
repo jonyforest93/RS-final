@@ -1,6 +1,7 @@
 .catalog-layout {
   display: grid;
   grid-template-columns: 300px 1fr;
+  gap: 20px;
 }
 
 @media (max-width: 1024px) {
@@ -42,4 +43,8 @@
 
 .products-grid {
   grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+}
+
+.category-active {
+  color: #43ffd2 !important;
 }
