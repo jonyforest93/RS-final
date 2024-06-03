@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 import { Controller } from 'react-hook-form'
 
 import type { Control, FieldValues } from 'react-hook-form'

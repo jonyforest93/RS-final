@@ -5,6 +5,7 @@ import Form from 'components/Form/Form'
 import { loginUser } from 'api/loginUser'
 import { tokenData } from 'services/token-storage'
 import { Context } from 'services/Context'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { ErrorModal } from './Error-message-server-modal'
 import Link from '../../components/Link'
@@ -27,7 +28,7 @@ const useErrorMessage = (): [string, (value: string) => void] => {
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate()
   useEffect(() => {
-    if (localStorage.getItem('LowerFlowerToken')) {
+    if (localStorageService.getItem(TOKEN_KEY)) {
       navigate('/')
     }
   }, [])
@@ -48,19 +49,14 @@ export const LoginPage: React.FC = () => {
 
     responseLoginData()
       .then(res => {
-        console.log(res)
         const { refreshToken } = tokenData.get()
-        console.log(tokenData.get())
-
-        console.log(refreshToken, typeof refreshToken)
-
-        if (refreshToken) {
-          localStorage.setItem('LowerFlowerToken', refreshToken)
+        if (typeof refreshToken === 'string') {
+          localStorageService.setItem(TOKEN_KEY, refreshToken)
           setIsLoggedUser(true)
         }
 
-        // navigate('/')
-        // return res
+        navigate('/')
+        return res
       })
       .catch(err => {
         if (err instanceof Error) {

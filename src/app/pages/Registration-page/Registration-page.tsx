@@ -7,6 +7,7 @@ import { ErrorModal } from 'pages/Login-page/Error-message-server-modal'
 import { tokenData } from 'services/token-storage'
 import { Context } from 'services/Context'
 import { Modal } from 'components/modal/Modal'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { billingFields, registrationFields, shippingFields } from './registration-fields'
 import { RegistrationImages } from './Registration-images'
@@ -36,11 +37,13 @@ export const RegistrationPage: React.FC = () => {
         setDisplayModal(true)
         setTimeout(() => {
           setDisplayModal(false)
+          const token = tokenData.get().refreshToken
+          if (token) {
+            localStorageService.setItem(TOKEN_KEY, token)
+          }
+          setIsLoggedUser(true)
           navigate('/')
         }, 2000)
-        const token = tokenData.get().refreshToken
-        localStorage.setItem('LowerFlowerToken', JSON.stringify(token))
-        setIsLoggedUser(true)
       })
       .catch(err => {
         if (err instanceof Error) {
@@ -65,7 +68,7 @@ export const RegistrationPage: React.FC = () => {
         {display ? (
           <ErrorModal errorMessage={errorMessage} isDisplayed={display} setDisplay={setDisplay}></ErrorModal>
         ) : null}
-        {displayModal ? <Modal modalText={modalMessage} isDisplay={displayModal} /> : null}
+        {displayModal ? <Modal isDisplay={displayModal}>{modalMessage}</Modal> : null}
       </div>
     </div>
   )

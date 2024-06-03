@@ -12,6 +12,7 @@ export default defineConfig({
       types: '/src/app/types',
       utils: '/src/app/utils',
       api: '/src/app/api',
+      hooks: '/src/app/hooks',
       'node-fetch': 'isomorphic-fetch',
     },
   },

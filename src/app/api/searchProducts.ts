@@ -1,7 +1,7 @@
 import { formattedSortProduct } from 'utils/formattedProduct'
 
-import { refreshClientCreate } from './refreshtoken'
-import { anonymousClient } from './BuildClient'
+import { refreshClientCreate } from './apiClients/refreshTokenClient'
+import { anonymousClient } from './apiClients/anonymousClient'
 
 import type { IProduct } from 'types/types'
 
