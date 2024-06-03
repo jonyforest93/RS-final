@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form'
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { collectAddresses } from 'utils/collectAddress'
 
-import { FormInput } from './FormInput'
 import { EditFormAdress } from './components/EditFormAdress'
+import { FormInput } from './FormInput'
 
 import type { ICollectedAddressField } from 'utils/collectAddress'
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
