@@ -6,6 +6,7 @@ import { sortByName, sortByPrice } from 'api/sortProducts'
 import { searchProducts } from 'api/searchProducts'
 import { getProductByategory } from 'api/getProductByCategory'
 import { getProductsInPriceRange } from 'api/getProductsInPriceRange'
+import { Loading } from 'components/Loading'
 
 import { ProductItem } from './Product-item'
 import { SearchBar } from './SearchBar'
@@ -146,10 +147,10 @@ export const CatalogPage: React.FC = () => {
                     </Link>
                   ))
                 ) : (
-                  <h1 className="title">No found products</h1>
+                  <Loading text="123" />
                 )
               ) : products.length === 0 ? (
-                <h1 className="title">No found products</h1>
+                <Loading text="123" />
               ) : (
                 products.map(product => (
                   <Link key={product.keyName} to={`/product/${product.keyName}`}>
