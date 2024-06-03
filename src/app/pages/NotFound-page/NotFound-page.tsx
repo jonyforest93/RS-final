@@ -7,7 +7,7 @@ export const NotFoundPage: React.FC = () => {
         <h1>404</h1>
         <div className="ml-0 flex items-center gap-[60px] sm:ml-[6%] ">
           <img src="/notFound/Line.png" alt="" className="hidden w-[150px] sm:block" />
-          <p className=" ">Not Found</p>
+          <p>Not Found</p>
         </div>
       </div>
       <div className="z-10 ml-0 mt-[30px] flex flex-col items-center gap-[20px] text-white sm:ml-[17%] sm:items-start">
@@ -27,7 +27,7 @@ export const NotFoundPage: React.FC = () => {
       <img src="/notFound/bigEllipsePink.png" alt="biEllipsePink" className="absolute  right-0  blur-[200px]" />
       <img
         src="/notFound/ellipseTurquoise.png"
-        alt=""
+        alt="ellipse Turquoise"
         className="absolute top-[0]  rotate-[21.1deg] bg-turquoiseEllipse blur-[250px] sm:bottom-[-750px]  sm:right-[-150px] sm:top-[100%] "
       />
     </div>

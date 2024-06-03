@@ -1,6 +1,5 @@
-import { anonymousClient } from './BuildClient'
-import { refreshClientCreate } from './refreshtoken'
-
+import { anonymousClient } from './apiClients/anonymousClient'
+import { refreshClientCreate } from './apiClients/refreshTokenClient'
 
 export interface IProduct {
   key?: string
@@ -11,9 +10,6 @@ export interface IProduct {
 }
 
 export const getProducts: () => Promise<IProduct[]> = async () => {
-
-import type { Product } from '@commercetools/platform-sdk'
-  
   const token = localStorage.getItem('LowerFlowerToken')
 
   const client = token ? refreshClientCreate(token) : anonymousClient()

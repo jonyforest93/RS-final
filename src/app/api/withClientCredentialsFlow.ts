@@ -1,7 +1,7 @@
 import { ClientBuilder } from '@commercetools/sdk-client-v2'
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 
-import { authMiddlewareOptions, httpMiddlewareOptions, projectKey } from './BuildClient'
+import { authMiddlewareOptions, httpMiddlewareOptions, projectKey } from './apiClients/anonymousClient'
 
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk'
 
