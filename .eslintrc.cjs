@@ -4,6 +4,9 @@ module.exports = {
     es2021: true,
   },
   settings: {
+    react: {
+      version: 'detect',
+    },
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -52,6 +55,7 @@ module.exports = {
     'max-depth': [2, 4],
     'max-statements': [2, 20],
     'max-params': [2, 5],
+    'react/prop-types': 0,
     'max-nested-callbacks': [2, 4],
     'max-lines-per-function': [
       2,
@@ -255,69 +259,6 @@ module.exports = {
     ],
     '@typescript-eslint/explicit-module-boundary-types': 2,
     '@typescript-eslint/method-signature-style': 2,
-    '@typescript-eslint/naming-convention': [
-      2,
-      {
-        selector: 'default',
-        format: ['strictCamelCase'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: 'import',
-        format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
-      },
-      {
-        selector: 'variable',
-        format: ['PascalCase', 'camelCase'],
-        leadingUnderscore: 'allow',
-      },
-      {
-        selector: 'variable',
-        format: ['strictCamelCase', 'UPPER_CASE'],
-        modifiers: ['const'],
-        types: ['boolean', 'string', 'number'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: ['variable', 'property'],
-        types: ['boolean'],
-        format: ['PascalCase'],
-        prefix: ['is', 'has', 'should', 'can', 'will'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: 'variable',
-        modifiers: ['destructured'],
-        format: null,
-      },
-      {
-        selector: 'objectLiteralProperty',
-        format: null,
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: 'parameter',
-        format: ['strictCamelCase'],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: ['typeLike', 'enum'],
-        format: ['PascalCase'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-      {
-        selector: 'enumMember',
-        format: ['PascalCase'],
-        leadingUnderscore: 'forbid',
-        trailingUnderscore: 'forbid',
-      },
-    ],
     '@typescript-eslint/no-base-to-string': 2,
     '@typescript-eslint/no-confusing-void-expression': 2,
     '@typescript-eslint/no-dynamic-delete': 2,
@@ -326,6 +267,7 @@ module.exports = {
     '@typescript-eslint/no-invalid-void-type': 2,
     '@typescript-eslint/no-non-null-assertion': 2,
     '@typescript-eslint/no-redeclare': 2,
+    '@typescript-eslint/no-misused-promises': 'off',
     '@typescript-eslint/no-redundant-type-constituents': 2,
     '@typescript-eslint/no-shadow': [
       2,

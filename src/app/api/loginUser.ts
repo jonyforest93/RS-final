@@ -1,4 +1,4 @@
-import { passwordFlowClient } from './withPasswordFlow'
+import { passwordFlowClient } from './apiClients/passwordFlowClient'
 
 import type { UserAuthOptions } from '@commercetools/sdk-client-v2'
 import type { Customer } from '@commercetools/platform-sdk'
