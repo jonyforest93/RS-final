@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface OrdersProps {
+export interface OrdersProps {
   title: string
   description: string
 }
