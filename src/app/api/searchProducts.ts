@@ -16,7 +16,7 @@ export const searchProducts: (productName: string) => Promise<IProduct[]> = asyn
       .search()
       .get({
         queryArgs: {
-          'text.en-US': productName,
+          'text.en-US': `${productName}*`,
           fuzzy: true,
         },
       })

@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 interface SearchBarProps {
   onSearch: (searchTerm: string) => void
+  searchText: string
+  setSearchText: (text: string) => void
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('')
-
+export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, searchText, setSearchText }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target
-    setSearchTerm(value)
+    setSearchText(value)
     onSearch(value)
   }
 
@@ -18,7 +18,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       <input
         type="text"
         placeholder="Search for products..."
-        value={searchTerm}
+        value={searchText}
         onChange={handleInputChange}
         className="search-input basic-text w-full px-4 md:w-[280px]"
       />
