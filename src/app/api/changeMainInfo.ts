@@ -32,6 +32,10 @@ export async function changeMainInfo({
               version: customerVersion,
               actions: [
                 {
+                  action: 'changeEmail',
+                  email,
+                },
+                {
                   action: 'setFirstName',
                   firstName,
                 },
@@ -42,10 +46,6 @@ export async function changeMainInfo({
                 {
                   action: 'setDateOfBirth',
                   dateOfBirth,
-                },
-                {
-                  action: 'changeEmail',
-                  email,
                 },
               ],
             },

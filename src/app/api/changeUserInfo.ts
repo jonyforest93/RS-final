@@ -1,17 +1,20 @@
 import { type IChangeMainInfoProps, changeMainInfo } from './changeMainInfo'
 import { changeAddress } from './changeAddress'
+import { deleteAddressesArray } from './deleteAdress'
 
 import type { ICollectedAddressField } from 'utils/collectAddress'
 
 interface IChangeUserInfo {
   user: IChangeMainInfoProps
   addressData: ICollectedAddressField[]
+  addressesIds: string[]
 }
-export async function changeUserInfo({ user, addressData }: IChangeUserInfo): Promise<void> {
+export async function changeUserInfo({ user, addressData, addressesIds }: IChangeUserInfo): Promise<void> {
   try {
     await changeMainInfo(user)
     await changeAddress(addressData)
-  } catch {
-    throw new Error('Error')
+    await deleteAddressesArray(addressesIds)
+  } catch (err) {
+    throw new Error(String(err))
   }
 }
