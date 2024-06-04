@@ -1,6 +1,6 @@
 import { loginUser } from '../api/loginUser'
 
-jest.mock('../api/withPasswordFlow', () => ({
+jest.mock('../api/apiClients/passwordFlowClient', () => ({
   passwordFlowClient: jest.fn(() => ({
     me: () => ({
       login: () => ({
