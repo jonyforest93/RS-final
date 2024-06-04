@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import { getProducts } from 'api/getProducts'
 import { sortByName, sortByPrice } from 'api/sortProducts'
 import { searchProducts } from 'api/searchProducts'
 import { getProductByategory } from 'api/getProductByCategory'
 import { getProductsInPriceRange } from 'api/getProductsInPriceRange'
-import { Loading } from 'components/Loading'
 
-import { ProductItem } from './Product-item'
 import { SearchBar } from './SearchBar'
 import { SortBar } from './SortBar'
 import { FilterBar } from './FilterBar'
+import { ProductList } from './ProductList'
 
 import type { IProduct } from 'types/types'
 
@@ -32,7 +30,6 @@ export const CatalogPage: React.FC = () => {
   }, [])
 
   const handleSearch = (searchTerm: string): void => {
-    setSearchText(searchTerm)
     searchProducts(searchTerm)
       .then(res => {
         setSearchedProduct(res)
@@ -97,6 +94,17 @@ export const CatalogPage: React.FC = () => {
     }
   }
 
+  const handleClearFilter = (): void => {
+    setSearchText('')
+    getProducts()
+      .then((res: IProduct[]) => {
+        setProducts(res)
+      })
+      .catch(error => {
+        console.error('Error', error)
+      })
+  }
+
   const handleSortToPriceRange = (min: string, max: string): void => {
     const minPrice = String(Number(min) * 100)
     const maxPrice = String(Number(max) * 100)
@@ -129,36 +137,20 @@ export const CatalogPage: React.FC = () => {
 
         <div className="catalog-layout mt-[60px]">
           <div>
-            <FilterBar changeCategory={handleCategoryChange} submitPriceRange={handleSortToPriceRange} />
+            <FilterBar
+              changeCategory={handleCategoryChange}
+              submitPriceRange={handleSortToPriceRange}
+              clearFilter={handleClearFilter}
+            />
           </div>
 
           <div>
             <div className="mb-[40px] flex flex-col items-center justify-start gap-[20px] md:flex-row md:justify-between">
-              <SearchBar onSearch={handleSearch} />
+              <SearchBar onSearch={handleSearch} searchText={searchText} setSearchText={setSearchText} />
               <SortBar onSortChange={handleSortChange} />
             </div>
 
-            <div className="flex flex-wrap justify-center gap-[30px]">
-              {searchText.length > 3 ? (
-                searchedProducts.length > 0 ? (
-                  searchedProducts.map(product => (
-                    <Link key={product.keyName} to={`/product/${product.keyName}`}>
-                      <ProductItem {...product} />
-                    </Link>
-                  ))
-                ) : (
-                  <Loading text="123" />
-                )
-              ) : products.length === 0 ? (
-                <Loading text="123" />
-              ) : (
-                products.map(product => (
-                  <Link key={product.keyName} to={`/product/${product.keyName}`}>
-                    <ProductItem {...product} />
-                  </Link>
-                ))
-              )}
-            </div>
+            <ProductList products={products} searchedProducts={searchedProducts} searchText={searchText} />
           </div>
         </div>
       </div>

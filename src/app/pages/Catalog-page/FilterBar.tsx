@@ -8,9 +8,10 @@ import type { ICategory } from 'api/getCategories'
 interface FilterBarProps {
   changeCategory: (category: string, name?: string) => void
   submitPriceRange: (min: string, max: string) => void
+  clearFilter: () => void
 }
 
-export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submitPriceRange }) => {
+export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submitPriceRange, clearFilter }) => {
   const [categories, setCategories] = useState<ICategory[]>([])
   const [activeCategory, setActiveCategory] = useState<string>('All')
   const [minPrice, setMinPrice] = useState<string>('')
@@ -32,6 +33,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submitPric
 
   const handleSubmitPriceRange = (): void => {
     submitPriceRange(minPrice, maxPrice)
+  }
+
+  const handleClearFilter = (): void => {
+    setActiveCategory('All')
+    setMinPrice('')
+    setMaxPrice('')
+    clearFilter()
   }
 
   useEffect(() => {
@@ -74,6 +82,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submitPric
           <input
             type="number"
             className="search-input basic-text w-[60px] px-2"
+            value={minPrice}
             onChange={event => {
               setMinPrice(event.target.value)
             }}
@@ -87,15 +96,21 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submitPric
           <input
             type="number"
             className="search-input basic-text w-[60px] px-2"
+            value={maxPrice}
             onChange={event => {
               setMaxPrice(event.target.value)
             }}
           />
         </div>
       </div>
-      <BaseButton variant="product-cart" onClick={handleSubmitPriceRange}>
-        filter
-      </BaseButton>
+      <div className="flex flex-col gap-4">
+        <BaseButton variant="product-cart" onClick={handleSubmitPriceRange}>
+          filter
+        </BaseButton>
+        <BaseButton variant="product-cart" onClick={handleClearFilter}>
+          reset
+        </BaseButton>
+      </div>
     </div>
   )
 }

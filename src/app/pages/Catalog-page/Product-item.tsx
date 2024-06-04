@@ -6,7 +6,7 @@ import type { IProduct } from 'types/types'
 
 export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
   return (
-    <div className="mb-[60px]">
+    <div className="mb-[60px] w-[255px]">
       <div className="content mb-[30px] flex w-[255px] cursor-pointer flex-col items-start justify-start gap-3 overflow-hidden">
         <img src={props.image} alt={props.title} width="255px" height="335px" />
         <div>
