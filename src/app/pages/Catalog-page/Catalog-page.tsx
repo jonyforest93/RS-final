@@ -5,6 +5,7 @@ import { sortByName, sortByPrice } from 'api/sortProducts'
 import { searchProducts } from 'api/searchProducts'
 import { getProductByategory } from 'api/getProductByCategory'
 import { getProductsInPriceRange } from 'api/getProductsInPriceRange'
+import { getProductsInHeightRange } from 'api/getProductsInHeightRange'
 
 import { SearchBar } from './SearchBar'
 import { SortBar } from './SortBar'
@@ -117,7 +118,15 @@ export const CatalogPage: React.FC = () => {
         console.error(error)
       })
   }
-
+  const handleSortToHeightRange = (min: string, max: string): void => {
+    getProductsInHeightRange(min, max)
+      .then(res => {
+        setProducts(res)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
   return (
     <div className="relative min-h-[100svh] overflow-hidden">
       <img src="images/catalogPageImg/flower-left.png" alt="flower" className="absolute z-[2]" />
@@ -141,6 +150,7 @@ export const CatalogPage: React.FC = () => {
               changeCategory={handleCategoryChange}
               submitPriceRange={handleSortToPriceRange}
               clearFilter={handleClearFilter}
+              submitHeightRange={handleSortToHeightRange}
             />
           </div>
 
