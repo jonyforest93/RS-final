@@ -107,10 +107,10 @@ export const CatalogPage: React.FC = () => {
   }
 
   const handleFilter = (minPrice: string, maxPrice: string, minHeight: string, maxHeight: string): void => {
-    const formattedMinPrice = String(Number(minPrice) * 100)
-    const formattedMaxPrice = String(Number(maxPrice) * 100)
+    const formattedMinPrice = minPrice ? String(Number(minPrice) * 100) : '0'
+    const formattedMaxPrice = maxPrice ? String(Number(maxPrice) * 100) : '100000'
     const formattedMinHeight = minHeight || '0'
-    const formattedMaxHeight = maxHeight || '1000'
+    const formattedMaxHeight = maxHeight || '100'
 
     getProductsFiltered(formattedMinPrice, formattedMaxPrice, formattedMinHeight, formattedMaxHeight)
       .then(res => {
