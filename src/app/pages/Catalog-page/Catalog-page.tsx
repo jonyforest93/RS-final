@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
 import { getProducts } from 'api/getProducts'
 import { sortByName, sortByPrice } from 'api/sortProducts'
@@ -29,7 +30,7 @@ export const CatalogPage: React.FC = () => {
       })
   }, [])
 
-  const handleSearch = (searchTerm: string): void => {
+  const handleSearch = useDebouncedCallback((searchTerm: string): void => {
     searchProducts(searchTerm)
       .then(res => {
         setSearchedProduct(res)
@@ -37,7 +38,7 @@ export const CatalogPage: React.FC = () => {
       .catch(error => {
         console.error(error)
       })
-  }
+  }, 300)
 
   const handleSortChange = (sortCategory: string, sortDirection: string): void => {
     if (sortCategory === '') {

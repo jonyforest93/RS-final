@@ -23,10 +23,10 @@ export const ProductList: React.FC<ProductListProps> = ({ products, searchedProd
             </Link>
           ))
         ) : (
-          <Loading text="123" />
+          <Loading text="not found product" />
         )
       ) : products.length === 0 ? (
-        <Loading text="123" />
+        <Loading text="not found product" />
       ) : (
         products.map(product => (
           <Link key={product.keyName} to={`/product/${product.keyName}`}>
