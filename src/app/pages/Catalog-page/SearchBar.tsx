@@ -17,7 +17,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, searchText, setS
     <div className="search-bar w-full px-[40px] md:px-0">
       <input
         type="text"
-        placeholder="Search for products..."
+        placeholder="Search for products...(min 3 letter)"
         value={searchText}
         onChange={handleInputChange}
         className="search-input basic-text w-full px-4 md:w-[280px]"
