@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import { createAdressFields } from 'pages/Profile-page/Profile-components/createAdressFields'
 import { generateAdressTitle } from 'utils/generateAdressTitle'
-import { deleteAdress } from 'api/deleteAdress'
 
 import { AdressCheckboxes } from '../AdressCheckboxes'
 import { FormInput } from '../FormInput'
@@ -17,18 +16,23 @@ interface IEditFormAdressProps {
   isEdit: boolean
   register: UseFormRegister<FieldValues>
   errors: FieldErrors<FieldValues>
+  addressesToDelete: string[]
 }
-export const EditFormAdress: React.FC<IEditFormAdressProps> = ({ register, errors, user, address, isEdit, index }) => {
+export const EditFormAdress: React.FC<IEditFormAdressProps> = ({
+  register,
+  errors,
+  user,
+  address,
+  isEdit,
+  index,
+  addressesToDelete,
+}) => {
   const [isDeleted, setDeleteStatus] = useState<boolean>(false)
   const adressId = address.id
   const handleClick = (): void => {
     setDeleteStatus(true)
     if (adressId) {
-      deleteAdress(adressId)
-        .then()
-        .catch(err => {
-          console.error(err)
-        })
+      addressesToDelete.push(address.id)
     }
   }
   if (!isDeleted) {

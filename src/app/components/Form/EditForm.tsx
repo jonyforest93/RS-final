@@ -18,6 +18,7 @@ interface IEditFormProps {
   isEdit: boolean
   user: Customer
   onEdit: () => void
+  addressesToDelete: string[]
 }
 export interface IFormData {
   email: string
@@ -27,7 +28,14 @@ export interface IFormData {
   dateOfBirth: string
   addressData: ICollectedAddressField[]
 }
-export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user, onEdit }: IEditFormProps) => {
+export const EditForm: FC<IEditFormProps> = ({
+  fields,
+  onDataSend,
+  isEdit,
+  user,
+  onEdit,
+  addressesToDelete,
+}: IEditFormProps) => {
   const {
     register,
     formState: { errors, isValid },
@@ -66,6 +74,7 @@ export const EditForm: FC<IEditFormProps> = ({ fields, onDataSend, isEdit, user,
                     index={index}
                     key={`${address.city}${index}`}
                     isEdit={isEdit}
+                    addressesToDelete={addressesToDelete}
                   ></EditFormAdress>
                 )
               })

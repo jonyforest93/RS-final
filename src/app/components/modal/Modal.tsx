@@ -13,10 +13,10 @@ export const Modal: React.FC<IModalProps> = ({ children, isDisplay, setDisplay, 
   }
   return (
     <div
-      className={`${isDisplay ? 'flex' : 'hidden'} fixed left-0 top-0 z-20 flex h-full w-full items-center justify-center bg-gray-800 bg-opacity-80  transition duration-100 `}
+      className={`${isDisplay ? 'flex' : 'hidden'} fixed left-0 top-0 z-20  flex h-full w-full items-center justify-center overflow-auto  bg-gray-800 bg-opacity-80  transition duration-100`}
     >
       <div
-        className={`relative flex min-h-[200px]  flex-col items-center justify-center gap-10 bg-${bg || '[#2a8e77]'} p-10 font-osvald text-xl text-white`}
+        className={`relative flex min-h-[200px]  flex-col items-center justify-center gap-10 bg-${bg || '[#2a8e77]'} m-5 p-10 font-osvald text-xl text-white`}
       >
         <div className="">{children}</div>
         {setDisplay ? (

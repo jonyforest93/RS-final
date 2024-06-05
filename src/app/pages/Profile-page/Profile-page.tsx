@@ -38,10 +38,16 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   const [isPasswordFormShow, showPasswordForm] = useState<boolean>(false)
   const [isAdressFormShow, showAdressForm] = useState<boolean>(false)
   const [modalMessage, setModalMessage] = useState<IProfileModalMessage>({ isShowMessage: false, text: '' })
+  const addressesToDelete: string[] = []
 
   function hideMessage(): void {
     setTimeout(() => {
       setModalMessage({ isShowMessage: false, text: '' })
+    }, MESSAGE_SHOW_TIME)
+  }
+  function refresh(): void {
+    setTimeout(() => {
+      refreshPage()
     }, MESSAGE_SHOW_TIME)
   }
 
@@ -57,13 +63,13 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
       await changeUserInfo({
         user: { firstName, lastName, dateOfBirth, email },
         addressData,
+        addressesIds: addressesToDelete,
       })
-      setTimeout(() => {
-        refreshPage()
-      }, MESSAGE_SHOW_TIME)
+      refresh()
     } catch (err) {
-      setModalMessage({ isShowMessage: true, text: 'err' })
+      setModalMessage({ isShowMessage: true, text: String(err) })
       hideMessage()
+      refresh()
     }
   }
 
@@ -95,6 +101,7 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
       })
       setModalMessage({ isShowMessage: true, text: 'The address has been added !' })
       hideMessage()
+      refresh()
     } catch (err) {
       setModalMessage({ isShowMessage: true, text: String(err) })
       hideMessage()
@@ -118,6 +125,7 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
           isEdit={isEdit}
           onDataSend={onMainFieldDataSend}
           onEdit={onEdit}
+          addressesToDelete={addressesToDelete}
         ></EditForm>
       </div>
       <ProfileImages />
