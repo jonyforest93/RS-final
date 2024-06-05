@@ -34,6 +34,7 @@ type OnDataSend = (data: string) => void
 interface IProduct {
   keyName?: string
   title: string
+  description?: string
   image?: string
   price?: number
   discountPrice?: number

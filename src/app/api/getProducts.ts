@@ -12,6 +12,7 @@ export const getProducts: () => Promise<IProduct[]> = async () => {
 
   try {
     const products = await client.products().get().execute()
+
     const formattedProducts = products.body.results.map(item => {
       const product = formattedProduct(item)
       return product

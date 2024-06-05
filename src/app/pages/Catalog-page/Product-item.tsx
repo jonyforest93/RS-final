@@ -19,6 +19,8 @@ export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
           ) : (
             <h3 className="card-title">${props.price}</h3>
           )}
+          <h3 className="card-title mt-2">Description</h3>
+          <p className="basic-text three-lines">{props.description}</p>
         </div>
       </div>
       <BaseButton variant="product-cart">Add to cart</BaseButton>

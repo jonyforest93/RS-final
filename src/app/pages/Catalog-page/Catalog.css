@@ -48,3 +48,11 @@
 .category-active {
   color: #43ffd2 !important;
 }
+
+.three-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Количество строк */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
