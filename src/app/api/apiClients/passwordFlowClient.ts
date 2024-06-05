@@ -42,7 +42,6 @@ export function passwordFlowClient(user: UserAuthOptions): ByProjectKeyRequestBu
   const client = new ClientBuilder()
     .withPasswordFlow(passwordMiddlewareOptions(user))
     .withHttpMiddleware(httpMiddlewareOptions())
-    .withLoggerMiddleware()
     .build()
 
   return createApiBuilderFromCtpClient(client).withProjectKey({ projectKey })
