@@ -4,8 +4,7 @@ import { getProducts } from 'api/getProducts'
 import { sortByName, sortByPrice } from 'api/sortProducts'
 import { searchProducts } from 'api/searchProducts'
 import { getProductByategory } from 'api/getProductByCategory'
-import { getProductsInPriceRange } from 'api/getProductsInPriceRange'
-import { getProductsInHeightRange } from 'api/getProductsInHeightRange'
+import { getProductsFiltered } from 'api/getProductsFiltered'
 
 import { SearchBar } from './SearchBar'
 import { SortBar } from './SortBar'
@@ -106,11 +105,13 @@ export const CatalogPage: React.FC = () => {
       })
   }
 
-  const handleSortToPriceRange = (min: string, max: string): void => {
-    const minPrice = String(Number(min) * 100)
-    const maxPrice = String(Number(max) * 100)
+  const handleFilter = (minPrice: string, maxPrice: string, minHeight: string, maxHeight: string): void => {
+    const formattedMinPrice = String(Number(minPrice) * 100)
+    const formattedMaxPrice = String(Number(maxPrice) * 100)
+    const formattedMinHeight = minHeight || '0'
+    const formattedMaxHeight = maxHeight || '1000'
 
-    getProductsInPriceRange(minPrice, maxPrice)
+    getProductsFiltered(formattedMinPrice, formattedMaxPrice, formattedMinHeight, formattedMaxHeight)
       .then(res => {
         setProducts(res)
       })
@@ -118,15 +119,7 @@ export const CatalogPage: React.FC = () => {
         console.error(error)
       })
   }
-  const handleSortToHeightRange = (min: string, max: string): void => {
-    getProductsInHeightRange(min, max)
-      .then(res => {
-        setProducts(res)
-      })
-      .catch(error => {
-        console.error(error)
-      })
-  }
+
   return (
     <div className="relative min-h-[100svh] overflow-hidden">
       <img src="images/catalogPageImg/flower-left.png" alt="flower" className="absolute z-[2]" />
@@ -148,9 +141,8 @@ export const CatalogPage: React.FC = () => {
           <div>
             <FilterBar
               changeCategory={handleCategoryChange}
-              submitPriceRange={handleSortToPriceRange}
+              submintFilter={handleFilter}
               clearFilter={handleClearFilter}
-              submitHeightRange={handleSortToHeightRange}
             />
           </div>
 
