@@ -22,7 +22,7 @@ export const Modal: React.FC<IModalProps> = ({ children, isDisplay, setDisplay, 
         <div className="">{children}</div>
         {setDisplay ? (
           <button type="button" onClick={handleClick}>
-            <img src="/closeIcon.png" alt="" className="absolute right-1 top-1 z-20 w-7" />
+            <img src="/closeIcon.png" alt="" className="absolute right-1 top-1 z-[1000] w-7" />
           </button>
         ) : null}
       </div>

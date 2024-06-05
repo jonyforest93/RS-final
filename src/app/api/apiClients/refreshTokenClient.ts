@@ -40,7 +40,6 @@ export const refreshClientCreate: (token: string) => ByProjectKeyRequestBuilder 
   const client = new ClientBuilder()
     .withRefreshTokenFlow(refresh(token))
     .withHttpMiddleware(httpMiddlewareOptions())
-    .withLoggerMiddleware()
     .build()
 
   return createApiBuilderFromCtpClient(client).withProjectKey({ projectKey })
