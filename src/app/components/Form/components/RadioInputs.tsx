@@ -7,7 +7,7 @@ interface IRadioInputsProps {
 }
 export const RadioInputs: React.FC<IRadioInputsProps> = ({ register }) => {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-5">
+    <div className="flex flex-wrap items-center justify-center gap-1 lg:gap-5">
       <RadioInput register={register} text={'Shipping adress'} value="addShippingAddressId" />
       <RadioInput register={register} text={'Default shipping adress'} value="setDefaultShippingAddress" />
       <RadioInput register={register} text={'Billing adress'} value="addBillingAddressId" />

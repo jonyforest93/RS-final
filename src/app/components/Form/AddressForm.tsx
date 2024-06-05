@@ -35,8 +35,8 @@ export const AdressForm: React.FC<IAdressFormProps> = ({ fields, onDataSend }) =
   }
 
   return (
-    <div className="flex  flex-col items-center overflow-auto">
-      <form className="m-auto flex h-[60%] flex-col items-center gap-5" onSubmit={handleSubmit(onSubmit)}>
+    <div className="flex flex-col items-center overflow-auto">
+      <form className="m-auto flex flex-col items-center gap-1" onSubmit={handleSubmit(onSubmit)}>
         {fields.map(field => (
           <FormInput register={register} errors={errors} field={field} key={field.name} isEdit={true} />
         ))}
