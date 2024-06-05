@@ -7,23 +7,18 @@ import type { ICategory } from 'api/getCategories'
 
 interface FilterBarProps {
   changeCategory: (category: string, name?: string) => void
-  submitPriceRange: (min: string, max: string) => void
+  submintFilter: (minPrice: string, maxPrice: string, minHeight: string, maxHeight: string) => void
   clearFilter: () => void
-  submitHeightRange: (min: string, max: string) => void
 }
 
-export const FilterBar: React.FC<FilterBarProps> = ({
-  changeCategory,
-  submitPriceRange,
-  clearFilter,
-  submitHeightRange,
-}) => {
+export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submintFilter, clearFilter }) => {
   const [categories, setCategories] = useState<ICategory[]>([])
   const [activeCategory, setActiveCategory] = useState<string>('All')
   const [minPrice, setMinPrice] = useState<string>('')
   const [maxPrice, setMaxPrice] = useState<string>('')
   const [minHeight, setMinHeight] = useState<string>('')
   const [maxHeight, setMaxHeight] = useState<string>('')
+
   const handleClickCategory = (event: React.MouseEvent<HTMLLIElement>): void => {
     const node = event.target as HTMLElement
     const [id, name] = node.id.split('_')
@@ -38,9 +33,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     changeCategory(id, name)
   }
 
-  const handleSubmitPriceRange = (): void => {
-    submitPriceRange(minPrice, maxPrice)
-    submitHeightRange(minHeight, maxHeight)
+  const handleSubmitFilter = (): void => {
+    submintFilter(minPrice, maxPrice, minHeight, maxHeight)
   }
 
   const handleClearFilter = (): void => {
@@ -113,7 +107,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           />
         </div>
       </div>
-      <h3 className="list-title mt-[40px]">Heigth (cm)</h3>
+      <h3 className="list-title mt-[40px]">Height (cm)</h3>
       <div className="my-[20px] flex w-full justify-center gap-4">
         <div className="flex items-center justify-between gap-2">
           <label htmlFor="minValue" className="basic-text">
@@ -144,7 +138,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <BaseButton variant="product-cart" onClick={handleSubmitPriceRange}>
+        <BaseButton variant="product-cart" onClick={handleSubmitFilter}>
           filter
         </BaseButton>
         <BaseButton variant="product-cart" onClick={handleClearFilter}>

@@ -5,10 +5,12 @@ import { anonymousClient } from './apiClients/anonymousClient'
 
 import type { IProduct } from 'types/types'
 
-export const getProductsInPriceRange: (minPrice: string, maxPrice: string) => Promise<IProduct[]> = async (
-  minPrice,
-  maxPrice,
-) => {
+export const getProductsFiltered: (
+  minPrice: string,
+  maxPrice: string,
+  minHeight: string,
+  maxHeight: string,
+) => Promise<IProduct[]> = async (minPrice, maxPrice, minHeight, maxHeight) => {
   const token = localStorage.getItem('LowerFlowerToken')
 
   const client = token ? refreshClientCreate(token) : anonymousClient()
@@ -21,7 +23,10 @@ export const getProductsInPriceRange: (minPrice: string, maxPrice: string) => Pr
       .search()
       .get({
         queryArgs: {
-          'filter.query': `variants.scopedPrice.value.centAmount:range (${minPrice} to ${maxPrice})`,
+          'filter.query': [
+            `variants.scopedPrice.value.centAmount:range (${minPrice} to ${maxPrice})`,
+            `variants.attributes.height:range (${minHeight} to ${maxHeight})`,
+          ],
           priceCurrency: currencyCode,
         },
       })
