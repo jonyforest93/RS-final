@@ -100,7 +100,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submintFil
                 </Link>
                 <Link to={`${`${item.name}/${item.subCategory.name['en-US'].split(' ').join(' ')}`}`} className="flex">
                   <li
-                    className={`mb-[12px] list-item cursor-pointer ${activeCategory === item.subCategory.id ? 'category-active' : ''} ml-3 text-[12px]`}
+                    className={`mb-[12px] list-item cursor-pointer ${activeCategory === item.subCategory.id ? 'category-active' : ''} ml-3 w-[100%] text-[12px]`}
                     id={`${item.subCategory.id}_${item.subCategory.name['en-US']}`}
                     onClick={handleClickCategory}
                   >
