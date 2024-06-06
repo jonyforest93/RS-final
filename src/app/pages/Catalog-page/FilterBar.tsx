@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 import { getCategory } from 'api/getCategories'
 import BaseButton from 'components/shared/BaseButton/BaseButton'
+import { Breadcrumbs } from 'components/breadcrumbs/BreadCrumbs'
 
 import type { ICategory } from 'api/getCategories'
 
@@ -18,6 +20,17 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submintFil
   const [maxPrice, setMaxPrice] = useState<string>('')
   const [minHeight, setMinHeight] = useState<string>('')
   const [maxHeight, setMaxHeight] = useState<string>('')
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.pathname === '/catalog') {
+      setActiveCategory('All')
+      return
+    }
+    if (location.pathname === '/catalog/Bouquets') {
+      setActiveCategory('6da3cfe6-1673-406f-bb13-eb0c0a4a7a62')
+    }
+  }, [location.pathname])
 
   const handleClickCategory = (event: React.MouseEvent<HTMLLIElement>): void => {
     const node = event.target as HTMLElement
@@ -29,7 +42,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submintFil
       changeCategory('All')
       return
     }
-
+    if (name === 'Monobouquets') {
+      changeCategory(id, 'BOUQUETS/MONOBOUQUETS')
+      return
+    }
     changeCategory(id, name)
   }
 
@@ -58,23 +74,52 @@ export const FilterBar: React.FC<FilterBarProps> = ({ changeCategory, submintFil
 
   return (
     <div className="my-blur mb-4">
+      <Breadcrumbs></Breadcrumbs>
       <h3 className="list-title mb-[20px]">Category</h3>
       <ul>
-        <li
-          className={`mb-[12px] list-item cursor-pointer ${activeCategory === 'All' ? 'category-active' : ''}`}
-          onClick={handleClickCategory}
-        >
-          All
-        </li>
-        {categories.map(item => (
+        <Link to={'all'}>
           <li
-            className={`mb-[12px] list-item cursor-pointer ${activeCategory === item.id ? 'category-active' : ''}`}
-            key={item.id}
-            id={`${item.id}_${item.name}`}
+            className={`mb-[12px] list-item cursor-pointer ${activeCategory === 'All' ? 'category-active' : ''}`}
             onClick={handleClickCategory}
           >
-            {item.name}
+            All
           </li>
+        </Link>
+        {categories.map(item => (
+          <div key={item.id}>
+            {item.subCategory ? (
+              <>
+                <Link to={`${item.name.split(' ').join(' ')}`}>
+                  <li
+                    className={`mb-[12px] list-item cursor-pointer ${activeCategory === item.id ? 'category-active' : ''}`}
+                    id={`${item.id}_${item.name}`}
+                    onClick={handleClickCategory}
+                  >
+                    {item.name}
+                  </li>
+                </Link>
+                <Link to={`${`${item.name}/${item.subCategory.name['en-US'].split(' ').join(' ')}`}`} className="flex">
+                  <li
+                    className={`mb-[12px] list-item cursor-pointer ${activeCategory === item.subCategory.id ? 'category-active' : ''} ml-3 w-[100%] text-[12px]`}
+                    id={`${item.subCategory.id}_${item.subCategory.name['en-US']}`}
+                    onClick={handleClickCategory}
+                  >
+                    {item.subCategory.name['en-US']}
+                  </li>
+                </Link>
+              </>
+            ) : (
+              <Link to={`${item.name.split(' ').join(' ')}`}>
+                <li
+                  className={`mb-[12px] list-item cursor-pointer ${activeCategory === item.id ? 'category-active' : ''}`}
+                  id={`${item.id}_${item.name}`}
+                  onClick={handleClickCategory}
+                >
+                  {item.name}
+                </li>
+              </Link>
+            )}
+          </div>
         ))}
       </ul>
       <h3 className="list-title mt-[40px]">Price</h3>

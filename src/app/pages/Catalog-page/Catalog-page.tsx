@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { getProducts } from 'api/getProducts'
 import { sortByName, sortByPrice } from 'api/sortProducts'
@@ -19,8 +20,35 @@ export const CatalogPage: React.FC = () => {
   const [searchedProducts, setSearchedProduct] = useState<IProduct[]>([])
   const [searchText, setSearchText] = useState<string>('')
   const [currentCategory, setCurrentCategory] = useState<string>('All')
+  const location = useLocation()
+  const [isBouquets, setBouquetsStatus] = useState<boolean>(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
+    if (location.pathname === '/catalog') {
+      getProducts()
+        .then((res: IProduct[]) => {
+          setProducts(res)
+        })
+        .catch(error => {
+          console.error('Error', error)
+        })
+    }
+
+    if (location.pathname === '/catalog/Bouquets') {
+      getProductByategory('6da3cfe6-1673-406f-bb13-eb0c0a4a7a62')
+        .then((res: IProduct[]) => {
+          setProducts(res)
+          setBouquetsStatus(true)
+        })
+        .catch(error => {
+          console.error('Error', error)
+        })
+    }
+  }, [location.pathname])
+
+  useEffect(() => {
+    navigate('/catalog')
     getProducts()
       .then((res: IProduct[]) => {
         setProducts(res)
@@ -123,12 +151,12 @@ export const CatalogPage: React.FC = () => {
 
   return (
     <div className="relative min-h-[100svh] overflow-hidden">
-      <img src="images/catalogPageImg/flower-left.png" alt="flower" className="absolute z-[2]" />
-      <img src="images/catalogPageImg/flower-right.png" alt="flower" className="absolute right-0 z-[2]" />
-      <img src="images/catalogPageImg/ellipse-l1.png" alt="ellipse" className="absolute top-[100px] z-[1]" />
-      <img src="images/catalogPageImg/ellipse-l2.png" alt="ellipse" className="absolute top-[550px] z-[1]" />
-      <img src="images/catalogPageImg/ellipse-l3.png" alt="ellipse" className="absolute top-[750px] z-[1]" />
-      <img src="images/catalogPageImg/elipse-r-t.png" alt="ellipse" className="absolute right-0 z-[1]" />
+      <img src="/images/catalogPageImg/flower-left.png" alt="flower" className="absolute z-[2]" />
+      <img src="/images/catalogPageImg/flower-right.png" alt="flower" className="absolute right-0 z-[2]" />
+      <img src="/images/catalogPageImg/ellipse-l1.png" alt="ellipse" className="absolute top-[100px] z-[1]" />
+      <img src="/images/catalogPageImg/ellipse-l2.png" alt="ellipse" className="absolute top-[550px] z-[1]" />
+      <img src="/images/catalogPageImg/ellipse-l3.png" alt="ellipse" className="absolute top-[750px] z-[1]" />
+      <img src="/images/catalogPageImg/elipse-r-t.png" alt="ellipse" className="absolute right-0 z-[1]" />
       <div className="container relative z-20 mx-auto mt-[120px]">
         <div className="my-blur flex flex-col items-start justify-start">
           <h2 className="title">Flower</h2>
@@ -152,8 +180,25 @@ export const CatalogPage: React.FC = () => {
               <SearchBar onSearch={handleSearch} searchText={searchText} setSearchText={setSearchText} />
               <SortBar onSortChange={handleSortChange} />
             </div>
+            {isBouquets ? null : (
+              <Routes>
+                <Route
+                  path={currentCategory}
+                  element={
+                    <div>
+                      <ProductList products={products} searchedProducts={searchedProducts} searchText={searchText} />
+                    </div>
+                  }
+                />
+              </Routes>
+            )}
 
-            <ProductList products={products} searchedProducts={searchedProducts} searchText={searchText} />
+            {location.pathname === '/catalog' ? (
+              <ProductList products={products} searchedProducts={searchedProducts} searchText={searchText} />
+            ) : null}
+            {isBouquets ? (
+              <ProductList products={products} searchedProducts={searchedProducts} searchText={searchText} />
+            ) : null}
           </div>
         </div>
       </div>

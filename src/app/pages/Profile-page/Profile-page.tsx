@@ -129,7 +129,6 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
         ></EditForm>
       </div>
       <ProfileImages />
-
       <div className="z-10 mt-10 flex gap-5">
         <BaseButton
           className="link"

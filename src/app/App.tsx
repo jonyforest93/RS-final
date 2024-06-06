@@ -8,10 +8,8 @@ import { RegistrationPage } from 'pages/Registration-page/Registration-page'
 import { RouterOutler } from 'router/Router-outlet'
 import { NotFoundPage } from 'pages/NotFound-page/NotFound-page'
 import { Context } from 'services/Context'
-
 import { ProfileWrapper } from 'pages/Profile-page/Profile-wrapper'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
-
 import { CatalogPage } from 'pages/Catalog-page/Catalog-page'
 import { ProductWrapper } from 'pages/ProductPage/ProductPageWrapper'
 
@@ -27,7 +25,7 @@ const App: FC = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
 
-            <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="catalog/*" element={<CatalogPage />} />
 
             <Route path="/product/:key" element={<ProductWrapper />}></Route>
 
