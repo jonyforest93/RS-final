@@ -26,6 +26,7 @@ export const CatalogPage: React.FC = () => {
 
   useEffect(() => {
     if (location.pathname === '/catalog') {
+      setBouquetsStatus(false)
       getProducts()
         .then((res: IProduct[]) => {
           setProducts(res)
@@ -113,6 +114,7 @@ export const CatalogPage: React.FC = () => {
 
     if (current) {
       setCurrentCategory(current)
+      console.log(current)
       if (current !== 'Bouquets') {
         getProductByategory(id)
           .then(res => {
