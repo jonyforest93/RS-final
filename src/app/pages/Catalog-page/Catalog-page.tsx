@@ -48,7 +48,7 @@ export const CatalogPage: React.FC = () => {
   }, [location.pathname])
 
   useEffect(() => {
-    navigate('/catalog')
+    navigate('/catalog/all')
     getProducts()
       .then((res: IProduct[]) => {
         setProducts(res)
@@ -113,13 +113,15 @@ export const CatalogPage: React.FC = () => {
 
     if (current) {
       setCurrentCategory(current)
-      getProductByategory(id)
-        .then(res => {
-          setProducts(res)
-        })
-        .catch(err => {
-          console.error(err)
-        })
+      if (current !== 'Bouquets') {
+        getProductByategory(id)
+          .then(res => {
+            setProducts(res)
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      }
     }
   }
 
