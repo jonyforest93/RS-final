@@ -1,5 +1,7 @@
 @import url('components/shared/BaseButton/BaseButton.css');
 @import url('pages/Main-page/main-page.css');
+@import url('pages/Catalog-page/Catalog.css');
+@import url('components/modal/Modal.css');
 
 .main-title {
   @apply font-cormorant text-[68px] font-normal uppercase tracking-wider text-white md:text-[200px] md:leading-[200px];
@@ -31,4 +33,10 @@
 
 .card-price {
   @apply font-osvald text-sm font-bold uppercase tracking-wider text-white;
+}
+.input {
+  @apply h-16 w-full border border-solid  bg-inherit pl-2 pr-12 font-osvald text-[#97bdf0];
+}
+.label {
+  @apply basic-text mb-1 mt-3;
 }

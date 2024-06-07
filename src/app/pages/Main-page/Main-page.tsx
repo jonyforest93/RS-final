@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 
@@ -13,7 +13,9 @@ export const MainPage: React.FC = () => {
           <p className="mb-[50px] text-center text-xl font-normal tracking-wide text-white">
             We create for those who appreciate the freshness and grace of flowers
           </p>
-          <BaseButton variant="primary">view catalog</BaseButton>
+          <Link to={`/catalog`}>
+            <BaseButton variant="primary">view catalog</BaseButton>
+          </Link>
           <div className="mt-[20px] flex gap-[15px]">
             <NavLink className="link" to="/login">
               Sign In
@@ -65,12 +67,12 @@ export const MainPage: React.FC = () => {
         </div>
         <img
           src="images/mainPageImg/orders-pink.png"
-          alt=""
+          alt="orders-pink"
           className="absolute left-0 top-[000px] object-cover opacity-50"
         />
         <img
           src="images/mainPageImg/orders-blue.png"
-          alt=""
+          alt="orders-blue"
           className="absolute right-[-50px] top-[0px] object-cover opacity-60"
         />
       </div>

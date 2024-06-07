@@ -7,4 +7,4 @@ const loggedUserState: LoggedUserState = {
   isLoggedUser: false,
   setIsLoggedUser: () => {},
 }
-export const Context = createContext(loggedUserState)
+export const loginContext = createContext(loggedUserState)

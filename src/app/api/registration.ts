@@ -1,13 +1,13 @@
 import { transormToRegisisterObject } from 'utils/transformToRegisterObject'
 
-import { passwordFlowClient } from './withPasswordFlow'
-import { anonymousClient } from './BuildClient'
+import { passwordFlowClient } from './apiClients/passwordFlowClient'
+import { anonymousClient } from './apiClients/anonymousClient'
 
 import type { ClientResponse, CustomerSignInResult } from '@commercetools/platform-sdk'
 
 type RegistrationFunction = (user: string) => Promise<ClientResponse<CustomerSignInResult>>
 
-export const registration: RegistrationFunction = async user => {
+export const registerUser: RegistrationFunction = async user => {
   const userData = transormToRegisisterObject(user)
   const client = anonymousClient()
   try {

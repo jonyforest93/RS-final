@@ -1,0 +1,12 @@
+.modal-position {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 300px;
+}
+
+@media (width > 768px) {
+  .modal-position {
+    min-width: 500px;
+  }
+}
