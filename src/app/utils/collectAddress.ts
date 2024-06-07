@@ -1,14 +1,5 @@
-export interface ICollectedAddress {
-  country: string | undefined
-  city: string | undefined
-  streetName: string | undefined
-  postalCode: string | undefined
-}
-export interface ICollectedAddressField {
-  id: string | undefined
-  radioOption: string | null
-  address: ICollectedAddress
-}
+import type { ICollectedAddressField } from 'types/types'
+
 export const collectAddresses: (data: Record<string, string | undefined>) => ICollectedAddressField[] = data => {
   const addresses = []
   let index = 0

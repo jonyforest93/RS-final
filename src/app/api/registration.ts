@@ -7,7 +7,7 @@ import type { ClientResponse, CustomerSignInResult } from '@commercetools/platfo
 
 type RegistrationFunction = (user: string) => Promise<ClientResponse<CustomerSignInResult>>
 
-export const registration: RegistrationFunction = async user => {
+export const registerUser: RegistrationFunction = async user => {
   const userData = transormToRegisisterObject(user)
   const client = anonymousClient()
   try {

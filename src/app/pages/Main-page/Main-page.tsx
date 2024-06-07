@@ -67,12 +67,12 @@ export const MainPage: React.FC = () => {
         </div>
         <img
           src="images/mainPageImg/orders-pink.png"
-          alt=""
+          alt="orders-pink"
           className="absolute left-0 top-[000px] object-cover opacity-50"
         />
         <img
           src="images/mainPageImg/orders-blue.png"
-          alt=""
+          alt="orders-blue"
           className="absolute right-[-50px] top-[0px] object-cover opacity-60"
         />
       </div>
