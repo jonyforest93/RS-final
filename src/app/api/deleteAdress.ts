@@ -10,7 +10,7 @@ interface IDeleteAddressFunc {
   client: ByProjectKeyRequestBuilder
   version: number
 }
-export async function deleteAdress({ addressId, client, version }: IDeleteAddressFunc): Promise<void> {
+export async function deleteAddress({ addressId, client, version }: IDeleteAddressFunc): Promise<void> {
   try {
     await client
       .me()
@@ -39,7 +39,7 @@ export async function deleteAddressesArray(addressesIds: string[]): Promise<void
       await addressesIds.reduce(async (previousePromise, addressId) => {
         await previousePromise
         const version = await getCustomerVersion()
-        await deleteAdress({ addressId, client, version })
+        await deleteAddress({ addressId, client, version })
       }, Promise.resolve())
     } catch (err) {
       throw new Error(String(err))

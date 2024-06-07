@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Form from 'components/Form/Form'
 import { loginUser } from 'api/loginUser'
 import { tokenData } from 'services/token-storage'
-import { Context } from 'services/Context'
+import { loginContext } from 'services/Context'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { ErrorModal } from './Error-message-server-modal'
@@ -35,7 +35,7 @@ export const LoginPage: React.FC = () => {
 
   const [display, setDisplay] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useErrorMessage()
-  const { setIsLoggedUser } = useContext(Context)
+  const { setIsLoggedUser } = useContext(loginContext)
   const onDataSend: OnDataSend = data => {
     const userData: UserData = JSON.parse(data) as UserData
     const loginData: UserAuthOptions = {

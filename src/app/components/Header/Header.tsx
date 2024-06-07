@@ -3,7 +3,7 @@ import { type FC, useEffect, useState } from 'react'
 import { useContext } from 'react'
 
 import { setActive } from 'utils/setAcitve'
-import { Context } from 'services/Context'
+import { loginContext } from 'services/Context'
 import { tokenData } from 'services/token-storage'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
@@ -11,7 +11,7 @@ import { HeaderLinks } from './HeaderLinks'
 import { HeaderBurger } from './HeaderBurger'
 
 export const Header: FC = () => {
-  const { isLoggedUser, setIsLoggedUser } = useContext(Context)
+  const { isLoggedUser, setIsLoggedUser } = useContext(loginContext)
   const [scrolling, setScrolling] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 

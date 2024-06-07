@@ -6,10 +6,9 @@ import { collectAddresses } from 'utils/collectAddress'
 import { EditFormAdress } from './components/EditFormAdress'
 import { FormInput } from './FormInput'
 
-import type { ICollectedAddressField } from 'utils/collectAddress'
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import type { Customer } from '@commercetools/platform-sdk'
-import type { IFields } from 'types/types'
+import type { ICollectedAddressField, IFields } from 'types/types'
 import type { FC } from 'react'
 
 interface IEditFormProps {

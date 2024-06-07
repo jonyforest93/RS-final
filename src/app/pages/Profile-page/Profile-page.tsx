@@ -11,12 +11,14 @@ import { AdressForm } from 'components/Form/AddressForm'
 import { addAdress } from 'api/addAdress'
 import { useRefreshPage } from 'hooks/useRefreshPage.hook'
 import { changeUserInfo } from 'api/changeUserInfo'
+import { Constants } from 'types/types'
 
 import { ProfileImages } from './Profile-images'
 import { passwordChangeFields } from './Profile-components/passwordChangeFields'
 import { addAdressFields } from './Profile-components/addAdressFields'
 import { createMainFields } from './Profile-components/mainInfoFields'
 
+import type { IProfileModalMessage } from 'types/types'
 import type { IAdressFormData } from 'components/Form/AddressForm'
 import type { IFormData } from 'components/Form/EditForm'
 import type { Customer } from '@commercetools/platform-sdk'
@@ -26,12 +28,6 @@ interface IProfileProps {
   onEdit: () => void
   isEdit: boolean
 }
-export interface IProfileModalMessage {
-  isShowMessage: boolean
-  text: string
-}
-
-const MESSAGE_SHOW_TIME = 2000
 
 export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   const refreshPage = useRefreshPage()
@@ -43,12 +39,12 @@ export const Profile: React.FC<IProfileProps> = ({ user, onEdit, isEdit }) => {
   function hideMessage(): void {
     setTimeout(() => {
       setModalMessage({ isShowMessage: false, text: '' })
-    }, MESSAGE_SHOW_TIME)
+    }, Constants.MESSAGE_SHOW_TIME)
   }
   function refresh(): void {
     setTimeout(() => {
       refreshPage()
-    }, MESSAGE_SHOW_TIME)
+    }, Constants.MESSAGE_SHOW_TIME)
   }
 
   async function onMainFieldDataSend({

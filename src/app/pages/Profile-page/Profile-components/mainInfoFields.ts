@@ -1,11 +1,5 @@
-import type { IFields } from 'types/types'
+import type { IFields, IMainInfoObject } from 'types/types'
 
-export interface IMainInfoObject {
-  email?: string
-  firstName?: string
-  lastName?: string
-  dateOfBirth?: string
-}
 export const createMainFields = ({ email, firstName, lastName, dateOfBirth }: IMainInfoObject): IFields[] => [
   {
     name: 'email',

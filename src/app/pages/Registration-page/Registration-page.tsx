@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Form from 'components/Form/Form'
-import { registration } from 'api/registration'
+import { registerUser } from 'api/registration'
 import { ErrorModal } from 'pages/Login-page/Error-message-server-modal'
 import { tokenData } from 'services/token-storage'
-import { Context } from 'services/Context'
+import { loginContext } from 'services/Context'
 import { Modal } from 'components/modal/Modal'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
@@ -17,7 +17,7 @@ import type { OnDataSend } from 'types/types'
 
 export const RegistrationPage: React.FC = () => {
   const navigate = useNavigate()
-  const { setIsLoggedUser } = useContext(Context)
+  const { setIsLoggedUser } = useContext(loginContext)
 
   useEffect(() => {
     if (localStorage.getItem('LowerFlowerToken')) {
@@ -25,13 +25,12 @@ export const RegistrationPage: React.FC = () => {
     }
   }, [])
 
-  const [errorMessage, setErrorMessage] = useState<string>('')
   const [modalMessage, setModalMessage] = useState<string>('')
   const [display, setDisplay] = useState<boolean>(false)
   const [displayModal, setDisplayModal] = useState<boolean>(false)
 
   const onDataSend: OnDataSend = data => {
-    registration(data)
+    registerUser(data)
       .then(() => {
         setModalMessage('Congratulations! You have successfully registered!')
         setDisplayModal(true)
@@ -47,7 +46,8 @@ export const RegistrationPage: React.FC = () => {
       })
       .catch(err => {
         if (err instanceof Error) {
-          setErrorMessage(err.message)
+          setDisplay(true)
+          setModalMessage(err.message)
         }
       })
   }
@@ -66,9 +66,13 @@ export const RegistrationPage: React.FC = () => {
           data-testid="registrationForm"
         ></Form>
         {display ? (
-          <ErrorModal errorMessage={errorMessage} isDisplayed={display} setDisplay={setDisplay}></ErrorModal>
+          <ErrorModal errorMessage={modalMessage} isDisplayed={display} setDisplay={setDisplay}></ErrorModal>
         ) : null}
-        {displayModal ? <Modal isDisplay={displayModal}>{modalMessage}</Modal> : null}
+        {displayModal ? (
+          <Modal bg={'black'} isDisplay={displayModal}>
+            {modalMessage}
+          </Modal>
+        ) : null}
       </div>
     </div>
   )

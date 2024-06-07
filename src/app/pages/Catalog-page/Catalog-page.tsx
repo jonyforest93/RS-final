@@ -12,6 +12,7 @@ import { SearchBar } from './SearchBar'
 import { SortBar } from './SortBar'
 import { FilterBar } from './FilterBar'
 import { ProductList } from './ProductList'
+import { CatalogPageImages } from './CatalogPageImages'
 
 import type { IProduct } from 'types/types'
 
@@ -114,7 +115,6 @@ export const CatalogPage: React.FC = () => {
 
     if (current) {
       setCurrentCategory(current)
-      console.log(current)
       if (current !== 'Bouquets') {
         getProductByategory(id)
           .then(res => {
@@ -155,12 +155,7 @@ export const CatalogPage: React.FC = () => {
 
   return (
     <div className="relative min-h-[100svh] overflow-hidden">
-      <img src="/images/catalogPageImg/flower-left.png" alt="flower" className="absolute z-[2]" />
-      <img src="/images/catalogPageImg/flower-right.png" alt="flower" className="absolute right-0 z-[2]" />
-      <img src="/images/catalogPageImg/ellipse-l1.png" alt="ellipse" className="absolute top-[100px] z-[1]" />
-      <img src="/images/catalogPageImg/ellipse-l2.png" alt="ellipse" className="absolute top-[550px] z-[1]" />
-      <img src="/images/catalogPageImg/ellipse-l3.png" alt="ellipse" className="absolute top-[750px] z-[1]" />
-      <img src="/images/catalogPageImg/elipse-r-t.png" alt="ellipse" className="absolute right-0 z-[1]" />
+      <CatalogPageImages />
       <div className="container relative z-20 mx-auto mt-[120px]">
         <div className="my-blur flex flex-col items-start justify-start">
           <h2 className="title">Flower</h2>
