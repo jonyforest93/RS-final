@@ -2,7 +2,7 @@ import { MemberCard } from './MemberCard'
 
 export const Members: React.FC = () => {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="relative z-20 flex flex-col gap-5 ">
       <MemberCard
         name={'Yauheni Struneuski'}
         roles={'Team Lead, Front-End Developer'}

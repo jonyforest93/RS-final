@@ -18,7 +18,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({
   link,
 }: MemberCardProps) => {
   return (
-    <div className="my-blur mx-auto max-w-[1000px]">
+    <div className="my-blur relative z-20 mx-auto max-w-[1000px]">
       <h3 className="title text-[40px] leading-none text-primary">{name}</h3>
       <h3 className="basic-text ml-2 mt-1">{roles}</h3>
       <div className="mx-auto mt-5 flex gap-5 max-md:flex-col">
