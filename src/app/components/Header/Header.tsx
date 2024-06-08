@@ -61,7 +61,7 @@ export const Header: FC = () => {
             <NavLink to="/catalog" className="link">
               Catalog
             </NavLink>
-            <NavLink to="/" className="link">
+            <NavLink to="/about" className="link">
               About Us
             </NavLink>
             <NavLink to="/" className="link">
