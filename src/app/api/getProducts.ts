@@ -1,4 +1,5 @@
 import { formattedProduct } from 'utils/formattedProduct'
+import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { refreshClientCreate } from './apiClients/refreshTokenClient'
 import { anonymousClient } from './apiClients/anonymousClient'
@@ -6,7 +7,7 @@ import { anonymousClient } from './apiClients/anonymousClient'
 import type { IProduct } from 'types/types'
 
 export const getProducts: () => Promise<IProduct[]> = async () => {
-  const token = localStorage.getItem('LowerFlowerToken')
+  const token = localStorageService.getItem(TOKEN_KEY)
 
   const client = token ? refreshClientCreate(token) : anonymousClient()
 

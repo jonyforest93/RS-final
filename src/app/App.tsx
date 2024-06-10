@@ -12,7 +12,7 @@ import { ProfileWrapper } from 'pages/Profile-page/Profile-wrapper'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 import { CatalogPage } from 'pages/Catalog-page/Catalog-page'
 import { ProductWrapper } from 'pages/ProductPage/ProductPageWrapper'
-import { CartPage } from 'pages/Cart-page/CartPape'
+import { CartPage } from 'pages/Cart-page/CartPage'
 
 const App: FC = () => {
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorageService.getItem(TOKEN_KEY)))

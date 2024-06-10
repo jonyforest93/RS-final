@@ -38,6 +38,7 @@ interface IProduct {
   image?: string
   price?: number
   discountPrice?: number
+  id: string
 }
 
 export const enum Constants {
