@@ -22,7 +22,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({
       <h3 className="title text-[40px] leading-none text-primary">{name}</h3>
       <h3 className="basic-text ml-2 mt-1">{roles}</h3>
       <div className="mx-auto mt-5 flex gap-5 max-md:flex-col">
-        <img className="mx-auto w-[255px] object-cover" src={img}></img>
+        <img className="mx-auto w-[255px] object-cover" src={img} alt={name}></img>
         <div className="mx-auto flex flex-col gap-2 max-md:max-w-[500px]">
           <h5 className="list-title">about</h5>
           <p className="basic-text">{about}</p>

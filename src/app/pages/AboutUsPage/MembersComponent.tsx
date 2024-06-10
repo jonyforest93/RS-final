@@ -32,9 +32,9 @@ export const Members: React.FC = () => {
       <MemberCard
         name={'Valeriy Lastovka'}
         roles={'Front-End Developer'}
-        img={'/images/aboutUsImg/evgen.png'}
+        img={'/images/aboutUsImg/valeriy.jpg'}
         about={
-          'Let me introduce myself. My name is Mariya I am a 20-year-old student from Donetsk. I study at the university in my native town and my future profession is bookkeeping. I live with my parents and my elder sister Lena. We are a friendly family. Lena is 2 years older than me. We share our room and tell all our secrets to each other.'
+          'Hi, I’m 29 years old, some time ago I started doing front-end development, my goal is further development in this direction and learning new technologies'
         }
         contributions={['Created Product Page', 'Created Login Page', 'Created About Us Page']}
         link={'https://github.com/ValeriyL01'}
