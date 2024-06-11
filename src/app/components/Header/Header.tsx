@@ -101,7 +101,7 @@ export const Header: FC = () => {
               </NavLink>
             </div>
           )}
-          <NavLink to="/cart">
+          <NavLink to="/cart" title="Cart">
             <img src="/cart.svg" alt="cart-image" />
           </NavLink>
         </div>

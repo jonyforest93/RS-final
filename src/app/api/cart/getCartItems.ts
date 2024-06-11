@@ -23,6 +23,7 @@ export async function createCart(): Promise<ClientResponse<Cart>> {
   const client = token ? refreshClientCreate(token) : anonymousClient()
   try {
     return await client
+      .me()
       .carts()
       .post({ body: { currency: 'USD' } })
       .execute()
