@@ -55,7 +55,7 @@ export const CartPage: React.FC = () => {
             <CartItem
               name={product.name}
               id={product.id}
-              price={product.price}
+              price={product.totalPrice}
               quantity={product.quantity}
               variant={product.variant}
               setProducts={setProducts}
