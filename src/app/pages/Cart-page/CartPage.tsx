@@ -21,7 +21,6 @@ export const CartPage: React.FC = () => {
     }
     getCartItems(cartKey)
       .then(res => {
-        console.log(res)
         setProducts(res.lineItems)
         setTotalPrice(res.totalPrice.centAmount)
       })
@@ -55,7 +54,9 @@ export const CartPage: React.FC = () => {
             <CartItem
               name={product.name}
               id={product.id}
-              price={product.totalPrice}
+              price={
+                product.price.discounted ? product.price.discounted.value.centAmount : product.price.value.centAmount
+              }
               quantity={product.quantity}
               variant={product.variant}
               setProducts={setProducts}
