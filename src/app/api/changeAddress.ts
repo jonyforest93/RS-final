@@ -10,6 +10,7 @@ import {
 import { refreshClientCreate } from './apiClients/refreshTokenClient'
 import { getCustomerVersion } from './getCustomerVersion'
 
+import type { ICollectedAddressField } from 'types/types'
 import type { AdressActionType } from './addAdress'
 import type {
   ByProjectKeyRequestBuilder,
@@ -18,7 +19,6 @@ import type {
   MyCustomerUpdateAction,
   _BaseAddress,
 } from '@commercetools/platform-sdk/dist/declarations/src'
-import type { ICollectedAddressField } from 'utils/collectAddress'
 
 const actionsMap = {
   addShippingAddressId: createShippingActions,

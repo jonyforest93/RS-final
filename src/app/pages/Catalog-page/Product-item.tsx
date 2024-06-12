@@ -1,10 +1,41 @@
 import React from 'react'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
+import { createCart } from 'api/cart/getCartItems'
+import { addCartItem } from 'api/cart/addItemToCart'
+import { CART_KEY, localStorageService } from 'services/local-storage-service'
 
 import type { IProduct } from 'types/types'
 
 export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
+  const handleClick = (): void => {
+    const cartKey = localStorageService.getItem(CART_KEY)
+    if (!cartKey) {
+      createCart()
+        .then(res => {
+          if (res.body?.id) {
+            localStorageService.setItem(CART_KEY, res.body.id)
+          }
+          addCartItem(
+            { productId: props.id, productKey: props.keyName ? props.keyName : '', quantity: 1 },
+            cartKey || '',
+          ).catch(err => {
+            console.error(err)
+          })
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
+    if (cartKey) {
+      addCartItem({ productId: props.id, productKey: props.keyName ? props.keyName : '', quantity: 1 }, cartKey).catch(
+        err => {
+          console.error(err)
+        },
+      )
+    }
+  }
+
   return (
     <div className="mb-[60px] w-[255px]">
       <div className="content mb-[30px] flex w-[255px] cursor-pointer flex-col items-start justify-start gap-3 overflow-hidden">
@@ -23,7 +54,9 @@ export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
           <p className="basic-text three-lines">{props.description}</p>
         </div>
       </div>
-      <BaseButton variant="product-cart">Add to cart</BaseButton>
+      <BaseButton variant="product-cart" onClick={handleClick}>
+        Add to cart
+      </BaseButton>
     </div>
   )
 }
