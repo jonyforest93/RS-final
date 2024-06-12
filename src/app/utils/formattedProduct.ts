@@ -2,7 +2,7 @@ import type { Product, ProductProjection } from '@commercetools/platform-sdk'
 import type { IProduct } from 'types/types'
 
 export const formattedProduct: (product: Product) => IProduct = item => {
-  const { key } = item
+  const { key, id } = item
   const title = item.masterData.current.name['en-US']
 
   const description = item.masterData.current.description ? item.masterData.current.description['en-US'] : ''
@@ -22,13 +22,14 @@ export const formattedProduct: (product: Product) => IProduct = item => {
     image,
     price,
     discountPrice,
+    id,
   }
 
   return product
 }
 
 export const formattedSortProduct: (product: ProductProjection) => IProduct = item => {
-  const { key } = item
+  const { key, id } = item
   const title = item.name['en-US']
 
   const description = item.description ? item.description['en-US'] : ''
@@ -46,6 +47,7 @@ export const formattedSortProduct: (product: ProductProjection) => IProduct = it
     image,
     price,
     discountPrice,
+    id,
   }
 
   return product

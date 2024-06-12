@@ -20,3 +20,5 @@ export class LocalStorageService {
 export const localStorageService = new LocalStorageService()
 
 export const TOKEN_KEY = 'LoverFlowerToken'
+
+export const CART_KEY = 'LoverFlowerCart'
