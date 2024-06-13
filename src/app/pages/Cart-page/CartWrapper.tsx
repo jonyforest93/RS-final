@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { clearCart } from 'api/cart/clearCart'
 import { getCartItems } from 'api/cart/getCartItems'
 import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import { Loading } from 'components/Loading'
@@ -30,27 +29,9 @@ export const CartWrapper: React.FC = () => {
       })
   }, [])
 
-  const handleCartClearClick = async (): Promise<void> => {
-    setProducts([])
-    const cartId = localStorageService.getItem(CART_KEY)
-    if (cartId) {
-      try {
-        await clearCart(cartId, products)
-        setTotalPrice(0)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  }
   if (loaded) {
     return (
-      <CartPage
-        totalPrice={totalPrice}
-        setTotalPrice={setTotalPrice}
-        products={products}
-        setProducts={setProducts}
-        clearCart={handleCartClearClick}
-      />
+      <CartPage totalPrice={totalPrice} setTotalPrice={setTotalPrice} products={products} setProducts={setProducts} />
     )
   }
   return <Loading />

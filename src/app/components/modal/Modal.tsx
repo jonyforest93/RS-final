@@ -19,7 +19,7 @@ export const Modal: React.FC<IModalProps> = ({ children, isDisplay, setDisplay, 
       <div
         className={`${isDisplay ? 'flex' : 'hidden'} modal-position absolute z-[1000] flex min-h-[200px] flex-col items-center justify-center gap-10 bg-${bg || '[#2a8e77]'} p-10 font-osvald text-xl text-white`}
       >
-        <div className="">{children}</div>
+        <div className="flex flex-col justify-between gap-5 text-center">{children}</div>
         {setDisplay ? (
           <button type="button" onClick={handleClick}>
             <img src="/closeIcon.png" alt="" className="absolute right-1 top-1 z-[1000] w-7" />
