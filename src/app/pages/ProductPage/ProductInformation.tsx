@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { addDotPrice } from 'utils/addDotPrice'
@@ -7,14 +7,16 @@ import { createCart, getCartItems } from 'api/cart/getCartItems'
 import { addCartItem } from 'api/cart/addItemToCart'
 import { deleteCartItem } from 'api/cart/deleteCartItem'
 import { Modal } from 'components/modal/Modal'
+import { quantityItemsInCartContext } from 'services/Context'
 
 import type { LineItem } from '@commercetools/platform-sdk'
 import type { IproductInfo } from 'types/types'
 
 export const ProductInformation = ({ name, description, price, discount, id, keyName }: IproductInfo): JSX.Element => {
-  const [isProductIncart, setProductIncart] = useState<boolean>()
+  const [isProductIncart, setProductInCart] = useState<boolean>()
   const [productIdInCart, setProductIdInCart] = useState('')
   const [isDisplayModal, setDisplayModal] = useState(false)
+  const { setquantityItemsInCart } = useContext(quantityItemsInCartContext)
   const formatPrice = addDotPrice(price)
   const formatDiscount = addDotPrice(discount)
 
@@ -26,14 +28,14 @@ export const ProductInformation = ({ name, description, price, discount, id, key
     try {
       if (isProductIncart) {
         await deleteCartItem(cartKey, productIdInCart)
-        setProductIncart(false)
+        setProductInCart(false)
         setDisplayModal(true)
         setTimeout(() => {
           setDisplayModal(false)
         }, 2000)
       } else {
         await addCartItem({ productId: id, productKey: keyName || '', quantity: 1 }, cartKey)
-        setProductIncart(true)
+        setProductInCart(true)
       }
     } catch (err) {
       console.error(err)
@@ -41,8 +43,10 @@ export const ProductInformation = ({ name, description, price, discount, id, key
   }
   const checkProductInCart = (productsCart: LineItem[]): void => {
     productsCart.forEach(product => {
-      product.productKey === keyName ? setProductIncart(true) : setProductIncart(false)
-      setProductIdInCart(product.id)
+      if (product.productKey === keyName) {
+        setProductInCart(true)
+        setProductIdInCart(product.id)
+      }
     })
   }
 
@@ -68,6 +72,7 @@ export const ProductInformation = ({ name, description, price, discount, id, key
     getCartItems(cartKey)
       .then(res => {
         checkProductInCart(res.lineItems)
+        setquantityItemsInCart(res.lineItems.length)
       })
       .catch(err => {
         console.error(err)
@@ -93,7 +98,7 @@ export const ProductInformation = ({ name, description, price, discount, id, key
           {isProductIncart ? 'remove from cart' : 'Add to cart'}
         </BaseButton>
       </div>
-      <Modal isDisplay={isDisplayModal} bg={'red-300'}>
+      <Modal isDisplay={isDisplayModal} bg={'black'}>
         Product removed from cart
       </Modal>
     </div>

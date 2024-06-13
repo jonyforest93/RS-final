@@ -3,7 +3,7 @@ import { type FC, useEffect, useState } from 'react'
 import { useContext } from 'react'
 
 import { setActive } from 'utils/setAcitve'
-import { loginContext } from 'services/Context'
+import { loginContext, quantityItemsInCartContext } from 'services/Context'
 import { tokenData } from 'services/token-storage'
 import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
@@ -12,6 +12,7 @@ import { HeaderBurger } from './HeaderBurger'
 
 export const Header: FC = () => {
   const { isLoggedUser, setIsLoggedUser } = useContext(loginContext)
+  const { quantityItemsInCart } = useContext(quantityItemsInCartContext)
   const [scrolling, setScrolling] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -102,7 +103,12 @@ export const Header: FC = () => {
             </div>
           )}
           <NavLink to="/cart" title="Cart">
-            <img src="/cart.svg" alt="cart-image" />
+            <div className="relative">
+              <img src="/cart.svg" alt="cart-image" />
+              <div className=" basic-text absolute bottom-3 left-4  h-5 w-5 rounded-full bg-[#43FFD2] text-center text-black">
+                {quantityItemsInCart}
+              </div>
+            </div>
           </NavLink>
         </div>
       </div>
