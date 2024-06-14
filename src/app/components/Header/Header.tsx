@@ -105,9 +105,11 @@ export const Header: FC = () => {
           <NavLink to="/cart" title="Cart">
             <div className="relative">
               <img src="/cart.svg" alt="cart-image" />
-              <div className=" basic-text absolute bottom-3 left-4  h-5 w-5 rounded-full bg-[#43FFD2] text-center text-black">
-                {quantityItemsInCart}
-              </div>
+              {quantityItemsInCart ? (
+                <div className=" basic-text absolute bottom-3 left-4  h-5 w-5 rounded-full bg-[#43FFD2] text-center text-black">
+                  {quantityItemsInCart}
+                </div>
+              ) : null}
             </div>
           </NavLink>
         </div>
