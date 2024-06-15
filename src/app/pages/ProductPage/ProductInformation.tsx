@@ -7,7 +7,7 @@ import { createCart, getCartItems } from 'api/cart/getCartItems'
 import { addCartItem } from 'api/cart/addItemToCart'
 import { deleteCartItem } from 'api/cart/deleteCartItem'
 import { Modal } from 'components/modal/Modal'
-import { quantityItemsInCartContext } from 'services/Context'
+import { cartItemsContext } from 'services/Context'
 
 import type { LineItem } from '@commercetools/platform-sdk'
 import type { IproductInfo } from 'types/types'
@@ -16,7 +16,7 @@ export const ProductInformation = ({ name, description, price, discount, id, key
   const [isProductIncart, setProductInCart] = useState<boolean>()
   const [productIdInCart, setProductIdInCart] = useState('')
   const [isDisplayModal, setDisplayModal] = useState(false)
-  const { setquantityItemsInCart } = useContext(quantityItemsInCartContext)
+  const { setСartItems } = useContext(cartItemsContext)
   const formatPrice = addDotPrice(price)
   const formatDiscount = addDotPrice(discount)
 
@@ -72,7 +72,7 @@ export const ProductInformation = ({ name, description, price, discount, id, key
     getCartItems(cartKey)
       .then(res => {
         checkProductInCart(res.lineItems)
-        setquantityItemsInCart(res.lineItems.length)
+        setСartItems(res.lineItems.length)
       })
       .catch(err => {
         console.error(err)

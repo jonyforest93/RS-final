@@ -5,7 +5,7 @@ import { getCartItems } from 'api/cart/getCartItems'
 import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { clearCart } from 'api/cart/clearCart'
-import { quantityItemsInCartContext } from 'services/Context'
+import { cartItemsContext } from 'services/Context'
 
 import { CartItem } from './components/CartItem'
 
@@ -14,7 +14,7 @@ import type { LineItem } from '@commercetools/platform-sdk'
 export const CartPage: React.FC = () => {
   const [products, setProducts] = useState<LineItem[]>([])
   const [totalPrice, setTotalPrice] = useState<number>(0)
-  const { setquantityItemsInCart } = useContext(quantityItemsInCartContext)
+  const { setСartItems } = useContext(cartItemsContext)
   useEffect(() => {
     const cartKey = localStorageService.getItem(CART_KEY)
     if (!cartKey) {
@@ -37,7 +37,7 @@ export const CartPage: React.FC = () => {
       try {
         await clearCart(cartId, products)
         setTotalPrice(0)
-        setquantityItemsInCart(0)
+        setСartItems(0)
       } catch (err) {
         console.error(err)
       }

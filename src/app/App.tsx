@@ -7,7 +7,7 @@ import { MainPage } from 'pages/Main-page/Main-page'
 import { RegistrationPage } from 'pages/Registration-page/Registration-page'
 import { RouterOutler } from 'router/Router-outlet'
 import { NotFoundPage } from 'pages/NotFound-page/NotFound-page'
-import { loginContext, quantityItemsInCartContext } from 'services/Context'
+import { cartItemsContext, loginContext } from 'services/Context'
 import { ProfileWrapper } from 'pages/Profile-page/Profile-wrapper'
 import { CART_KEY, TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 import { CatalogPage } from 'pages/Catalog-page/Catalog-page'
@@ -18,7 +18,7 @@ import { getCartItems } from 'api/cart/getCartItems'
 
 const App: FC = () => {
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorageService.getItem(TOKEN_KEY)))
-  const [quantityItemsInCart, setquantityItemsInCart] = useState<number>(0)
+  const [cartItems, setСartItems] = useState<number>(0)
   useEffect(() => {
     const cartKey = localStorageService.getItem(CART_KEY)
     if (!cartKey) {
@@ -26,14 +26,14 @@ const App: FC = () => {
     }
     getCartItems(cartKey)
       .then(res => {
-        setquantityItemsInCart(res.lineItems.length)
+        setСartItems(res.lineItems.length)
       })
       .catch(err => {
         console.error(err)
       })
   }, [])
   return (
-    <quantityItemsInCartContext.Provider value={{ quantityItemsInCart, setquantityItemsInCart }}>
+    <cartItemsContext.Provider value={{ cartItems, setСartItems }}>
       <loginContext.Provider value={{ isLoggedUser, setIsLoggedUser }}>
         <div className="font-poppins container m-auto flex min-h-[100vh] max-w-[10000px] flex-col justify-between bg-[#040a0a]">
           <Routes>
@@ -55,7 +55,7 @@ const App: FC = () => {
           </Routes>
         </div>
       </loginContext.Provider>
-    </quantityItemsInCartContext.Provider>
+    </cartItemsContext.Provider>
   )
 }
 

@@ -4,13 +4,13 @@ interface LoggedUserState {
   setIsLoggedUser: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-interface IquantityItemsInCart {
-  quantityItemsInCart: number
-  setquantityItemsInCart: React.Dispatch<React.SetStateAction<number>>
+interface IcartItems {
+  cartItems: number
+  setСartItems: React.Dispatch<React.SetStateAction<number>>
 }
-const quantityItemsInCartState: IquantityItemsInCart = {
-  quantityItemsInCart: 0,
-  setquantityItemsInCart: () => {},
+const cartItemsState: IcartItems = {
+  cartItems: 0,
+  setСartItems: () => {},
 }
 
 const loggedUserState: LoggedUserState = {
@@ -18,5 +18,5 @@ const loggedUserState: LoggedUserState = {
   setIsLoggedUser: () => {},
 }
 
-export const quantityItemsInCartContext = createContext(quantityItemsInCartState)
+export const cartItemsContext = createContext(cartItemsState)
 export const loginContext = createContext(loggedUserState)
