@@ -16,10 +16,12 @@ export const CartWrapper: React.FC = () => {
   useEffect(() => {
     const cartKey = localStorageService.getItem(CART_KEY)
     if (!cartKey) {
+      setLoaded(true)
       return
     }
     getCartItems(cartKey)
       .then(res => {
+        console.log(res)
         setProducts(res.lineItems)
         setTotalPrice(res.totalPrice.centAmount)
         setLoaded(true)

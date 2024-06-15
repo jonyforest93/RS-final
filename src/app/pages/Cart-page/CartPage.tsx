@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { clearCart } from 'api/cart/clearCart'
 import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import { Modal } from 'components/modal/Modal'
+import { getDiscountCode } from 'api/cart/getDiscountCode'
+import { addPromocode } from 'api/cart/addPromocode'
 
 import { CartItem } from './components/CartItem'
 import { EmptyCart } from './components/EmptyCart'
 import { CartImages } from './components/CartImages'
 
+import type { FormEvent } from 'react'
 import type { LineItem } from '@commercetools/platform-sdk'
 
 interface ICartPageProps {
@@ -26,6 +29,27 @@ const CART_MESSAGE_TEXT = 'Are you sure? This action will clear cart.'
 export const CartPage: React.FC<ICartPageProps> = ({ products, totalPrice, setProducts, setTotalPrice }) => {
   const [modal, showModal] = useState<ModalType>({ isDisplay: false, message: '' })
 
+  const handleSubmit = (e: FormEvent): void => {
+    e.preventDefault()
+    const promocode = new FormData(e.target as HTMLFormElement).get('promocode') as string
+    addPromocode(promocode)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
+  useEffect(() => {
+    getDiscountCode()
+      .then(res => {
+        console.log(res)
+      })
+      .catch(() => {
+        console.error()
+      })
+  })
   const handleCartClearClick = async (): Promise<void> => {
     setProducts([])
     const cartId = localStorageService.getItem(CART_KEY)
@@ -63,11 +87,23 @@ export const CartPage: React.FC<ICartPageProps> = ({ products, totalPrice, setPr
           )
         })}
       </div>
+
       {totalPrice ? (
         <>
           <div className="mt-10">
             <p className="label text-[24px]">{`Total price:  ${totalPrice / 100} USD`}</p>
           </div>
+          <form className="relative z-10 flex flex-col items-center gap-5" onSubmit={handleSubmit}>
+            <div className="flex  items-center gap-5">
+              <label htmlFor="promocode" className="label h-8">
+                Promocode
+              </label>
+              <input type="text" name="promocode" className="w-25 input h-7  p-1" />
+              <BaseButton type="submit" variant="promocode">
+                OK
+              </BaseButton>
+            </div>
+          </form>
           <BaseButton
             onClick={() => {
               showModal({ isDisplay: true, message: CART_MESSAGE_TEXT })

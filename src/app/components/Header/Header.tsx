@@ -55,18 +55,7 @@ export const Header: FC = () => {
           className={`absolute left-0 top-0 min-h-[100svh] w-[300px] bg-black px-4 py-8 ${isMenuOpen ? 'block' : 'hidden'}`}
         >
           <div className="flex flex-col gap-10">
-            <NavLink to="/" className={setActive}>
-              Home
-            </NavLink>
-            <NavLink to="/catalog" className="link">
-              Catalog
-            </NavLink>
-            <NavLink to="/about" className="link">
-              About Us
-            </NavLink>
-            <NavLink to="/" className="link">
-              Contacts
-            </NavLink>
+            <HeaderLinks />
           </div>
           <div
             className="absolute left-[305px] top-5 flex h-[50px] w-[50px] items-center justify-center bg-black"
@@ -80,7 +69,10 @@ export const Header: FC = () => {
           <h2>Lover</h2>
           <h2>Flower</h2>
         </div>
-        <HeaderLinks />
+        <div className="hidden flex-wrap gap-[75px] lg:flex">
+          <HeaderLinks />
+        </div>
+
         <div className="flex  w-[100px] items-center justify-center gap-[20px] ">
           {isLoggedUser ? (
             <div className="flex flex-col">
@@ -93,10 +85,10 @@ export const Header: FC = () => {
             </div>
           ) : (
             <div className="flex flex-col ">
-              <NavLink className="link" to="/login">
+              <NavLink className={setActive} to="/login">
                 Sign In
               </NavLink>
-              <NavLink className="link" to="/registration">
+              <NavLink className={setActive} to="/registration">
                 Sign Up
               </NavLink>
             </div>
