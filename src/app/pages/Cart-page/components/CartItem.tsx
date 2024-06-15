@@ -3,6 +3,7 @@ import { type Dispatch, type SetStateAction, useState } from 'react'
 import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import { deleteCartItem } from 'api/cart/deleteCartItem'
 import { changeCartItemQuantity } from 'api/cart/changeCartItemQuantity'
+import useDebounce from 'hooks/useDebounce'
 
 import type { LineItem, LocalizedString, ProductVariant } from '@commercetools/platform-sdk'
 
@@ -41,11 +42,9 @@ export const CartItem: React.FC<CartItemProps> = ({
     }
   }
   const increaseQuantity = async (): Promise<void> => {
-    setItemQuantity(prev => prev + 1)
     if (cartId) {
       try {
         await changeCartItemQuantity(cartId, id, itemQuantity + 1)
-        setTotalPrice(prev => prev + price)
       } catch (err) {
         console.error(err)
       }
@@ -53,16 +52,28 @@ export const CartItem: React.FC<CartItemProps> = ({
   }
 
   const decreaseQuantity = async (): Promise<void> => {
-    setItemQuantity(prev => prev - 1)
     if (cartId) {
       try {
         await changeCartItemQuantity(cartId, id, itemQuantity - 1)
-        setTotalPrice(prev => prev - price)
       } catch (err) {
         console.error(err)
       }
     }
   }
+  const debouncedIncreaseQuantity = useDebounce(increaseQuantity, 500)
+  const debouncedDecreaseQuantity = useDebounce(decreaseQuantity, 500)
+
+  const increaseItems = (): void => {
+    setItemQuantity(prev => prev + 1)
+    setTotalPrice(prev => prev + price)
+    debouncedIncreaseQuantity()
+  }
+  const decreaseItems = (): void => {
+    setItemQuantity(prev => prev - 1)
+    setTotalPrice(prev => prev - price)
+    debouncedDecreaseQuantity()
+  }
+
   if (itemQuantity) {
     return (
       <div className="flex w-[350px] gap-5">
@@ -74,11 +85,11 @@ export const CartItem: React.FC<CartItemProps> = ({
           </div>
           <div className="flex  items-center gap-5">
             <div className="flex h-[30px] w-[100px] items-center justify-center gap-[22px] border border-gray-600">
-              <button type="button" onClick={decreaseQuantity}>
+              <button type="button" onClick={decreaseItems}>
                 -
               </button>
               <p>{itemQuantity}</p>
-              <button type="button" onClick={increaseQuantity}>
+              <button type="button" onClick={increaseItems}>
                 +
               </button>
             </div>

@@ -8,31 +8,24 @@ import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import type { IProduct } from 'types/types'
 
 export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
-  const handleClick = (): void => {
+  const handleClick = async (): Promise<void> => {
     const cartKey = localStorageService.getItem(CART_KEY)
-    if (!cartKey) {
-      createCart()
-        .then(res => {
-          if (res.body?.id) {
-            localStorageService.setItem(CART_KEY, res.body.id)
-          }
-          addCartItem(
-            { productId: props.id, productKey: props.keyName ? props.keyName : '', quantity: 1 },
-            cartKey || '',
-          ).catch(err => {
-            console.error(err)
-          })
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    }
-    if (cartKey) {
-      addCartItem({ productId: props.id, productKey: props.keyName ? props.keyName : '', quantity: 1 }, cartKey).catch(
-        err => {
-          console.error(err)
-        },
+    try {
+      if (cartKey) {
+        await addCartItem({ productId: props.id, productKey: props.keyName ? props.keyName : '', quantity: 1 }, cartKey)
+
+        return
+      }
+      const cartResponse = await createCart()
+      if (cartResponse.body?.id) {
+        localStorageService.setItem(CART_KEY, cartResponse.body.id)
+      }
+      await addCartItem(
+        { productId: props.id, productKey: props.keyName ? props.keyName : '', quantity: 1 },
+        cartKey || '',
       )
+    } catch (err) {
+      console.error(err)
     }
   }
 
