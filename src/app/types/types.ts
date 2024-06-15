@@ -23,6 +23,8 @@ interface IproductInfo {
   description: string
   price: number
   discount: number | undefined
+  id: string
+  keyName: string | undefined
 }
 
 interface IproductData extends IproductInfo {

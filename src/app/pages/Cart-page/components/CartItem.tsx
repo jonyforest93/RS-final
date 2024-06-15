@@ -1,9 +1,13 @@
 import { type Dispatch, type SetStateAction, useState } from 'react'
+import { useContext } from 'react'
 
 import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import { deleteCartItem } from 'api/cart/deleteCartItem'
 import { changeCartItemQuantity } from 'api/cart/changeCartItemQuantity'
+import { cartItemsContext } from 'services/Context'
+
 import useDebounce from 'hooks/useDebounce'
+
 
 import type { LineItem, LocalizedString, ProductVariant } from '@commercetools/platform-sdk'
 
@@ -29,13 +33,14 @@ export const CartItem: React.FC<CartItemProps> = ({
   const cartId = localStorageService.getItem(CART_KEY)
   const imageUrl = variant.images
   const [itemQuantity, setItemQuantity] = useState<number>(quantity)
-
+  const { cartItems, setСartItems } = useContext(cartItemsContext)
   const handleDeleteClick = async (): Promise<void> => {
     if (cartId) {
       try {
         await deleteCartItem(cartId, id)
         setProducts(prev => prev.filter(element => element.id !== id))
         setTotalPrice(prev => prev - price * quantity)
+        setСartItems(cartItems - 1)
       } catch (err) {
         console.error(err)
       }

@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
 
+import { useContext, useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { clearCart } from 'api/cart/clearCart'
+import { cartItemsContext } from 'services/Context'
 import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import { Modal } from 'components/modal/Modal'
 import { getDiscountCode } from 'api/cart/getDiscountCode'
@@ -13,6 +15,7 @@ import { CartImages } from './components/CartImages'
 
 import type { FormEvent } from 'react'
 import type { LineItem } from '@commercetools/platform-sdk'
+
 
 interface ICartPageProps {
   products: LineItem[]
@@ -28,11 +31,12 @@ interface ModalType {
 const CART_MESSAGE_TEXT = 'Are you sure? This action will clear cart.'
 export const CartPage: React.FC<ICartPageProps> = ({ products, totalPrice, setProducts, setTotalPrice }) => {
   const [modal, showModal] = useState<ModalType>({ isDisplay: false, message: '' })
-
+  const { setСartItems } = useContext(cartItemsContext)
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault()
     const promocode = new FormData(e.target as HTMLFormElement).get('promocode') as string
     addPromocode(promocode)
+
       .then(res => {
         console.log(res)
       })
@@ -58,6 +62,7 @@ export const CartPage: React.FC<ICartPageProps> = ({ products, totalPrice, setPr
       try {
         await clearCart(cartId, products)
         setTotalPrice(0)
+        setСartItems(0)
         showModal({ isDisplay: false, message: '' })
       } catch (err) {
         console.error(err)
