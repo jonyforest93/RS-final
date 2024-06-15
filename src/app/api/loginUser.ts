@@ -13,7 +13,9 @@ export const loginUser: LoginFunction = async user => {
     } = await client
       .me()
       .login()
-      .post({ body: { email: user.username, password: user.password } })
+      .post({
+        body: { email: user.username, password: user.password },
+      })
       .execute()
 
     return customer
