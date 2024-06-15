@@ -13,14 +13,11 @@ import { CART_KEY, TOKEN_KEY, localStorageService } from 'services/local-storage
 import { CatalogPage } from 'pages/Catalog-page/Catalog-page'
 import { ProductWrapper } from 'pages/ProductPage/ProductPageWrapper'
 import { AboutUsPage } from 'pages/AboutUsPage/AboutUsPage'
-import { CartPage } from 'pages/Cart-page/CartPage'
-import { getCartItems } from 'api/cart/getCartItems'
+import { createCart, getCartItems } from 'api/cart/getCartItems'
 import { CartWrapper } from 'pages/Cart-page/CartWrapper'
 import { getActiveCart } from 'api/cart/getActiveCart'
-import { createCart } from 'api/cart/getCartItems'
 
 const App: FC = () => {
-  
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorageService.getItem(TOKEN_KEY)))
   const [cartItems, setСartItems] = useState<number>(0)
   useEffect(() => {
@@ -41,7 +38,7 @@ const App: FC = () => {
         })
     }
   }, [])
-  
+
   useEffect(() => {
     const cartKey = localStorageService.getItem(CART_KEY)
     if (!cartKey) {
@@ -71,7 +68,7 @@ const App: FC = () => {
               <Route path="about" element={<AboutUsPage />} />
 
               <Route path="product/:key" element={<ProductWrapper />} />
-              <Route path="cart" element={<CartPage />} />
+              <Route path="cart" element={<CartWrapper />} />
 
               <Route path="*" element={<NotFoundPage />} />
             </Route>
@@ -79,7 +76,6 @@ const App: FC = () => {
         </div>
       </loginContext.Provider>
     </cartItemsContext.Provider>
-
   )
 }
 
