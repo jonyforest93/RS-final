@@ -15,10 +15,33 @@ import { ProductWrapper } from 'pages/ProductPage/ProductPageWrapper'
 import { AboutUsPage } from 'pages/AboutUsPage/AboutUsPage'
 import { CartPage } from 'pages/Cart-page/CartPage'
 import { getCartItems } from 'api/cart/getCartItems'
+import { CartWrapper } from 'pages/Cart-page/CartWrapper'
+import { getActiveCart } from 'api/cart/getActiveCart'
+import { createCart } from 'api/cart/getCartItems'
 
 const App: FC = () => {
+  
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorageService.getItem(TOKEN_KEY)))
   const [cartItems, setСartItems] = useState<number>(0)
+  useEffect(() => {
+    const token = localStorageService.getItem(TOKEN_KEY)
+    if (token) {
+      getActiveCart(token)
+        .then(res => {
+          localStorageService.setItem(CART_KEY, res.body?.id as string)
+        })
+        .catch(() => {
+          createCart()
+            .then(res => {
+              localStorageService.setItem(CART_KEY, res.body?.id as string)
+            })
+            .catch(err => {
+              console.error(err)
+            })
+        })
+    }
+  }, [])
+  
   useEffect(() => {
     const cartKey = localStorageService.getItem(CART_KEY)
     if (!cartKey) {
@@ -56,6 +79,7 @@ const App: FC = () => {
         </div>
       </loginContext.Provider>
     </cartItemsContext.Provider>
+
   )
 }
 

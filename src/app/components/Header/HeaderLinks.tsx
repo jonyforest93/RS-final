@@ -4,19 +4,16 @@ import { setActive } from 'utils/setAcitve'
 
 export const HeaderLinks: React.FC = () => {
   return (
-    <div className="hidden flex-wrap gap-[75px] lg:flex">
+    <>
       <NavLink to="/" className={setActive}>
         Home
       </NavLink>
-      <NavLink to="/catalog" className="link">
+      <NavLink to="/catalog" className={setActive}>
         Catalog
       </NavLink>
-      <NavLink to="/about" className="link">
+      <NavLink to="/about" className={setActive}>
         About Us
       </NavLink>
-      <NavLink to="/" className="link">
-        Contacts
-      </NavLink>
-    </div>
+    </>
   )
 }
