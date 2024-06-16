@@ -55,10 +55,10 @@ export const Header: FC = () => {
       <div className="container mx-auto flex items-center justify-center lg:justify-between ">
         <HeaderBurger onClick={handleMenuToggle} />
         <div
-          className={`absolute left-0 top-0 min-h-[100svh] w-[300px] bg-black px-4 py-8 ${isMenuOpen ? 'block' : 'hidden'}`}
+          className={`absolute left-0 top-0 min-h-[100svh] w-[300px] bg-black px-4 py-8 transition-all duration-500 ${isMenuOpen ? 'left-0' : '-left-96'}`}
         >
           <div className="flex flex-col gap-10">
-            <HeaderLinks />
+            <HeaderLinks setIsMenuOpen={setIsMenuOpen} />
           </div>
           <div
             className="absolute left-[305px] top-5 flex h-[50px] w-[50px] items-center justify-center bg-black"
@@ -73,7 +73,7 @@ export const Header: FC = () => {
           <h2>Flower</h2>
         </div>
         <div className="hidden flex-wrap gap-[75px] lg:flex">
-          <HeaderLinks />
+          <HeaderLinks setIsMenuOpen={setIsMenuOpen} />
         </div>
 
         <div className="mr-2  flex w-[100px] items-center justify-center gap-[20px] ">
