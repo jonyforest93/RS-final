@@ -5,9 +5,7 @@ import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import { deleteCartItem } from 'api/cart/deleteCartItem'
 import { changeCartItemQuantity } from 'api/cart/changeCartItemQuantity'
 import { cartItemsContext } from 'services/Context'
-
 import useDebounce from 'hooks/useDebounce'
-
 
 import type { LineItem, LocalizedString, ProductVariant } from '@commercetools/platform-sdk'
 

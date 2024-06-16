@@ -1,6 +1,5 @@
-
 import { useContext, useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { clearCart } from 'api/cart/clearCart'
 import { cartItemsContext } from 'services/Context'
@@ -15,7 +14,6 @@ import { CartImages } from './components/CartImages'
 
 import type { FormEvent } from 'react'
 import type { LineItem } from '@commercetools/platform-sdk'
-
 
 interface ICartPageProps {
   products: LineItem[]
@@ -36,7 +34,6 @@ export const CartPage: React.FC<ICartPageProps> = ({ products, totalPrice, setPr
     e.preventDefault()
     const promocode = new FormData(e.target as HTMLFormElement).get('promocode') as string
     addPromocode(promocode)
-
       .then(res => {
         console.log(res)
       })
