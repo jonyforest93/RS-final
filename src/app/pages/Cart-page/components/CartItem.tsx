@@ -1,4 +1,4 @@
-import { type Dispatch, type SetStateAction, useState } from 'react'
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import { useContext } from 'react'
 
 import { CART_KEY, localStorageService } from 'services/local-storage-service'
@@ -32,6 +32,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   const imageUrl = variant.images
   const [itemQuantity, setItemQuantity] = useState<number>(quantity)
   const { cartItems, setСartItems } = useContext(cartItemsContext)
+
   const handleDeleteClick = async (): Promise<void> => {
     if (cartId) {
       try {
@@ -44,10 +45,17 @@ export const CartItem: React.FC<CartItemProps> = ({
       }
     }
   }
+
+  useEffect(() => {
+    if (itemQuantity < 1) {
+      setСartItems(cartItems - 1)
+    }
+  }, [itemQuantity])
+
   const increaseQuantity = async (): Promise<void> => {
     if (cartId) {
       try {
-        await changeCartItemQuantity(cartId, id, itemQuantity + 1)
+        await changeCartItemQuantity(cartId, id, itemQuantity)
       } catch (err) {
         console.error(err)
       }
@@ -57,12 +65,13 @@ export const CartItem: React.FC<CartItemProps> = ({
   const decreaseQuantity = async (): Promise<void> => {
     if (cartId) {
       try {
-        await changeCartItemQuantity(cartId, id, itemQuantity - 1)
+        await changeCartItemQuantity(cartId, id, itemQuantity)
       } catch (err) {
         console.error(err)
       }
     }
   }
+
   const debouncedIncreaseQuantity = useDebounce(increaseQuantity, 500)
   const debouncedDecreaseQuantity = useDebounce(decreaseQuantity, 500)
 

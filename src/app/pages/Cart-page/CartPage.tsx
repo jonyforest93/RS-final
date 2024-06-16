@@ -1,18 +1,17 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { clearCart } from 'api/cart/clearCart'
 import { cartItemsContext } from 'services/Context'
 import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import { Modal } from 'components/modal/Modal'
-import { getDiscountCode } from 'api/cart/getDiscountCode'
 import { addPromocode } from 'api/cart/addPromocode'
 
 import { CartItem } from './components/CartItem'
 import { EmptyCart } from './components/EmptyCart'
 import { CartImages } from './components/CartImages'
 
-import type { FormEvent } from 'react'
+import type { ChangeEventHandler, FormEvent } from 'react'
 import type { LineItem } from '@commercetools/platform-sdk'
 
 interface ICartPageProps {
@@ -20,6 +19,8 @@ interface ICartPageProps {
   totalPrice: number
   setProducts: React.Dispatch<React.SetStateAction<LineItem[]>>
   setTotalPrice: React.Dispatch<React.SetStateAction<number>>
+  setDiscountPrice: React.Dispatch<React.SetStateAction<number>>
+  discountPrice: number
 }
 interface ModalType {
   isDisplay: boolean
@@ -27,32 +28,40 @@ interface ModalType {
 }
 
 const CART_MESSAGE_TEXT = 'Are you sure? This action will clear cart.'
-export const CartPage: React.FC<ICartPageProps> = ({ products, totalPrice, setProducts, setTotalPrice }) => {
+export const CartPage: React.FC<ICartPageProps> = ({
+  products,
+  totalPrice,
+  setProducts,
+  setTotalPrice,
+  setDiscountPrice,
+  discountPrice,
+}) => {
   const [modal, showModal] = useState<ModalType>({ isDisplay: false, message: '' })
   const { setСartItems } = useContext(cartItemsContext)
+  const [inputValue, setInputValue] = useState<string>('')
+
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = e => {
+    setInputValue(e.target.value)
+  }
+
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault()
-    const promocode = new FormData(e.target as HTMLFormElement).get('promocode') as string
-    addPromocode(promocode)
+    addPromocode(inputValue)
       .then(res => {
-        console.log(res)
+        if (res?.body) {
+          setTotalPrice(res.body.totalPrice.centAmount)
+          setDiscountPrice(res.body.discountOnTotalPrice?.discountedAmount.centAmount as number)
+          setInputValue('')
+        }
       })
       .catch(err => {
         console.error(err)
       })
   }
 
-  useEffect(() => {
-    getDiscountCode()
-      .then(res => {
-        console.log(res)
-      })
-      .catch(() => {
-        console.error()
-      })
-  })
   const handleCartClearClick = async (): Promise<void> => {
     setProducts([])
+
     const cartId = localStorageService.getItem(CART_KEY)
 
     if (cartId) {
@@ -70,7 +79,7 @@ export const CartPage: React.FC<ICartPageProps> = ({ products, totalPrice, setPr
   return (
     <main className="relative flex w-[100%] flex-grow flex-col items-center justify-center gap-10 overflow-hidden px-3 pb-10 text-white">
       <CartImages />
-      <h1 className="title relative z-10 ">Cart</h1>
+      <h1 className="title relative z-10  mt-20">Cart</h1>
       <div className=" relative z-10 flex max-w-[1440px] flex-wrap items-center justify-center gap-10">
         {products.map(product => {
           return (
@@ -90,19 +99,28 @@ export const CartPage: React.FC<ICartPageProps> = ({ products, totalPrice, setPr
         })}
       </div>
 
-      {totalPrice ? (
+      {totalPrice > 0 ? (
         <>
-          <div className="mt-10">
-            <p className="label text-[24px]">{`Total price:  ${totalPrice / 100} USD`}</p>
+          <div className="mt-10 flex">
+            <p className="label text-[24px]">{`Total price:  $${totalPrice / 100} `}</p>
+            {discountPrice ? (
+              <p className="text-[13px] line-through">{`$${(totalPrice + discountPrice) / 100}`}</p>
+            ) : null}
           </div>
           <form className="relative z-10 flex flex-col items-center gap-5" onSubmit={handleSubmit}>
             <div className="flex  items-center gap-5">
               <label htmlFor="promocode" className="label h-8">
                 Promocode
               </label>
-              <input type="text" name="promocode" className="w-25 input h-7  p-1" />
+              <input
+                type="text"
+                name="promocode"
+                className="w-25 input h-7  p-1"
+                value={inputValue}
+                onChange={handleInputChange}
+              />
               <BaseButton type="submit" variant="promocode">
-                OK
+                Apply
               </BaseButton>
             </div>
           </form>

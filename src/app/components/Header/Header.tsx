@@ -5,14 +5,14 @@ import { useContext } from 'react'
 import { setActive } from 'utils/setAcitve'
 import { cartItemsContext, loginContext } from 'services/Context'
 import { tokenData } from 'services/token-storage'
-import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
+import { CART_KEY, TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { HeaderLinks } from './HeaderLinks'
 import { HeaderBurger } from './HeaderBurger'
 
 export const Header: FC = () => {
   const { isLoggedUser, setIsLoggedUser } = useContext(loginContext)
-  const { cartItems } = useContext(cartItemsContext)
+  const { cartItems, setСartItems } = useContext(cartItemsContext)
   const [scrolling, setScrolling] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -34,6 +34,8 @@ export const Header: FC = () => {
 
   const handleClick: () => void = () => {
     localStorageService.removeItem(TOKEN_KEY)
+    localStorageService.removeItem(CART_KEY)
+    setСartItems(0)
     tokenData.reset()
     setIsLoggedUser(false)
   }
@@ -74,7 +76,7 @@ export const Header: FC = () => {
           <HeaderLinks />
         </div>
 
-        <div className="flex  w-[100px] items-center justify-center gap-[20px] ">
+        <div className="mr-2  flex w-[100px] items-center justify-center gap-[20px] ">
           {isLoggedUser ? (
             <div className="flex flex-col">
               <NavLink to="/profile" className={setActive}>
