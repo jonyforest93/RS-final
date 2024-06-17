@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -28,6 +28,8 @@ export const CatalogPage: React.FC = () => {
   const location = useLocation()
   const [isBouquets, setBouquetsStatus] = useState<boolean>(true)
 
+  const navigate = useNavigate()
+
   const fetchProducts = async (pageNumber: number): Promise<void> => {
     try {
       const newProducts = await getProducts(pageNumber)
@@ -42,6 +44,17 @@ export const CatalogPage: React.FC = () => {
   }
 
   useEffect(() => {
+    navigate('/catalog/all')
+    getProducts(page)
+      .then((res: IProduct[]) => {
+        setProducts(res)
+      })
+      .catch(error => {
+        console.error('Error', error)
+      })
+  }, [])
+
+  useEffect(() => {
     setPage(1)
     setProducts([])
     setHasMore(true)
@@ -54,6 +67,32 @@ export const CatalogPage: React.FC = () => {
         .then((res: IProduct[]) => {
           setProducts(res)
           setHasMore(false)
+        })
+        .catch(error => {
+          console.error('Error', error)
+        })
+    }
+  }, [])
+
+  useEffect(() => {
+    setPage(1)
+    setProducts([])
+    setHasMore(true)
+    if (location.pathname === '/catalog') {
+      setBouquetsStatus(false)
+      getProducts(page)
+        .then((res: IProduct[]) => {
+          setProducts(res)
+        })
+        .catch(error => {
+          console.error('Error', error)
+        })
+    }
+    if (location.pathname === '/catalog/Bouquets') {
+      getProductByCategory('6da3cfe6-1673-406f-bb13-eb0c0a4a7a62')
+        .then((res: IProduct[]) => {
+          setProducts(res)
+          setBouquetsStatus(false)
         })
         .catch(error => {
           console.error('Error', error)
@@ -193,7 +232,7 @@ export const CatalogPage: React.FC = () => {
                         hasMore={hasMore}
                         loader={<h4>Loading...</h4>}
                         endMessage={
-                          <p style={{ textAlign: 'center' }}>
+                          <p className="text-white" style={{ textAlign: 'center' }}>
                             <b>You have seen all products</b>
                           </p>
                         }
