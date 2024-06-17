@@ -10,7 +10,7 @@ export async function changeCartItemQuantity(cartId: string, itemId: string, qua
   const token = localStorageService.getItem(TOKEN_KEY)
 
   const client = token ? refreshClientCreate(token) : anonymousClient()
-  const removeLineItemActions: CartUpdateAction[] = [
+  const changeLineItemActions: CartUpdateAction[] = [
     {
       action: 'changeLineItemQuantity',
       quantity,
@@ -24,7 +24,7 @@ export async function changeCartItemQuantity(cartId: string, itemId: string, qua
       await client
         .carts()
         .withId({ ID: cartId })
-        .post({ body: { version, actions: removeLineItemActions } })
+        .post({ body: { version, actions: changeLineItemActions } })
         .execute()
     }
   } catch (err) {
