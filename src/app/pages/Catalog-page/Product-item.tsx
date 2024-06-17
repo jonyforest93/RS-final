@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
 import { createCart } from 'api/cart/getCartItems'
@@ -8,7 +8,14 @@ import { CART_KEY, localStorageService } from 'services/local-storage-service'
 import type { IProduct } from 'types/types'
 
 export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
-  const handleClick = async (): Promise<void> => {
+  const [isButtonDisabled, setButtonDisabled] = useState(false)
+
+  const handleClick = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> => {
+    event.stopPropagation()
+    event.preventDefault()
+
+    setButtonDisabled(true)
+
     const cartKey = localStorageService.getItem(CART_KEY)
     try {
       if (cartKey) {
@@ -17,8 +24,8 @@ export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
         return
       }
       const cartResponse = await createCart()
-      if (cartResponse.body?.id) {
-        localStorageService.setItem(CART_KEY, cartResponse.body.id)
+      if (cartResponse.id) {
+        localStorageService.setItem(CART_KEY, cartResponse.id)
       }
       await addCartItem(
         { productId: props.id, productKey: props.keyName ? props.keyName : '', quantity: 1 },
@@ -47,7 +54,7 @@ export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
           <p className="basic-text three-lines">{props.description}</p>
         </div>
       </div>
-      <BaseButton variant="product-cart" onClick={handleClick}>
+      <BaseButton variant="product-cart" onClick={handleClick} disabled={isButtonDisabled}>
         Add to cart
       </BaseButton>
     </div>

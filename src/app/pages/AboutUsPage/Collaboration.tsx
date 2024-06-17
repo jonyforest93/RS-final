@@ -12,6 +12,11 @@ export const Collaboration: React.FC = () => {
         role in coordinating team efforts. They allow programmers to collaborate effectively, even if they are
         physically located in different parts of the world.
       </p>
+      <p className="basic-text">
+        In our team, we used an approach in which everyone was equal and had voting rights. Collaboration and teamwork
+        consisted of daily meetings, as well as joint code reviews. If someone couldn’t cope with a task, the team
+        happily came to the rescue. Discrord, canban, github were involved in the team work.
+      </p>
     </div>
   )
 }

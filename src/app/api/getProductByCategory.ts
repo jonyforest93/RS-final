@@ -5,7 +5,7 @@ import { refreshClientCreate } from './apiClients/refreshTokenClient'
 
 import type { IProduct } from 'types/types'
 
-export const getProductByategory: (id: string) => Promise<IProduct[]> = async id => {
+export const getProductByCategory: (id: string) => Promise<IProduct[]> = async id => {
   const token = localStorage.getItem('LowerFlowerToken')
   const client = token ? refreshClientCreate(token) : anonymousClient()
 
