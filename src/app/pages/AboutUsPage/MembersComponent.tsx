@@ -18,7 +18,7 @@ export const Members: React.FC = () => {
         roles={'Front-End Developer'}
         img={'/images/aboutUsImg/aleksey.jpg'}
         about={
-          'Let me introduce myself. My name is Mariya I am a 20-year-old student from Donetsk. I study at the university in my native town and my future profession is bookkeeping. I live with my parents and my elder sister Lena. We are a friendly family. Lena is 2 years older than me. We share our room and tell all our secrets to each other.'
+          'Former financier with 10 years of experience. I decided to start learning frontend. I am happy to learn new things and take on challenging tasks. I plan to study Angular and work at Google in the future.'
         }
         contributions={[
           'Implemented Routing',

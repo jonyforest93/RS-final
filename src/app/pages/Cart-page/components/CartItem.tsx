@@ -38,7 +38,7 @@ export const CartItem: React.FC<CartItemProps> = ({
       try {
         await deleteCartItem(cartId, id)
         setProducts(prev => prev.filter(element => element.id !== id))
-        setTotalPrice(prev => prev - price * quantity)
+        setTotalPrice(prev => prev - price * itemQuantity)
         setСartItems(cartItems - 1)
       } catch (err) {
         console.error(err)

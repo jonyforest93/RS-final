@@ -79,8 +79,8 @@ export const CartPage: React.FC<ICartPageProps> = ({
   return (
     <main className="relative flex w-[100%] flex-grow flex-col items-center justify-center gap-10 overflow-hidden px-3 pb-10 text-white">
       <CartImages />
-      <h1 className="title relative z-10  mt-20">Cart</h1>
-      <div className=" relative z-10 flex max-w-[1440px] flex-wrap items-center justify-center gap-10">
+      <h1 className="title z-100 relative  mt-20">Cart</h1>
+      <div className="z-100 relative flex max-w-[1440px] flex-wrap items-center justify-center gap-10">
         {products.map(product => {
           return (
             <CartItem
@@ -107,7 +107,7 @@ export const CartPage: React.FC<ICartPageProps> = ({
               <p className="text-[13px] line-through">{`$${(totalPrice + discountPrice) / 100}`}</p>
             ) : null}
           </div>
-          <form className="relative z-10 flex flex-col items-center gap-5" onSubmit={handleSubmit}>
+          <form className="relative z-20 flex flex-col items-center gap-5" onSubmit={handleSubmit}>
             <div className="flex  items-center gap-5">
               <label htmlFor="promocode" className="label h-8">
                 Promocode
