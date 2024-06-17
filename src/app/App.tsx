@@ -35,7 +35,7 @@ const App: FC = () => {
         .catch(() => {
           createCart()
             .then(res => {
-              const cartKey = res.body?.id as string
+              const cartKey = res.id
               localStorageService.setItem(CART_KEY, cartKey)
               setcartKeyLocalStorage(cartKey)
             })

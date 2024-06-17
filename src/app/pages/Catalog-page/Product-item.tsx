@@ -24,8 +24,8 @@ export const ProductItem: React.FC<IProduct> = ({ ...props }) => {
         return
       }
       const cartResponse = await createCart()
-      if (cartResponse.body?.id) {
-        localStorageService.setItem(CART_KEY, cartResponse.body.id)
+      if (cartResponse.id) {
+        localStorageService.setItem(CART_KEY, cartResponse.id)
       }
       await addCartItem(
         { productId: props.id, productKey: props.keyName ? props.keyName : '', quantity: 1 },
