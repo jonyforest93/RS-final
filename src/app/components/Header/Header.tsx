@@ -35,9 +35,9 @@ export const Header: FC = () => {
   const handleClick: () => void = () => {
     localStorageService.removeItem(TOKEN_KEY)
     localStorageService.removeItem(CART_KEY)
-    setСartItems(0)
     tokenData.reset()
     setIsLoggedUser(false)
+    setСartItems(0)
   }
 
   const handleMenuToggle: () => void = () => {
@@ -55,7 +55,7 @@ export const Header: FC = () => {
       <div className="container mx-auto flex items-center justify-center lg:justify-between ">
         <HeaderBurger onClick={handleMenuToggle} />
         <div
-          className={`absolute left-0 top-0 min-h-[100svh] w-[300px] bg-black px-4 py-8 transition-all duration-500 ${isMenuOpen ? 'left-0' : '-left-96'}`}
+          className={`absolute left-0 top-0 min-h-[100svh] w-[300px] bg-black px-4 py-8  duration-500 ${isMenuOpen ? 'left-0' : 'left-[-400px]'}`}
         >
           <div className="flex flex-col gap-10">
             <HeaderLinks setIsMenuOpen={setIsMenuOpen} />

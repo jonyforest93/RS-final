@@ -21,6 +21,7 @@ import { setLoggedUserCartItems } from 'utils/setLoggedUserCartItems'
 const App: FC = () => {
   const [isLoggedUser, setIsLoggedUser] = useState(Boolean(localStorageService.getItem(TOKEN_KEY)))
   const [cartItems, setСartItems] = useState<number>(0)
+  const [cartKeyLocalStorage, setcartKeyLocalStorage] = useState<string | null>(localStorageService.getItem(CART_KEY))
 
   useEffect(() => {
     const token = localStorageService.getItem(TOKEN_KEY)
@@ -29,14 +30,14 @@ const App: FC = () => {
         .then(res => {
           const cartKey = res.body?.id as string
           localStorageService.setItem(CART_KEY, cartKey)
-          setLoggedUserCartItems(cartKey, setСartItems)
+          setcartKeyLocalStorage(cartKey)
         })
         .catch(() => {
           createCart()
             .then(res => {
               const cartKey = res.body?.id as string
               localStorageService.setItem(CART_KEY, cartKey)
-              setLoggedUserCartItems(cartKey, setСartItems)
+              setcartKeyLocalStorage(cartKey)
             })
             .catch(err => {
               console.error(err)
@@ -44,6 +45,19 @@ const App: FC = () => {
         })
     }
   }, [isLoggedUser])
+
+  useEffect(() => {
+    const cartKey = localStorageService.getItem(CART_KEY)
+    setcartKeyLocalStorage(cartKey)
+  }, [isLoggedUser, cartKeyLocalStorage])
+
+  useEffect(() => {
+    if (!cartKeyLocalStorage) {
+      setСartItems(0)
+      return
+    }
+    setLoggedUserCartItems(cartKeyLocalStorage, setСartItems)
+  }, [cartKeyLocalStorage])
 
   return (
     <cartItemsContext.Provider value={{ cartItems, setСartItems }}>
