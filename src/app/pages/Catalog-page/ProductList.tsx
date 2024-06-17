@@ -18,7 +18,7 @@ export const ProductList: React.FC<ProductListProps> = ({ products, searchedProd
       {searchText.length > 3 ? (
         searchedProducts.length > 0 ? (
           searchedProducts.map(product => (
-            <Link key={product.keyName} to={`/product/${product.keyName}`}>
+            <Link key={`${product.keyName}`} to={`/product/${product.keyName}`}>
               <ProductItem {...product} />
             </Link>
           ))
