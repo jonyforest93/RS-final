@@ -11,7 +11,7 @@ export const getProducts: (page: number) => Promise<IProduct[]> = async page => 
 
   const client = token ? refreshClientCreate(token) : anonymousClient()
 
-  const limit = 6
+  const limit = 4
   const offset = page * limit - limit
 
   try {

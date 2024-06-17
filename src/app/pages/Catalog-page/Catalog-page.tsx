@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-// import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -25,9 +25,8 @@ export const CatalogPage: React.FC = () => {
   const [searchedProducts, setSearchedProduct] = useState<IProduct[]>([])
   const [searchText, setSearchText] = useState<string>('')
   const [currentCategory, setCurrentCategory] = useState<string>('All')
-  // const location = useLocation()
-  // const [isBouquets, setBouquetsStatus] = useState<boolean>(true)
-  // const navigate = useNavigate()
+  const location = useLocation()
+  const [isBouquets, setBouquetsStatus] = useState<boolean>(true)
 
   const fetchProducts = async (pageNumber: number): Promise<void> => {
     try {
@@ -47,29 +46,21 @@ export const CatalogPage: React.FC = () => {
     setPage(1)
     setProducts([])
     setHasMore(true)
-    void fetchProducts(1)
-    // if (location.pathname === '/catalog') {
-    //   setBouquetsStatus(false)
-    //   void fetchProducts(1)
-    // }
-
-    // if (location.pathname === '/catalog/Bouquets') {
-    //   setBouquetsStatus(true)
-    //   getProductByCategory('6da3cfe6-1673-406f-bb13-eb0c0a4a7a62')
-    //     .then((res: IProduct[]) => {
-    //       setProducts(res)
-    //       setHasMore(false)
-    //     })
-    //     .catch(error => {
-    //       console.error('Error', error)
-    //     })
-    // }
-  }, [])
-
-  // useEffect(() => {
-  //   navigate('/catalog/all')
-  //   void fetchProducts(1)
-  // }, [])
+    if (location.pathname === '/catalog') {
+      setBouquetsStatus(false)
+      void fetchProducts(1)
+    } else if (location.pathname === '/catalog/Bouquets') {
+      setBouquetsStatus(true)
+      getProductByCategory('6da3cfe6-1673-406f-bb13-eb0c0a4a7a62')
+        .then((res: IProduct[]) => {
+          setProducts(res)
+          setHasMore(false)
+        })
+        .catch(error => {
+          console.error('Error', error)
+        })
+    }
+  }, [location.pathname])
 
   const handleSearch = useDebouncedCallback((searchTerm: string): void => {
     searchProducts(searchTerm)
@@ -191,7 +182,7 @@ export const CatalogPage: React.FC = () => {
               <SearchBar onSearch={handleSearch} searchText={searchText} setSearchText={setSearchText} />
               <SortBar onSortChange={handleSortChange} />
             </div>
-            {/* {isBouquets ? null : (
+            {isBouquets ? null : (
               <Routes>
                 <Route
                   path={currentCategory}
@@ -214,7 +205,7 @@ export const CatalogPage: React.FC = () => {
                   }
                 />
               </Routes>
-            )} */}
+            )}
 
             {location.pathname === '/catalog' ? (
               <InfiniteScroll
