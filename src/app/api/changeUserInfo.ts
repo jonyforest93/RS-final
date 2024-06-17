@@ -2,7 +2,7 @@ import { type IChangeMainInfoProps, changeMainInfo } from './changeMainInfo'
 import { changeAddress } from './changeAddress'
 import { deleteAddressesArray } from './deleteAdress'
 
-import type { ICollectedAddressField } from 'utils/collectAddress'
+import type { ICollectedAddressField } from 'types/types'
 
 interface IChangeUserInfo {
   user: IChangeMainInfoProps

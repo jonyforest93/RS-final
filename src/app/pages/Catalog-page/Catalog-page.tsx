@@ -31,7 +31,6 @@ export const CatalogPage: React.FC = () => {
   const fetchProducts = async (pageNumber: number): Promise<void> => {
     try {
       const newProducts = await getProducts(pageNumber)
-      console.log(newProducts)
 
       setProducts(prevProducts => [...prevProducts, ...newProducts])
       if (newProducts.length === 0) {

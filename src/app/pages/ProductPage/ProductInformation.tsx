@@ -54,8 +54,8 @@ export const ProductInformation = ({ name, description, price, discount, id, key
     if (!localStorageService.getItem(CART_KEY)) {
       createCart()
         .then(res => {
-          if (res.body?.id) {
-            localStorageService.setItem(CART_KEY, res.body.id)
+          if (res.id) {
+            localStorageService.setItem(CART_KEY, res.id)
           }
         })
         .catch(err => {

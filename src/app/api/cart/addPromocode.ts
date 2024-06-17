@@ -28,6 +28,7 @@ export async function addPromocode(code: string): Promise<ClientResponse<Cart> |
         .post({ body: { version, actions: addPromoAction } })
         .execute()
     }
+    return
   } catch (err) {
     throw new Error(String(err))
   }
