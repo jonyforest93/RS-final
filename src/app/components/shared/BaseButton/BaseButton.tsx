@@ -3,7 +3,7 @@ import React from 'react'
 import type { ButtonHTMLAttributes } from 'react'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'basket' | 'login' | 'edit' | 'product-cart' | 'modal' | 'promocode'
+  variant?: 'primary' | 'basket' | 'login' | 'edit' | 'product-cart' | 'modal' | 'promocode' | 'cart'
   icon?: React.ReactNode
 }
 
@@ -22,6 +22,7 @@ const BaseButton: React.FC<ButtonProps> = ({ children, variant = 'primary', icon
       'text-btnText hover:bg-secondary bg-primary px-[25px] py-[10px] text-xs font-bold uppercase tracking-wider hover:text-white',
     promocode:
       'text-btnText hover:bg-secondary bg-primary px-[15px] py-[7px] text-xs font-bold uppercase tracking-wider hover:text-white',
+    cart: 'hover:bg-primary hover:text-btnText border bg-transparent px-[15px] py-[7px] text-xs font-bold uppercase tracking-wider text-white  hover:border-inherit',
   }
 
   const combinedClassName = `${buttonStyles[variant]} btn flex justify-center`
