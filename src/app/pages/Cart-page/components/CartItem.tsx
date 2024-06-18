@@ -88,7 +88,7 @@ export const CartItem: React.FC<CartItemProps> = ({
 
   if (itemQuantity) {
     return (
-      <div className="flex w-[350px] gap-5">
+      <div className="z-20 flex w-[350px] gap-5">
         <img src={imageUrl ? imageUrl[0].url : ''} alt="productImage" className="w-[120px]" />
         <div className="flex flex-col justify-between">
           <div className="flex justify-between">

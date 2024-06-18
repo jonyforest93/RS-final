@@ -79,7 +79,7 @@ export const CartPage: React.FC<ICartPageProps> = ({
   return (
     <main className="relative flex w-[100%] flex-grow flex-col items-center justify-center gap-10 overflow-hidden px-3 pb-10 text-white">
       <CartImages />
-      <h1 className="title z-100 relative  mt-20">Cart</h1>
+      <h1 className="title relative z-20  mt-20">Cart</h1>
       <div className="z-100 relative flex max-w-[1440px] flex-wrap items-center justify-center gap-10">
         {products.map(product => {
           return (
