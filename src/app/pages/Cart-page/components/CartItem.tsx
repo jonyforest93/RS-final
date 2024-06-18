@@ -6,6 +6,7 @@ import { deleteCartItem } from 'api/cart/deleteCartItem'
 import { changeCartItemQuantity } from 'api/cart/changeCartItemQuantity'
 import { cartItemsContext } from 'services/Context'
 import useDebounce from 'hooks/useDebounce'
+import BaseButton from 'components/shared/BaseButton/BaseButton'
 
 import type { LineItem, LocalizedString, ProductVariant } from '@commercetools/platform-sdk'
 
@@ -88,27 +89,33 @@ export const CartItem: React.FC<CartItemProps> = ({
 
   if (itemQuantity) {
     return (
-      <div className="flex w-[350px] gap-5">
-        <img src={imageUrl ? imageUrl[0].url : ''} alt="productImage" className="w-[120px]" />
-        <div className="flex flex-col justify-between">
-          <div className="flex justify-between">
-            <h2 className="w-[100px]">{name['en-US']}</h2>
-            <p className="font-extrabold text-turquoiseEllipse">{`${(price / 100) * itemQuantity} USD`}</p>
-          </div>
-          <div className="flex  items-center gap-5">
-            <div className="flex h-[30px] w-[100px] items-center justify-center gap-[22px] border border-gray-600">
-              <button type="button" onClick={decreaseItems}>
-                -
-              </button>
-              <p>{itemQuantity}</p>
-              <button type="button" onClick={increaseItems}>
-                +
-              </button>
+      <div className="z-20 flex flex-col gap-5">
+        <div className="flex  gap-5">
+          <img src={imageUrl ? imageUrl[0].url : ''} alt="productImage" className="w-[150px]" />
+          <div className="flex flex-col justify-between">
+            <div className="flex justify-between">
+              <h2 className="w-[150px]">{name['en-US']}</h2>
+              <div className="flex gap-1 text-[14px]"></div>
             </div>
-            <button type="button" onClick={handleDeleteClick} className="link">
-              Delete
+            <div className="flex  items-center gap-5">
+              <BaseButton variant="cart" onClick={handleDeleteClick}>
+                Delete
+              </BaseButton>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-5">
+          <p className="text-[14px] font-bold text-white">{`Individual: ${price / 100} $`}</p>
+          <div className="flex h-[30px] w-[100px] items-center justify-center gap-[22px] border border-gray-600">
+            <button type="button" onClick={decreaseItems}>
+              -
+            </button>
+            <p>{itemQuantity}</p>
+            <button type="button" onClick={increaseItems}>
+              +
             </button>
           </div>
+          <p className="text-[14px] font-bold text-white">{`Total: ${(price / 100) * itemQuantity} $`}</p>
         </div>
       </div>
     )
