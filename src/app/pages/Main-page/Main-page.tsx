@@ -1,10 +1,26 @@
 import { Link, NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 import BaseButton from 'components/shared/BaseButton/BaseButton'
+import { getDiscountCode } from 'api/cart/getDiscountCode'
 
 import Orders from './Orders'
 
+import type { DiscountCode } from '@commercetools/platform-sdk'
+
 export const MainPage: React.FC = () => {
+  const [discountCodes, setDiscountCodes] = useState<DiscountCode[]>([])
+
+  useEffect(() => {
+    getDiscountCode()
+      .then(res => {
+        setDiscountCodes(res)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }, [])
+
   return (
     <>
       <div className="paralax overflow-hidden">
@@ -23,6 +39,14 @@ export const MainPage: React.FC = () => {
             <NavLink className="link" to="/registration">
               Sign Up
             </NavLink>
+          </div>
+          <div className="mt-5 flex flex-col items-center justify-center gap-5 text-white">
+            <h2>Available Promocodes:</h2>
+            <div className="flex gap-5 font-bold">
+              {discountCodes.map(discountCode => {
+                return <p key={discountCode.code}>{discountCode.code}</p>
+              })}
+            </div>
           </div>
         </div>
         <div className="mask"></div>

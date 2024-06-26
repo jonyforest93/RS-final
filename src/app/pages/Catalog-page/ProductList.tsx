@@ -17,8 +17,8 @@ export const ProductList: React.FC<ProductListProps> = ({ products, searchedProd
     <div className="flex flex-wrap justify-center gap-[30px]">
       {searchText.length > 3 ? (
         searchedProducts.length > 0 ? (
-          searchedProducts.map(product => (
-            <Link key={product.keyName} to={`/product/${product.keyName}`}>
+          searchedProducts.map((product, index) => (
+            <Link key={`${product.id}-${index}-${Math.random()}`} to={`/product/${product.keyName}`}>
               <ProductItem {...product} />
             </Link>
           ))

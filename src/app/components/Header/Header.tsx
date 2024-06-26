@@ -3,15 +3,16 @@ import { type FC, useEffect, useState } from 'react'
 import { useContext } from 'react'
 
 import { setActive } from 'utils/setAcitve'
-import { loginContext } from 'services/Context'
+import { cartItemsContext, loginContext } from 'services/Context'
 import { tokenData } from 'services/token-storage'
-import { TOKEN_KEY, localStorageService } from 'services/local-storage-service'
+import { CART_KEY, TOKEN_KEY, localStorageService } from 'services/local-storage-service'
 
 import { HeaderLinks } from './HeaderLinks'
 import { HeaderBurger } from './HeaderBurger'
 
 export const Header: FC = () => {
   const { isLoggedUser, setIsLoggedUser } = useContext(loginContext)
+  const { cartItems, setСartItems } = useContext(cartItemsContext)
   const [scrolling, setScrolling] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -33,8 +34,10 @@ export const Header: FC = () => {
 
   const handleClick: () => void = () => {
     localStorageService.removeItem(TOKEN_KEY)
+    localStorageService.removeItem(CART_KEY)
     tokenData.reset()
     setIsLoggedUser(false)
+    setСartItems(0)
   }
 
   const handleMenuToggle: () => void = () => {
@@ -52,21 +55,10 @@ export const Header: FC = () => {
       <div className="container mx-auto flex items-center justify-center lg:justify-between ">
         <HeaderBurger onClick={handleMenuToggle} />
         <div
-          className={`absolute left-0 top-0 min-h-[100svh] w-[300px] bg-black px-4 py-8 ${isMenuOpen ? 'block' : 'hidden'}`}
+          className={`absolute left-0 top-0 min-h-[100svh] w-[300px] bg-black px-4 py-8  duration-500 ${isMenuOpen ? 'left-0' : 'left-[-400px]'}`}
         >
           <div className="flex flex-col gap-10">
-            <NavLink to="/" className={setActive}>
-              Home
-            </NavLink>
-            <NavLink to="/catalog" className="link">
-              Catalog
-            </NavLink>
-            <NavLink to="/" className="link">
-              About Us
-            </NavLink>
-            <NavLink to="/" className="link">
-              Contacts
-            </NavLink>
+            <HeaderLinks setIsMenuOpen={setIsMenuOpen} />
           </div>
           <div
             className="absolute left-[305px] top-5 flex h-[50px] w-[50px] items-center justify-center bg-black"
@@ -80,8 +72,11 @@ export const Header: FC = () => {
           <h2>Lover</h2>
           <h2>Flower</h2>
         </div>
-        <HeaderLinks />
-        <div className="flex  w-[100px] items-center justify-center gap-[20px] ">
+        <div className="hidden flex-wrap gap-[75px] lg:flex">
+          <HeaderLinks setIsMenuOpen={setIsMenuOpen} />
+        </div>
+
+        <div className="mr-2  flex w-[100px] items-center justify-center gap-[20px] ">
           {isLoggedUser ? (
             <div className="flex flex-col">
               <NavLink to="/profile" className={setActive}>
@@ -93,16 +88,23 @@ export const Header: FC = () => {
             </div>
           ) : (
             <div className="flex flex-col ">
-              <NavLink className="link" to="/login">
+              <NavLink className={setActive} to="/login">
                 Sign In
               </NavLink>
-              <NavLink className="link" to="/registration">
+              <NavLink className={setActive} to="/registration">
                 Sign Up
               </NavLink>
             </div>
           )}
-          <NavLink to="/">
-            <img src="/cart.svg" alt="" />
+          <NavLink to="/cart" title="Cart">
+            <div className="relative">
+              <img src="/cart.svg" alt="cart-image" />
+              {cartItems ? (
+                <div className=" basic-text absolute bottom-3 left-4  h-5 w-5 rounded-full bg-[#43FFD2] text-center text-black">
+                  {cartItems}
+                </div>
+              ) : null}
+            </div>
           </NavLink>
         </div>
       </div>

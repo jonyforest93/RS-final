@@ -23,6 +23,8 @@ interface IproductInfo {
   description: string
   price: number
   discount: number | undefined
+  id: string
+  keyName: string | undefined
 }
 
 interface IproductData extends IproductInfo {
@@ -38,6 +40,7 @@ interface IProduct {
   image?: string
   price?: number
   discountPrice?: number
+  id: string
 }
 
 export const enum Constants {

@@ -2,21 +2,26 @@ import { NavLink } from 'react-router-dom'
 
 import { setActive } from 'utils/setAcitve'
 
-export const HeaderLinks: React.FC = () => {
+interface Props {
+  setIsMenuOpen: (value: boolean) => void
+}
+
+export const HeaderLinks: React.FC<Props> = ({ setIsMenuOpen }) => {
+  const handleMenuClose: () => void = () => {
+    setIsMenuOpen(false)
+  }
+
   return (
-    <div className="hidden flex-wrap gap-[75px] lg:flex">
-      <NavLink to="/" className={setActive}>
+    <>
+      <NavLink onClick={handleMenuClose} to="/" className={setActive}>
         Home
       </NavLink>
-      <NavLink to="/catalog" className="link">
+      <NavLink onClick={handleMenuClose} to="/catalog" className={setActive}>
         Catalog
       </NavLink>
-      <NavLink to="/" className="link">
+      <NavLink onClick={handleMenuClose} to="/about" className={setActive}>
         About Us
       </NavLink>
-      <NavLink to="/" className="link">
-        Contacts
-      </NavLink>
-    </div>
+    </>
   )
 }

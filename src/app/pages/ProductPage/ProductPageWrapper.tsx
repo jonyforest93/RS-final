@@ -25,6 +25,8 @@ export const ProductWrapper: React.FC = () => {
             description: dataProduct.description['en-US'],
             price: priceProduct.value.centAmount,
             discount: priceProduct.discounted?.value.centAmount,
+            id: res.id,
+            keyName: res.key,
           })
         }
         setIsLoading(false)
